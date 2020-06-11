@@ -1,4 +1,4 @@
-package lzp;
+package com.lzp;
 
 /**
  * Description:key-value缓存接口

@@ -1,9 +1,4 @@
-package lzp;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+package com.lzp;
 
 /**
  * Description:基于LFU淘汰的线程安全的缓存
@@ -12,6 +7,5 @@ import java.util.TreeSet;
  * @date: 2020/6/10 9:34
  */
 public class LfuCache<K,V> implements Cache<K, V> {
-
-
+    
 }
