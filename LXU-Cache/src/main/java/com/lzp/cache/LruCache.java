@@ -1,4 +1,6 @@
-package com.lzp;
+package com.lzp.cache;
+
+import com.lzp.cache.Cache;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
