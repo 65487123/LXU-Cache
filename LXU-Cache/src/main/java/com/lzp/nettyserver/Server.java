@@ -22,11 +22,11 @@ import java.util.Properties;
 public class Server {
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
     private static final int PORT;
-    public static Cache lruCache;
+    public static Cache cache;
 
     static {
         int maxSize = Integer.parseInt(getProperty("lruCacheMaxSize"));
-        lruCache = "LRU".equals(getProperty("strategy")) ? new LruCache(maxSize) : new LfuCache(maxSize);
+        cache = "LRU".equals(getProperty("strategy")) ? new LruCache(maxSize) : new LfuCache(maxSize);
         PORT = Integer.parseInt(getProperty("port"));
     }
 
@@ -48,7 +48,7 @@ public class Server {
 
     public static String getProperty(String key) {
         Properties properties = new Properties();
-        InputStream in = Server.class.getClassLoader().getResourceAsStream("config/config.properties");
+        InputStream in = Server.class.getClassLoader().getResourceAsStream("config.properties");
         try {
             properties.load(in);
         } catch (IOException e) {

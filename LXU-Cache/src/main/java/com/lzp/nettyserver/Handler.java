@@ -1,44 +1,33 @@
 package com.lzp.nettyserver;
 
-import io.netty.buffer.Unpooled;
-import io.netty.channel.Channel;
+import com.lzp.protocol.CommandDTO;
+import com.lzp.protocol.ResponseDTO;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-
-import java.nio.charset.Charset;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @Author：luzeping
  * @Date: 2020/1/6 20:35
  */
-public class Handler extends SimpleChannelInboundHandler {
-    private static List<Channel> channelList = new CopyOnWriteArrayList<>();
-
-    static {
-        new Thread() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 2000; i++) {
-                    for (Channel channel : channelList) {
-                        channel.writeAndFlush(Unpooled.copiedBuffer(Instant.now().atZone(ZoneId.systemDefault())+" 客户端"+channel.remoteAddress().toString() + ":当前有" + channelList.size() + "个连接", Charset.forName("GBK")));
-                    }
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
-    }
-
+public class Handler extends SimpleChannelInboundHandler<CommandDTO> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
-
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, CommandDTO commandDTO) throws Exception {
+        switch (commandDTO.getType()) {
+            case "get":
+                channelHandlerContext.writeAndFlush(new ResponseDTO("get",Server.cache.get(commandDTO.getKey())).toBytes());
+                break;
+            case "put":
+                channelHandlerContext.writeAndFlush(new ResponseDTO("put",Server.cache.put(commandDTO.getKey(),commandDTO.getValue())).toBytes());
+                break;
+            case "remove":
+                channelHandlerContext.writeAndFlush(new ResponseDTO("remove",Server.cache.remove(commandDTO.getKey())).toBytes());
+                break;
+            case "getMaxMemorySize":
+                channelHandlerContext.writeAndFlush(new ResponseDTO("getMaxMemorySize",Server.cache.getMaxMemorySize()).toBytes());
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandDTO.getType());
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.lzp.nettyserver;
+package com.lzp.protocol;
 
 /**
  * Description:
@@ -6,7 +6,7 @@ package com.lzp.nettyserver;
  * @author: Lu ZePing
  * @date: 2020/6/20 16:32
  */
-public class ResponseDTO {
+public class ResponseDTO extends AbstractDTO {
     private String type;
 
     private Object result;

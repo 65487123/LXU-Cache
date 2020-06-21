@@ -1,5 +1,0 @@
-syntax = "proto3";
-option java_outer_classname = "CommandDTO";
-message Command{
-    string type
-}

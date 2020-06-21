@@ -1,6 +1,4 @@
-package com.lzp.nettyserver;
-
-import java.io.Serializable;
+package com.lzp.protocol;
 
 /**
  * Description:
@@ -8,10 +6,11 @@ import java.io.Serializable;
  * @author: Lu ZePing
  * @date: 2020/6/18 19:03
  */
-class CommandDTO implements Serializable {
-    String type;
-    Object key;
-    Object value;
+public class CommandDTO extends AbstractDTO {
+
+    private String type;
+    private Object key;
+    private Object value;
 
     public CommandDTO(String type, Object key, Object value) {
         this.type = type;
@@ -30,5 +29,13 @@ class CommandDTO implements Serializable {
                 ", key=" + key +
                 ", value=" + value +
                 '}';
+    }
+
+    public Object getKey() {
+        return key;
+    }
+
+    public Object getValue() {
+        return value;
     }
 }
