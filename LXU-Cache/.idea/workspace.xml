@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="加入springboot依赖">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j/log4j.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,12 +117,31 @@
       <workItem from="1592647188672" duration="3479000" />
       <workItem from="1592709144455" duration="808000" />
       <workItem from="1592711171228" duration="12552000" />
-      <workItem from="1592790568836" duration="10309000" />
+      <workItem from="1592790568836" duration="12148000" />
     </task>
+    <task id="LOCAL-00001" summary="加入springboot依赖">
+      <created>1592817139399</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592817139399</updated>
+    </task>
+    <task id="LOCAL-00002" summary="加入springboot依赖">
+      <created>1592817147155</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592817147155</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="加入springboot依赖" />
+    <option name="LAST_COMMIT_MESSAGE" value="加入springboot依赖" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592793590062">
@@ -154,30 +168,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="399" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1592470794130" />
-    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2" timestamp="1592817138376">
+    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2" timestamp="1592817152217">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592817138376" />
+    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592817152217" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1591845839562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1723" height="28" key="GridCell.Tab.0.bottom" timestamp="1592816669480">
+    <state width="1723" height="296" key="GridCell.Tab.0.bottom" timestamp="1592818708814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1723" height="28" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592816669480" />
-    <state width="1723" height="28" key="GridCell.Tab.0.center" timestamp="1592816669480">
+    <state width="1723" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592818708814" />
+    <state width="1723" height="296" key="GridCell.Tab.0.center" timestamp="1592818708814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1723" height="28" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592816669480" />
-    <state width="1723" height="28" key="GridCell.Tab.0.left" timestamp="1592816669479">
+    <state width="1723" height="296" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592818708814" />
+    <state width="1723" height="296" key="GridCell.Tab.0.left" timestamp="1592818708814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1723" height="28" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592816669479" />
-    <state width="1723" height="28" key="GridCell.Tab.0.right" timestamp="1592816669480">
+    <state width="1723" height="296" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592818708814" />
+    <state width="1723" height="296" key="GridCell.Tab.0.right" timestamp="1592818708814">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1723" height="28" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592816669480" />
+    <state width="1723" height="296" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592818708814" />
     <state width="938" height="348" key="GridCell.Tab.1.bottom" timestamp="1592791058183">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -202,6 +216,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1592815862801" />
+    <state x="661" y="311" key="git4idea.merge.GitPullDialog" timestamp="1592817158159">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="661" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592817158159" />
     <state x="334" y="221" key="new project wizard" timestamp="1592475187725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
