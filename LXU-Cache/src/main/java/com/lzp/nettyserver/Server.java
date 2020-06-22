@@ -10,6 +10,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ import java.util.Properties;
  * @Author：luzeping
  * @Date: 2020/1/6 20:23
  */
+@SpringBootApplication
 public class Server {
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
     private static final int PORT;
