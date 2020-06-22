@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="加入springboot依赖">
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +116,7 @@
       <workItem from="1592647188672" duration="3479000" />
       <workItem from="1592709144455" duration="808000" />
       <workItem from="1592711171228" duration="12552000" />
-      <workItem from="1592790568836" duration="12148000" />
+      <workItem from="1592790568836" duration="12467000" />
     </task>
     <task id="LOCAL-00001" summary="加入springboot依赖">
       <created>1592817139399</created>
@@ -133,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592817147155</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="修改GA">
+      <created>1592818823014</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1592818823014</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,7 +147,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="加入springboot依赖" />
-    <option name="LAST_COMMIT_MESSAGE" value="加入springboot依赖" />
+    <MESSAGE value="修改GA" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改GA" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592793590062">
@@ -168,10 +175,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="399" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1592470794130" />
-    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2" timestamp="1592817152217">
+    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2" timestamp="1592818822129">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592817152217" />
+    <state x="438" y="109" width="1258" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592818822129" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1591845839562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
