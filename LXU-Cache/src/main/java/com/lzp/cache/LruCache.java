@@ -19,8 +19,19 @@ public class LruCache<K, V> implements Cache<K, V> {
     private final int maxSize;
 
     public LruCache(int maxSize) {
-        this.map = new LinkedHashMap<K, V>((int) (maxSize / 0.75) + 1, 0.75f, true);
+        this.map = new AutoDeleteMap<>((int) (maxSize/0.75 +1), 0.75f, true);
         this.maxSize = maxSize;
+    }
+
+    private class AutoDeleteMap<K1, V1> extends LinkedHashMap<K1, V1> {
+        AutoDeleteMap(int initialCapacity, float loadFactor, boolean accessOrder) {
+            super(initialCapacity, loadFactor, accessOrder);
+        }
+
+        @Override
+        protected boolean removeEldestEntry(Map.Entry eldest) {
+            return this.size() > maxSize;
+        }
     }
 
     @Override
@@ -30,11 +41,7 @@ public class LruCache<K, V> implements Cache<K, V> {
 
     @Override
     public synchronized V put(K key, V value) {
-        V v = map.put(key, value);
-        if (map.size() > maxSize) {
-            map.remove(map.keySet().iterator().next());
-        }
-        return v;
+        return map.put(key, value);
     }
 
     @Override
