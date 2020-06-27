@@ -3,6 +3,7 @@ package com.lzp.nettyserver;
 import com.lzp.cache.Cache;
 import com.lzp.cache.LfuCache;
 import com.lzp.cache.LruCache;
+import com.lzp.util.FileUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
@@ -24,12 +25,9 @@ import java.util.Properties;
 public class Server {
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
     private static final int PORT;
-    public static Cache cache;
 
     static {
-        int maxSize = Integer.parseInt(getProperty("lruCacheMaxSize"));
-        cache = "LRU".equals(getProperty("strategy")) ? new LruCache(maxSize) : new LfuCache(maxSize);
-        PORT = Integer.parseInt(getProperty("port"));
+        PORT = Integer.parseInt(FileUtil.getProperty("port"));
     }
 
     public static void main(String[] args) {
@@ -48,14 +46,4 @@ public class Server {
         }
     }
 
-    public static String getProperty(String key) {
-        Properties properties = new Properties();
-        InputStream in = Server.class.getClassLoader().getResourceAsStream("config.properties");
-        try {
-            properties.load(in);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
-        return properties.getProperty(key);
-    }
 }

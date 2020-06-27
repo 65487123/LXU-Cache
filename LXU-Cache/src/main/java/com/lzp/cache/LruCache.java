@@ -6,15 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Description:基于LinkedHashMap LRU线程安全的缓存
+ * Description:基于LinkedHashMap LRU缓存淘汰策略缓存
  *
  * @author: Lu ZePing
  * @date: 2020/6/10 13:23
  */
 public class LruCache<K, V> implements Cache<K, V> {
 
-    //用volatile修饰对象，当这个对象里的没被volatile修饰的属性发生改变，其他线程都能通过这个对象看到变化
-    private volatile Map<K, V> map;
+    private Map<K, V> map;
 
     private final int maxSize;
 
@@ -29,6 +28,11 @@ public class LruCache<K, V> implements Cache<K, V> {
         }
 
         @Override
+        public V1 put(K1 key, V1 value) {
+            return super.put(key, value);
+        }
+
+        @Override
         protected boolean removeEldestEntry(Map.Entry eldest) {
             return this.size() > maxSize;
         }
@@ -40,17 +44,17 @@ public class LruCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public synchronized V put(K key, V value) {
+    public V put(K key, V value) {
         return map.put(key, value);
     }
 
     @Override
-    public synchronized void clear() {
+    public void clear() {
         map.clear();
     }
 
     @Override
-    public synchronized V remove(K key) {
+    public V remove(K key) {
         return map.remove(key);
     }
 
