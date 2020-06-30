@@ -1,12 +1,10 @@
 package com.lzp.nettyserver;
 
-import com.lzp.protocol.LzpMessageDecoder;
-import com.lzp.protocol.LzpMessageEncoder;
+import com.lzp.protocol.*;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
-import io.netty.handler.codec.serialization.ClassResolver;
-import io.netty.handler.codec.serialization.ClassResolvers;
-import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 /**
  * @Author：luzeping
@@ -15,6 +13,8 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 public class ServerInitializer extends ChannelInitializer {
     @Override
     protected void initChannel(Channel channel) {
-        channel.pipeline().addLast(new LzpMessageDecoder()).addLast(new LzpMessageEncoder()).addLast("handler1",new Handler());
+        channel.pipeline().addLast(new LzpMessageDecoder()).addLast(new LzpProtobufDecoder(CommandDTO.Command.getDefaultInstance()))
+                .addLast(new LzpMessageEncoder()).addLast(new LzpProtobufEncoder())
+                .addLast("handler1",new Handler());
     }
 }

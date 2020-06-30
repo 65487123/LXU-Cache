@@ -9,10 +9,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @Author：luzeping
  * @Date: 2020/1/6 20:35
  */
-public class Handler extends SimpleChannelInboundHandler<CommandDTO> {
+public class Handler extends SimpleChannelInboundHandler<CommandDTO.Command> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, CommandDTO commandDTO) throws Exception {
-        CacheService.addMessage(new CacheService.Message(commandDTO,channelHandlerContext));
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, CommandDTO.Command command) throws Exception {
+        CacheService.addMessage(new CacheService.Message(command,channelHandlerContext));
     }
 }
