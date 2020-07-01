@@ -13,14 +13,12 @@ public class ThreadFactoryImpl implements ThreadFactory {
     private final ThreadGroup group;
     private final AtomicInteger threadNumber = new AtomicInteger(1);
     private final String namePrefix;
-    private final int priority;
 
-    public ThreadFactoryImpl(String namePrefix,int priority) {
+    public ThreadFactoryImpl(String namePrefix) {
         SecurityManager s = System.getSecurityManager();
         group = (s != null) ? s.getThreadGroup() :
                 Thread.currentThread().getThreadGroup();
         this.namePrefix = namePrefix + "-thread-";
-        this.priority = priority;
     }
 
     @Override
@@ -28,7 +26,6 @@ public class ThreadFactoryImpl implements ThreadFactory {
         Thread t = new Thread(group, r,
                 namePrefix + threadNumber.getAndIncrement(),
                 0);
-        t.setPriority(priority);
         return t;
     }
 

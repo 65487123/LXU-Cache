@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" afterDir="false" />
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="fix 修改序列化反序列化协议">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/CacheServiceWithOneQueue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/ServerInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/CommandDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/CommandDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/CacheService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/CacheService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,22 +218,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1506" height="423" key="GridCell.Tab.0.bottom" timestamp="1593513279601">
+    <state width="1764" height="358" key="GridCell.Tab.0.bottom" timestamp="1593601102971">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="423" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593513279601" />
-    <state width="1506" height="423" key="GridCell.Tab.0.center" timestamp="1593513279600">
+    <state width="1764" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593601102971" />
+    <state width="1764" height="358" key="GridCell.Tab.0.center" timestamp="1593601102971">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="423" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593513279600" />
-    <state width="1506" height="423" key="GridCell.Tab.0.left" timestamp="1593513279600">
+    <state width="1764" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593601102971" />
+    <state width="1764" height="358" key="GridCell.Tab.0.left" timestamp="1593601102970">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="423" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593513279600" />
-    <state width="1506" height="423" key="GridCell.Tab.0.right" timestamp="1593513279600">
+    <state width="1764" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593601102970" />
+    <state width="1764" height="358" key="GridCell.Tab.0.right" timestamp="1593601102971">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="423" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593513279600" />
+    <state width="1764" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593601102971" />
     <state width="1506" height="423" key="GridCell.Tab.1.bottom" timestamp="1593513279601">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -286,11 +280,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java</url>
           <line>64</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
