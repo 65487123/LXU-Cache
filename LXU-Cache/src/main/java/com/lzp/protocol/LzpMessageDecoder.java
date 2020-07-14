@@ -15,7 +15,7 @@ public class LzpMessageDecoder extends ReplayingDecoder<Void> {
     private static final Logger logger = LoggerFactory.getLogger(LzpMessageDecoder.class);
 
     @Override
-    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
+    protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) {
         int length = byteBuf.readInt();
         byte[] content = new byte[length];
         byteBuf.readBytes(content);

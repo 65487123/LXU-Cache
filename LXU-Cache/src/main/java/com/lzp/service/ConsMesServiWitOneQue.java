@@ -13,43 +13,33 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.*;
 
 /**
- * Description:有多个消息队列的缓存服务
+ * Description:只有一个消息队列的缓存服务，对应一个消费消息的线程
  *
  * @author: Lu ZePing
- * @date: 2020/6/10 13:23
+ * @date: 2020/7/1 18:13
  */
-public class CacheService {
-    //逻辑处理器相同数量的消息队列
-    private static final BlockingQueue<Message>[] QUEUES;
-    //逻辑处理器相同数量的缓存
-    private static final Cache<String,String>[] CACHES;
+public class ConsMesServiWitOneQue {
+    private static final BlockingQueue<ConsMesServiWitOneQue.Message> QUEUE;
 
-    private static final Logger logger = LoggerFactory.getLogger(CacheService.class);
+    private static final Cache<String,String> CACHE;
 
-    private static final boolean IS_POWER_Of_TWO;
+    private static final Logger logger = LoggerFactory.getLogger(ConsMesServiWitOneQue.class);
+
     private static ExecutorService threadPool;
 
     static {
         int maxSize = Integer.parseInt(FileUtil.getProperty("lruCacheMaxSize"));
         int cpuSum = Runtime.getRuntime().availableProcessors();
-        threadPool = new ThreadPoolExecutor(cpuSum, cpuSum, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
-        IS_POWER_Of_TWO = (cpuSum & (cpuSum - 1)) == 0;
-        QUEUES = new BlockingQueue[cpuSum];
-        CACHES = new Cache[cpuSum];
+        threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
-            for (int i = 0; i < cpuSum; i++) {
-                CACHES[i] = new LruCache(maxSize);
-                QUEUES[i] = new ArrayBlockingQueue<>(maxSize);
-                final int finalI = i;
-                threadPool.execute(() -> operCache(finalI));
-            }
+                CACHE = new LruCache<String,String>(maxSize);
+                QUEUE = new ArrayBlockingQueue<>(maxSize);
+                threadPool.execute(() -> operCache());
         } else {
-            for (int i = 0; i < cpuSum; i++) {
-                CACHES[i] = new LfuCache(maxSize);
-                QUEUES[i] = new ArrayBlockingQueue<>(maxSize);
-                final int finalI = i;
-                threadPool.execute(() -> operCache(finalI));
-            }
+                CACHE = new LfuCache(maxSize);
+                QUEUE = new ArrayBlockingQueue<>(maxSize);
+                threadPool.execute(() -> operCache());
+
         }
     }
 
@@ -71,25 +61,25 @@ public class CacheService {
         }
     }
 
-    private static void operCache(int index) {
+    private static void operCache() {
         try {
             while (true) {
-                Message message = QUEUES[index].take();
+                ConsMesServiWitOneQue.Message message = QUEUE.take();
                 switch (message.command.getType()) {
                     case "get": {
-                        Object retern = CACHES[index].get(message.command.getKey());
+                        Object retern = CACHE.get(message.command.getKey());
                         String result = retern == null ? "null" : retern.toString();
                         message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("get").setResult(result).build());
                         break;
                     }
                     case "put": {
-                        Object retern = CACHES[index].put(message.command.getKey(), message.command.getValue());
+                        Object retern = CACHE.put(message.command.getKey(), message.command.getValue());
                         String result = retern == null ? "null" : retern.toString();
                         message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("put").setResult(result).build());
                         break;
                     }
                     case "remove": {
-                        Object retern = CACHES[index].remove(message.command.getKey());
+                        Object retern = CACHE.remove(message.command.getKey());
                         String result = retern == null ? "null" : retern.toString();
                         message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("remove").setResult(result).build());
                         break;
@@ -103,21 +93,11 @@ public class CacheService {
         }
     }
 
-    public static void addMessage(Message message) {
-        String key = String.valueOf(message.command.getKey());
-        int charSum = sumChar(key);
-        if (IS_POWER_Of_TWO){
-            try {
-                QUEUES[charSum & (QUEUES.length-1)].put(message);
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage(),e);
-            }
-        }else {
-            try {
-                QUEUES[charSum % QUEUES.length-1].put(message);
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage(),e);
-            }
+    public static void addMessage(ConsMesServiWitOneQue.Message message) {
+        try {
+            QUEUE.put(message);
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage(),e);
         }
     }
 

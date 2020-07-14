@@ -3,8 +3,6 @@ package com.lzp.nettyserver;
 import com.lzp.protocol.*;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.handler.codec.protobuf.ProtobufEncoder;
 
 /**
  * @Author：luzeping

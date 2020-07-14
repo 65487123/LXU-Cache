@@ -1,0 +1,8 @@
+syntax = "proto3";
+option java_outer_classname = "ResponseDTO";
+option optimize_for = SPEED;
+option java_package = "com.lzp.protocol";
+message Response {
+    string type = 1;
+    string result = 2;
+}
