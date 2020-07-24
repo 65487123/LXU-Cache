@@ -1,8 +1,5 @@
 package com.lzp.nettyserver;
 
-import com.lzp.cache.Cache;
-import com.lzp.cache.LfuCache;
-import com.lzp.cache.LruCache;
 import com.lzp.util.FileUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
@@ -12,10 +9,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * @Author：luzeping
@@ -32,7 +25,7 @@ public class Server {
 
     public static void main(String[] args) {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup workerGroup = new NioEventLoopGroup(16);
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
@@ -45,5 +38,4 @@ public class Server {
             workerGroup.shutdownGracefully();
         }
     }
-
 }

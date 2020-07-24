@@ -34,7 +34,7 @@ public class ExpireService {
 
     private static final long pollingInterval;
 
-    private static final Logger logger = LoggerFactory.getLogger(ConsumeMessageService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExpireService.class);
     static {
         pollingInterval = Long.parseLong(FileUtil.getProperty("pollingInterval"));
         threadPool.execute(new Runnable() {
@@ -47,7 +47,7 @@ public class ExpireService {
                     while (iterator.hasNext()) {
                         Map.Entry<String, Long> entry = iterator.next();
                         if (now > entry.getValue()) {
-                            ConsumeMessageService.addMessage(new ConsumeMessageService.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(), null));
+                            ConsMesServiWitOneQue.addMessage(new ConsMesServiWitOneQue.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(),null),0);
                             iterator.remove();
                         }
                     }

@@ -1,8 +1,10 @@
 package com.lzp.service;
 
+import com.lzp.cache.AutoDeleteMap;
 import com.lzp.cache.Cache;
 import com.lzp.cache.LfuCache;
-import com.lzp.cache.LruCache;
+import com.lzp.datastructure.queue.BlockingQueueAdapter;
+import com.lzp.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.protocol.CommandDTO;
 import com.lzp.protocol.ResponseDTO;
 import com.lzp.util.FileUtil;
@@ -22,33 +24,32 @@ import java.util.concurrent.*;
  */
 public class ConsumeMessageService {
     /**逻辑处理器相同数量的消息队列*/
-    private static final BlockingQueue<Message>[] QUEUES;
+    private static final BlockingQueueAdapter<Message>[] QUEUES;
     /**逻辑处理器相同数量的缓存*/
     private static final Cache<String,Object>[] CACHES;
 
     private static final Logger logger = LoggerFactory.getLogger(ConsumeMessageService.class);
 
     private static final boolean IS_POWER_Of_TWO;
-    private static ExecutorService threadPool;
 
     static {
         int maxSize = Integer.parseInt(FileUtil.getProperty("lruCacheMaxSize"));
         int cpuSum = Runtime.getRuntime().availableProcessors();
-        threadPool = new ThreadPoolExecutor(cpuSum, cpuSum, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
+        ExecutorService threadPool = new ThreadPoolExecutor(cpuSum, cpuSum, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
         IS_POWER_Of_TWO = (cpuSum & (cpuSum - 1)) == 0;
-        QUEUES = new BlockingQueue[cpuSum];
+        QUEUES = new BlockingQueueAdapter[cpuSum];
         CACHES = new Cache[cpuSum];
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
             for (int i = 0; i < cpuSum; i++) {
-                CACHES[i] = new LruCache(maxSize);
-                QUEUES[i] = new ArrayBlockingQueue<>(maxSize);
+                CACHES[i] = new AutoDeleteMap<>(maxSize);
+                QUEUES[i] = new NoLockBlockingQueue<>(maxSize,cpuSum);
                 final int finalI = i;
                 threadPool.execute(() -> operCache(finalI));
             }
         } else {
             for (int i = 0; i < cpuSum; i++) {
                 CACHES[i] = new LfuCache(maxSize);
-                QUEUES[i] = new ArrayBlockingQueue<>(maxSize);
+                QUEUES[i] = new NoLockBlockingQueue<>(maxSize,cpuSum);
                 final int finalI = i;
                 threadPool.execute(() -> operCache(finalI));
             }
@@ -251,19 +252,24 @@ public class ConsumeMessageService {
             logger.error(e.getMessage(), e);
         }
     }
-
-    public static void addMessage(Message message) {
+    /**
+     * Description ：先根据key确定要放入的队列，再根据线程id确定队列中要存入的块
+     *
+     * @param
+     * @Return
+     **/
+    public static void addMessage(Message message,int threadId) {
         String key = String.valueOf(message.command.getKey());
         int charSum = sumChar(key);
         if (IS_POWER_Of_TWO){
             try {
-                QUEUES[charSum & (QUEUES.length-1)].put(message);
+                QUEUES[charSum & (QUEUES.length-1)].put(message,threadId);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage(),e);
             }
         }else {
             try {
-                QUEUES[charSum % QUEUES.length-1].put(message);
+                QUEUES[charSum % QUEUES.length-1].put(message,threadId);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage(),e);
             }
