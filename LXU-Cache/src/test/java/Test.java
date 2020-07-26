@@ -1,7 +1,10 @@
+import com.lzp.cache.AutoDeleteMap;
 import com.lzp.protocol.CommandDTO;
 import com.lzp.service.ConsumeMessageService;
+import com.lzp.util.SeriallUtil;
 
 import java.time.Instant;
+import java.util.*;
 
 /**
  * Description:
@@ -11,10 +14,22 @@ import java.time.Instant;
  */
 public class Test {
     public static void main(String[] args) {
-        long now = Instant.now().toEpochMilli();
-        for (int i = 0 ;i<10;i++){
-            new ConsumeMessageService.Message(null,null);
-        }
-        System.out.println(Instant.now().toEpochMilli()-now);
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        Set set = new HashSet(list);
+        AutoDeleteMap map = new AutoDeleteMap(1000);
+        Map map1 = new HashMap();
+        map1.put("2","#");
+        map1.put("4","5");
+        map.put("1","2");
+        map.put("2",list);
+        map.put("3",set);
+        map.put("4",map1);
+
+        String s=SeriallUtil.CacheToString(map);
+        System.out.println(s);
+        AutoDeleteMap map2 = SeriallUtil.StringToLruCache(s);
+        System.out.println((map2));
     }
 }

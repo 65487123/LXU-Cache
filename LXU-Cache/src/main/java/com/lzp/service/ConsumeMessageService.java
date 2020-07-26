@@ -8,7 +8,7 @@ import com.lzp.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.protocol.CommandDTO;
 import com.lzp.protocol.ResponseDTO;
 import com.lzp.util.FileUtil;
-import com.lzp.util.ValueUtil;
+import com.lzp.util.SeriallUtil;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,7 +124,7 @@ public class ConsumeMessageService {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hput").setResult("e").build());
                             break;
                         }
-                        Map<String,String> values = ValueUtil.stringToMap(message.command.getValue());
+                        Map<String,String> values = SeriallUtil.stringToMap(message.command.getValue());
                         CACHES[index].put(key,values);
                         message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hput").build());
                         break;
@@ -133,14 +133,14 @@ public class ConsumeMessageService {
                         String key = message.command.getKey();
                         Object value;
                         if ((value = CACHES[index].get(key)) == null) {
-                            Map<String, String> values = ValueUtil.stringToMap(message.command.getValue());
+                            Map<String, String> values = SeriallUtil.stringToMap(message.command.getValue());
                             CACHES[index].put(key, values);
                         } else if (!(value instanceof Map)) {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hmerge").setResult("e").build());
                             break;
                         } else {
                             Map<String, String> mapValue = (Map<String, String>) value;
-                            Map<String, String> values = ValueUtil.stringToMap(message.command.getValue());
+                            Map<String, String> values = SeriallUtil.stringToMap(message.command.getValue());
                             for (Map.Entry<String, String> entry : values.entrySet()) {
                                 mapValue.put(entry.getKey(), entry.getValue());
                             }
@@ -154,7 +154,7 @@ public class ConsumeMessageService {
                         if ((value = CACHES[index].get(key)) == null) {
                             //不values.addAll(Arrays.asList(message.command.getValue().split(","))) 这样写的原因是他底层也是要addAll的，没区别
                             //而且还多了一步new java.util.Arrays.ArrayList()的操作。虽然jvm在编译的时候可能就会优化成和我写的一样，但最终结果都一样，这样写直观一点。下面同样
-                            CACHES[index].put(key, ValueUtil.stringToList(message.command.getValue()));
+                            CACHES[index].put(key, SeriallUtil.stringToList(message.command.getValue()));
                         } else if (!(value instanceof List)) {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("lpush").setResult("e").build());
                             break;
@@ -169,7 +169,7 @@ public class ConsumeMessageService {
                         String key = message.command.getKey();
                         Object value;
                         if ((value = CACHES[index].get(key)) == null) {
-                            CACHES[index].put(key, ValueUtil.stringToSet(message.command.getValue()));
+                            CACHES[index].put(key, SeriallUtil.stringToSet(message.command.getValue()));
                         } else if (!(value instanceof List)) {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zadd").setResult("e").build());
                             break;
@@ -202,7 +202,7 @@ public class ConsumeMessageService {
                     case "getList": {
                         try {
                             List<String> values = (List<String>) CACHES[index].get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getList").setResult(values == null ? "null" : ValueUtil.collectionToString(values)).build());
+                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getList").setResult(values == null ? "null" : SeriallUtil.collectionToString(values)).build());
                         } catch (Exception e) {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getList").setResult("e").build());
                         }
@@ -211,7 +211,7 @@ public class ConsumeMessageService {
                     case "getSet": {
                         try {
                             Set<String> values = (Set<String>) CACHES[index].get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getSet").setResult(values == null ? "null" : ValueUtil.collectionToString(values)).build());
+                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getSet").setResult(values == null ? "null" : SeriallUtil.collectionToString(values)).build());
                         } catch (Exception e) {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getSet").setResult("e").build());
                         }
