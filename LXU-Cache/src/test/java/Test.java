@@ -1,8 +1,6 @@
 import com.lzp.cache.AutoDeleteMap;
-import com.lzp.protocol.CommandDTO;
-import com.lzp.service.ConsumeMessageService;
-import com.lzp.util.SeriallUtil;
 
+import java.io.*;
 import java.time.Instant;
 import java.util.*;
 
@@ -13,23 +11,50 @@ import java.util.*;
  * @date: 2020/7/15 12:26
  */
 public class Test {
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        Set set = new HashSet(list);
-        AutoDeleteMap map = new AutoDeleteMap(1000);
-        Map map1 = new HashMap();
-        map1.put("2","#");
-        map1.put("4","5");
-        map.put("1","2");
-        map.put("2",list);
-        map.put("3",set);
-        map.put("4",map1);
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        AutoDeleteMap<String, Object> map = new AutoDeleteMap(1000000);
 
-        String s=SeriallUtil.CacheToString(map);
-        System.out.println(s);
-        AutoDeleteMap map2 = SeriallUtil.StringToLruCache(s);
-        System.out.println((map2));
+        Map<String, Object> map1 = new HashMap<>();
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < 100; i++) {
+            set.add(String.valueOf(i));
+        }
+        List<String> list = new ArrayList<>(set);
+        for (int i = 0; i < 100000; i++) {
+            map.put(String.valueOf(i), String.valueOf(i));
+            map1.put(String.valueOf(i), String.valueOf(i));
+        }
+        for (int i = 100000; i < 200000; i++) {
+            map.put(String.valueOf(i), set);
+        }
+        for (int i = 200000; i < 300000; i++) {
+            map.put(String.valueOf(i), list);
+        }
+        for (int i = 300000; i < 400000; i++) {
+            map.put(String.valueOf(i), map1);
+        }
+
+
+        long now = Instant.now().toEpochMilli();
+        File file = new File("./d.txt");
+        //FileWriter outputStream = new FileWriter(file);
+        OutputStream outputStream = new FileOutputStream(file);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+        objectOutputStream.writeObject(map);
+        System.out.println(Instant.now().toEpochMilli()-now);
+        now = Instant.now().toEpochMilli();
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
+        AutoDeleteMap map2 = (AutoDeleteMap) objectInputStream.readObject();
+        System.out.println(Instant.now().toEpochMilli()-now);
+        //outputStream.write(SeriallUtil.CacheToString(map));
+        /*FileReader fileReader = new FileReader(file);*/
+        /*StringBuilder stringBuilder = new StringBuilder(16384);
+        int c;
+        while ((c = fileReader.read())!=-1){
+            stringBuilder.append((char)c);
+        }
+        Map autoDeleteMap = JSON.parseObject(stringBuilder.toString(),Map.class);
+        System.out.println(Instant.now().toEpochMilli()-now);
+        System.out.println(autoDeleteMap.get("444").equals(map.get("444")));*/
     }
 }

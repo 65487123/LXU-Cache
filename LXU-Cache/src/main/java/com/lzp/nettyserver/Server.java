@@ -19,8 +19,19 @@ public class Server {
     private static final Logger logger = LoggerFactory.getLogger(Server.class);
     private static final int PORT;
 
+    /**
+     * 启动顺序：先去初始化 com.lzp.service.ConsMesService，初始化过程会把持久化数据恢复到内存，恢复完成后会
+     * 清空文件并生成一个新的快照文件。然后初始化com.lzp.service.ExpireService，恢复key过期时间的持久化文件
+     * 同样，恢复完成后会删除文件并生成新的快照。
+     */
     static {
         PORT = Integer.parseInt(FileUtil.getProperty("port"));
+        try {
+            Class.forName("com.lzp.service.ConsMesService");
+            Class.forName("com.lzp.service.ExpireService");
+        } catch (ClassNotFoundException e) {
+            logger.error(e.getMessage(),e);
+        }
     }
 
     public static void main(String[] args) {

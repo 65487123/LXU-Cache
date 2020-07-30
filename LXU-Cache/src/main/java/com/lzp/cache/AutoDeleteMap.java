@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public class AutoDeleteMap<K, V> extends LinkedHashMap<K, V> implements Cache<K, V> {
     private final int maxSize;
+    private static final long serialVersionUID = 1L;
 
     public AutoDeleteMap(int maxSize) {
         super((int) (maxSize / 0.75 + 1), 0.75f, true);

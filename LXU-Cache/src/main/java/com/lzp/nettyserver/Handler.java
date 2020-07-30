@@ -3,7 +3,7 @@ package com.lzp.nettyserver;
 
 import com.lzp.protocol.CommandDTO;
 
-import com.lzp.service.ConsMesServiWitOneQue;
+import com.lzp.service.ConsMesService;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.EventLoop;
@@ -23,7 +23,7 @@ public class Handler extends SimpleChannelInboundHandler<CommandDTO.Command> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, CommandDTO.Command command) {
-        ConsMesServiWitOneQue.addMessage(new ConsMesServiWitOneQue.Message(command, channelHandlerContext),eventLoopNumMap.get(channelHandlerContext.channel().eventLoop()));
+        ConsMesService.addMessage(new ConsMesService.Message(command, channelHandlerContext),eventLoopNumMap.get(channelHandlerContext.channel().eventLoop()));
     }
 
     @Override
