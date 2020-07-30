@@ -42,7 +42,7 @@ public class ExpireService {
     private static final Logger logger = LoggerFactory.getLogger(ExpireService.class);
 
     static {
-        File file = new File("./persistence/expire/snapshot.txt");
+        File file = new File("./persistence/expire/snapshot.ser");
         if (!file.exists()) {
             keyTimeMap = new ConcurrentHashMap<>(16);
         } else {

@@ -70,7 +70,7 @@ public class PersistenceService {
             if (objectOutputStream!=null) {
                 objectOutputStream.close();
             }
-            objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/corecache/snapshot.txt")));
+            objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/corecache/snapshot.ser")));
             objectOutputStream.writeObject(object);
             objectOutputStream.flush();
         } catch (IOException e) {
@@ -83,7 +83,7 @@ public class PersistenceService {
             if (expireObjectOutputStream!=null) {
                 expireObjectOutputStream.close();
             }
-            expireObjectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/expire/snapshot.txt")));
+            expireObjectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/expire/snapshot.ser")));
             expireObjectOutputStream.writeObject(object);
             expireObjectOutputStream.flush();
         } catch (IOException e) {

@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="ENHANCE 增加数据结构，增加key超时功能">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/AutoDeleteMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cache/AutoDeleteMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesServiWitOneQue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsumeMessageService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ExpireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/PersistenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/PersistenceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/SeriallUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/SeriallUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
-    </list>
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -161,7 +147,7 @@
       <workItem from="1593330334590" duration="25157000" />
       <workItem from="1594262755327" duration="50287000" />
       <workItem from="1595668690756" duration="16499000" />
-      <workItem from="1595819103662" duration="84229000" />
+      <workItem from="1595819103662" duration="85025000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -177,16 +163,31 @@
       <option name="project" value="LOCAL" />
       <updated>1593156687465</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ENHANCE 增加持久化功能">
+      <created>1596093438495</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596093438495</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <created>1596093507651</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596093507651</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix" />
     <MESSAGE value="修改lrucache实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改lrucache实现" />
+    <MESSAGE value="ENHANCE 增加持久化功能" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592474340485">
@@ -237,22 +238,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom" timestamp="1596090323364">
+    <state width="1877" height="318" key="GridCell.Tab.0.bottom" timestamp="1596095290123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596090323364" />
-    <state width="1877" height="318" key="GridCell.Tab.0.center" timestamp="1596090323364">
+    <state width="1877" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596095290123" />
+    <state width="1877" height="318" key="GridCell.Tab.0.center" timestamp="1596095290123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596090323364" />
-    <state width="1877" height="318" key="GridCell.Tab.0.left" timestamp="1596090323364">
+    <state width="1877" height="318" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596095290123" />
+    <state width="1877" height="318" key="GridCell.Tab.0.left" timestamp="1596095290123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596090323364" />
-    <state width="1877" height="318" key="GridCell.Tab.0.right" timestamp="1596090323364">
+    <state width="1877" height="318" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596095290123" />
+    <state width="1877" height="318" key="GridCell.Tab.0.right" timestamp="1596095290123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="318" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596090323364" />
+    <state width="1877" height="318" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596095290123" />
     <state width="1877" height="275" key="GridCell.Tab.1.bottom" timestamp="1596090263139">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -277,10 +278,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="499" y="256" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1595903229166" />
-    <state x="567" y="220" width="786" height="600" key="find.popup" timestamp="1595990719467">
+    <state x="567" y="220" width="1058" height="600" key="find.popup" timestamp="1596095204399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="567" y="220" width="786" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1595990719467" />
+    <state x="567" y="220" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596095204399" />
     <state x="334" y="221" key="new project wizard" timestamp="1592475187725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

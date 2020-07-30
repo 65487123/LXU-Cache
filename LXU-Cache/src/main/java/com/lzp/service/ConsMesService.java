@@ -41,7 +41,7 @@ public class ConsMesService {
         SNAPSHOT_BATCH_COUNT_D1 = Integer.parseInt(FileUtil.getProperty("snapshot-batch-count"))-1;
         ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
-            File file = new File("./persistence/corecache/snapshot.txt");
+            File file = new File("./persistence/corecache/snapshot.ser");
             if (!file.exists()) {
                 CACHE = new AutoDeleteMap<>(maxSize);
             } else {
