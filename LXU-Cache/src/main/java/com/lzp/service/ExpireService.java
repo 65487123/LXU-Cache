@@ -24,7 +24,7 @@ import java.util.concurrent.*;
  * 所以这里选择用第三种方法来处理过期key。适量浪费单个cpu的资源问题也不是很大，用字符串常量池里的对象来当key，也不会造成额外内存占用过多
  *
  * @author: Lu ZePing
- * @date: 2020/7/14 11:07
+ * @date: 2019/7/14 11:07
  */
 public class ExpireService {
     /**

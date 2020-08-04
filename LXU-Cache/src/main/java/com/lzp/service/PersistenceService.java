@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Description:持久化服务，生成快照会阻塞线程，生成日志是另一个线程异步执行
  *
  * @author: Lu ZePing
- * @date: 2020/7/24 14:58
+ * @date: 2019/7/24 14:58
  */
 public class PersistenceService {
     private static ObjectOutputStream objectOutputStream;

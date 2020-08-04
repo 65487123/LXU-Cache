@@ -13,7 +13,7 @@ import java.util.Properties;
  * Description:文件读取工具类
  *
  * @author: Lu ZePing
- * @date: 2020/6/10 13:23
+ * @date: 2019/6/10 13:23
  */
 public class FileUtil {
     private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);

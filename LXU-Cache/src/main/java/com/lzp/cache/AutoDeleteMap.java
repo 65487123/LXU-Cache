@@ -7,7 +7,7 @@ import java.util.Map;
  * Description:实现了LRU淘汰策略的缓存
  *
  * @author: Lu ZePing
- * @date: 2020/6/10 13:23
+ * @date: 2019/6/10 13:23
  */
 public class AutoDeleteMap<K, V> extends LinkedHashMap<K, V> implements Cache<K, V> {
     private final int maxSize;

@@ -6,7 +6,7 @@ import io.netty.channel.ChannelInitializer;
 
 /**
  * @Author：luzeping
- * @Date: 2020/1/6 20:39
+ * @Date: 2019/1/6 20:39
  */
 public class ServerInitializer extends ChannelInitializer {
     @Override

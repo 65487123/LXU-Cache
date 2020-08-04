@@ -4,7 +4,7 @@ package com.lzp.cache;
  * Description:key-value缓存接口
  *
  * @author: Lu ZePing
- * @date: 2020/6/10 9:34
+ * @date: 2019/6/10 9:34
  */
 public interface Cache<K,V> {
     /**

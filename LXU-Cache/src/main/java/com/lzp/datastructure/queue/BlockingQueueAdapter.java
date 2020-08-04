@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Description:为了适配 TakeNolockQueue
  *
  * @author: Lu ZePing
- * @date: 2020/7/20 12:20
+ * @date: 2019/7/20 12:20
  */
 public abstract class BlockingQueueAdapter<E> implements BlockingQueue<E> {
     protected int tableSizeFor(int cap) {

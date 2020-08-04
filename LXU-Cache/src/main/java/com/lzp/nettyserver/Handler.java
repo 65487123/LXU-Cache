@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * @Author：luzeping
- * @Date: 2020/1/6 20:35
+ * @Date: 2019/1/6 20:35
  */
 public class Handler extends SimpleChannelInboundHandler<CommandDTO.Command> {
     private static Map<EventLoop,Integer> eventLoopNumMap=new HashMap(32);
