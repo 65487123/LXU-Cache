@@ -28,6 +28,16 @@
 
 
 # 	使用方法：
-    1、通过修改config.properties配置文件设置缓存使用的端口、缓存淘汰策略、缓存最大条目数量、key过期策略、生成快照时的日志条目数等。
-    2、编译项目，生成jar包
-    3、丢到服务器 执行 nohup java -jar lxucache-server-1.0-SNAPSHOT.jar & ，可以根据自己需求添加其他JVM启动参数
+## 单机模式
+    1、config.properties的cluster-enabled配置为no
+    2、通过修改config.properties配置文件设置缓存使用的端口、缓存淘汰策略、缓存最大条目数量、key过期策略、生成快照时的日志条目数等。
+    3、编译项目，生成jar包
+    4、丢到服务器 执行 nohup java -jar lxucache-server-1.0-SNAPSHOT.jar & ，可以根据自己需求添加其他JVM启动参数
+    
+## 集群模式
+    1、config.properties的cluster-enabled配置为yes
+    2、如果是主节点配置文件里isMaster属性设为yes，如果是从节点，masterIpAndPort需要配置为主节点的ip加端口,示例：masterIpAndPort=127.0.0.1:4445
+    3、先启动主节点，主节点的目录下面如果有持久化文件，启动后会恢复数据。
+    4、再启动从节点，启动后会自动同步主节点的数据到从节点中。可以启动多个从节点。 启动从节点需要带上参数 -XX:-RestrictContended(从节点用的队列是通
+    过官方实现解决伪共享的)。示例：nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar & ，可以根据自己需求添加其他JVM启动参数
+    5、客户端通过CacheClientCluster来连接集群。
