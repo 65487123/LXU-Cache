@@ -2,25 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="fix">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/HashUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/MasterHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/AutoDeleteMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cache/AutoDeleteMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cache/Cache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/LfuCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cache/LfuCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/BlockingQueueAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/BlockingQueueAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/NoLockBlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/NoLockBlockingQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/OneToOneBlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/OneToOneBlockingQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/zset/Zset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/set/Zset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/ServerInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufEncoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ExpireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/PersistenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/PersistenceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/SeriallUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/util/SerialUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/AutoDeleteMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/cache/AutoDeleteMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/Cache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/cache/Cache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cache/LfuCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/cache/LfuCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/BlockingQueueAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/BlockingQueueAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/NoLockBlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/NoLockBlockingQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/queue/OneToOneBlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/OneToOneBlockingQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/datastructure/set/Zset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/set/Zset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/model/command.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/model/command.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/model/response.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/model/response.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Handler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/nettyserver/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/MasterServerInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/AbstractDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/AbstractDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/CommandDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/CommandDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpMessageEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpProtobufDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/LzpProtobufEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpProtobufEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/ResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ExpireService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/PersistenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/PersistenceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/service/ThreadFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ThreadFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/util/SerialUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/SerialUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,40 +77,44 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LxuCache-Client/LxuCache-Client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\model\compileUtil" />
+      <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\util" />
+      <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\model" />
+      <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\resources\log4j" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lzp.cluster.handler" />
+      <recent name="com.lzp.cluster.client" />
+      <recent name="com.lzp.cluster" />
+      <recent name="com.lzp.protocol" />
+      <recent name="com.lzp.service" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\protocol" />
       <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\java\com\lzp\datastructure\zset" />
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp" />
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\protocol" />
       <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\java\com\lzp\protocol" />
-      <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\java" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.lzp.protocol" />
-      <recent name="com.lzp.service" />
-      <recent name="com.lzp.nettyserver" />
-      <recent name="lzp.com.lzp.nettyserver" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\resources\log4j" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Server">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lzp.nettyserver.Server" />
+      <option name="MAIN_CLASS_NAME" value="com.lzp.Server" />
       <module name="LXU-Cache" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lzp.nettyserver.*" />
+          <option name="PATTERN" value="com.lzp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -111,11 +131,11 @@
       </method>
     </configuration>
     <configuration name="Zset" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lzp.datastructure.set.Zset" />
+      <option name="MAIN_CLASS_NAME" value="com.lzp.common.cache.datastructure.set.Zset" />
       <module name="LXU-Cache" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lzp.datastructure.set.*" />
+          <option name="PATTERN" value="com.lzp.common.cache.datastructure.set.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -139,7 +159,7 @@
     </configuration>
     <configuration name="Server" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="LXU-Cache" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lzp.nettyserver.Server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lzp.Server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -235,18 +255,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595831866423" />
-    <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592646749243">
+    <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596789732143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592646749243" />
+    <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1596789732143" />
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592644672922">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592644672922" />
-    <state x="626" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1592470791190">
+    <state x="626" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1597109533422">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="626" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592470791190" />
+    <state x="626" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597109533422" />
     <state x="739" y="378" width="441" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592471624495">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -255,18 +275,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="399" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1592470794130" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593432338354">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597127001787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593432338354" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597127001787" />
     <state x="461" y="498" width="1003" height="306" key="#xdebugger.evaluate" timestamp="1596525451865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="498" width="1003" height="306" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1596525451865" />
-    <state x="494" y="109" key="CommitChangelistDialog2" timestamp="1596093436844">
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597137622883">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="109" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596093436844" />
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597137622883" />
     <state width="491" height="466" key="DebuggerActiveHint" timestamp="1596525435375">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -275,46 +295,50 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1877" height="342" key="GridCell.Tab.0.bottom" timestamp="1596526315868">
+    <state width="1877" height="346" key="GridCell.Tab.0.bottom" timestamp="1597137520261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="342" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596526315868" />
-    <state width="1877" height="342" key="GridCell.Tab.0.center" timestamp="1596526315868">
+    <state width="1877" height="346" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597137520261" />
+    <state width="1877" height="346" key="GridCell.Tab.0.center" timestamp="1597137520261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="342" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596526315868" />
-    <state width="1877" height="342" key="GridCell.Tab.0.left" timestamp="1596526315868">
+    <state width="1877" height="346" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597137520261" />
+    <state width="1877" height="346" key="GridCell.Tab.0.left" timestamp="1597137520261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="342" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596526315868" />
-    <state width="1877" height="342" key="GridCell.Tab.0.right" timestamp="1596526315868">
+    <state width="1877" height="346" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597137520261" />
+    <state width="1877" height="346" key="GridCell.Tab.0.right" timestamp="1597137520261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="342" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596526315868" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1596526097191">
+    <state width="1877" height="346" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597137520261" />
+    <state width="1877" height="390" key="GridCell.Tab.1.bottom" timestamp="1597137285380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596526097191" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1596526097191">
+    <state width="1877" height="390" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597137285380" />
+    <state width="1877" height="390" key="GridCell.Tab.1.center" timestamp="1597137285380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596526097191" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1596526097191">
+    <state width="1877" height="390" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597137285380" />
+    <state width="1877" height="390" key="GridCell.Tab.1.left" timestamp="1597137285380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596526097191" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1596526097191">
+    <state width="1877" height="390" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597137285380" />
+    <state width="1877" height="390" key="GridCell.Tab.1.right" timestamp="1597137285380">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596526097191" />
-    <state x="497" y="158" width="1087" height="882" key="SettingsEditor" timestamp="1593482090506">
+    <state width="1877" height="390" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597137285380" />
+    <state x="497" y="158" width="1087" height="882" key="SettingsEditor" timestamp="1597039407855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="497" y="158" width="1087" height="882" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593482090506" />
+    <state x="497" y="158" width="1087" height="882" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597039407855" />
     <state x="499" y="256" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1595903229166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="499" y="256" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1595903229166" />
+    <state x="690" y="284" key="extract.method.dialog" timestamp="1597031795981">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597031795981" />
     <state x="567" y="220" width="1058" height="600" key="find.popup" timestamp="1596523100092">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -323,14 +347,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="221" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1592475187725" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1596022857302">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1596692991895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596022857302" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1596453632556">
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596692991895" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597129915238">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1596453632556" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597129915238" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -341,9 +365,14 @@
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/service/ConsMesService.java</url>
-          <line>459</line>
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
+          <line>460</line>
           <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -352,78 +381,5 @@
     <SUITE FILE_PATH="coverage/LXU_Cache$Server.ic" NAME="Server Coverage Results" MODIFIED="1595903218514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.lzp.nettyserver.*</FILTER>
     </SUITE>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>LXU-Cache</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
