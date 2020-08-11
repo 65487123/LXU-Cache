@@ -38,6 +38,6 @@
     1、config.properties的cluster-enabled配置为yes
     2、如果是主节点配置文件里isMaster属性设为yes，如果是从节点，masterIpAndPort需要配置为主节点的ip加端口,示例：masterIpAndPort=127.0.0.1:4445
     3、先启动主节点，主节点的目录下面如果有持久化文件，启动后会恢复数据。
-    4、再启动从节点，启动后会自动同步主节点的数据到从节点中。可以启动多个从节点。 启动从节点需要带上参数 -XX:-RestrictContended(从节点用的队列是通
-    过官方实现解决伪共享的)。示例：nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar & ，可以根据自己需求添加其他JVM启动参数
+    4、再启动从节点，启动后会自动同步主节点的数据到从节点中。可以启动多个从节点。启动从节点需要带上参数-XX:-RestrictContended(从节点用的队列是通过官
+    方实现解决伪共享的)。示例：nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar & ，可以根据自己需求添加其他JVM启动参数
     5、客户端通过CacheClientCluster来连接集群。
