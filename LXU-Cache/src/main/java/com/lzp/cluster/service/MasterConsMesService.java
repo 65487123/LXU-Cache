@@ -486,6 +486,9 @@ public class MasterConsMesService {
                             ExpireService.setKeyAndTime(key, expireTime);
                             PersistenceService.writeExpireJournal(key +
                                     "ÈÈ" + expireTime);
+                            for (Channel channel : slaves) {
+                                channel.writeAndFlush(message.command);
+                            }
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("expire").setResult("1").build());
                         }
                         break;
@@ -495,13 +498,14 @@ public class MasterConsMesService {
                             PersistenceService.generateSnapshot(CACHE);
                         }
                         PersistenceService.writeJournal(message.command);
-                        for (Channel channel:slaves){
-                            channel.writeAndFlush(message.command);
-                        }
                         CACHE.remove(message.command.getKey());
                         if (message.channelHandlerContext != null) {
+                            for (Channel channel : slaves) {
+                                channel.writeAndFlush(message.command);
+                            }
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("remove").build());
                         }
+
                         break;
                     }
                     case "zrange": {
@@ -551,8 +555,9 @@ public class MasterConsMesService {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "fullSynz": {
+                    case "fullSync": {
                         connectSlaveAndSendSyncData(message);
+                        break;
                     }
                     default:
                         throw new IllegalStateException("Unexpected value: " + message.command.getType());
@@ -570,11 +575,13 @@ public class MasterConsMesService {
     private static void connectSlaveAndSendSyncData(Message message) {
         InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
         String ip = inetSocketAddress.getAddress().getHostAddress();
-        int port = inetSocketAddress.getPort();
+        int port = Integer.parseInt(message.command.getKey());
         noticeAllSlave(ip, port);
         Channel channel = ClientService.getConnection(ip, port);
         FileInputStream snapshotFileInputStream = null;
         FileInputStream journalFileInputStream = null;
+        FileInputStream expireSnapshotFileInputStream = null;
+        FileInputStream expireJournalFileInputStream = null;
         try {
             snapshotFileInputStream = new FileInputStream("./persistence/corecache/snapshot.ser");
             byte[] snapshotsBytes = new byte[snapshotFileInputStream.available()];
@@ -582,8 +589,14 @@ public class MasterConsMesService {
             journalFileInputStream = new FileInputStream("./persistence/corecache/journal.txt");
             byte[] journalBytes = new byte[journalFileInputStream.available()];
             journalFileInputStream.read(journalBytes);
-            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(new String(snapshotsBytes))
-                    .setValue(new String(journalBytes)).build());
+            expireSnapshotFileInputStream = new FileInputStream("./persistence/expire/snapshot.ser");
+            byte[] expireSnapshotsBytes = new byte[expireSnapshotFileInputStream.available()];
+            expireSnapshotFileInputStream.read(expireSnapshotsBytes);
+            expireJournalFileInputStream = new FileInputStream("./persistence/expire/journal.txt");
+            byte[] expireJournalBytes = new byte[expireJournalFileInputStream.available()];
+            expireJournalFileInputStream.read(expireJournalBytes);
+            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(SerialUtil.toHexString(snapshotsBytes) + "■■■■■" + SerialUtil.toHexString(expireSnapshotsBytes))
+                    .setValue(SerialUtil.toHexString(journalBytes) + "■■■■■" + SerialUtil.toHexString(expireJournalBytes)).build());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         } finally {
@@ -597,6 +610,20 @@ public class MasterConsMesService {
             if (journalFileInputStream != null) {
                 try {
                     journalFileInputStream.close();
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if (expireJournalFileInputStream != null) {
+                try {
+                    expireJournalFileInputStream.close();
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            if (expireSnapshotFileInputStream != null) {
+                try {
+                    expireSnapshotFileInputStream.close();
                 } catch (IOException e) {
                     logger.error(e.getMessage(), e);
                 }

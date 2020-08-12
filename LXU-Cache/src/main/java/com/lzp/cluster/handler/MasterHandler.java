@@ -2,10 +2,8 @@ package com.lzp.cluster.handler;
 
 
 import com.lzp.cluster.service.MasterConsMesService;
-import com.lzp.cluster.service.SlaveConsMesService;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.singlemachine.handler.Handler;
-import com.lzp.singlemachine.service.ConsMesService;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;

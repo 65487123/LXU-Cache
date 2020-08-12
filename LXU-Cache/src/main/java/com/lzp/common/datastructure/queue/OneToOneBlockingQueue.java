@@ -51,7 +51,8 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
         return (E) e;
     }
 
-    public E take(long timeout, TimeUnit unit) {
+    @Override
+    public E poll(long timeout, TimeUnit unit) throws InterruptedException {
         long now = 0;
         long time = unit.toMillis(timeout);
         Object e;
@@ -60,7 +61,7 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
             if (now == 0) {
                 now = System.currentTimeMillis();
             } else if (System.currentTimeMillis() - now > time) {
-                break;
+                throw new InterruptedException();
             } else {
                 Thread.yield();
             }

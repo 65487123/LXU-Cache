@@ -78,16 +78,16 @@ public class Server {
     public static void main(String[] args) {
         try {
             serverChannel = serverBootstrap.bind(PORT).sync().channel();
+            if ("yes".equals(FileUtil.getProperty("cluster-enabled")) && (!"yes".equals(FileUtil.getProperty("isMaster")))) {
+                String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
+                ClientService.sentFullSyncReq(masterIpAndPort[0], Integer.parseInt(masterIpAndPort[1]));
+            }
             serverChannel.closeFuture().sync();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
-        }
-        if ("yes".equals(FileUtil.getProperty("cluster-enabled")) && (!"yes".equals(FileUtil.getProperty("isMaster")))) {
-            String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
-            ClientService.sentFullSyncReq(masterIpAndPort[0], Integer.parseInt(masterIpAndPort[1]));
         }
     }
 

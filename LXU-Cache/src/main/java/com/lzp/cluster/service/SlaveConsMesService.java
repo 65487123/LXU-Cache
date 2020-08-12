@@ -171,16 +171,10 @@ public class SlaveConsMesService {
     }
 
     private static void operCache() {
-        try {
-            while (true) {
-                SlaveConsMesService.Message message = queue.take(1,TimeUnit.SECONDS);
+        while (true) {
+            try {
+                SlaveConsMesService.Message message = queue.poll(1, TimeUnit.SECONDS);
                 switch (message.command.getType()) {
-                    case "get": {
-                        Object retern = cache.get(message.command.getKey());
-                        String result = retern == null ? "null" : retern.toString();
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("get").setResult(result).build());
-                        break;
-                    }
                     case "put": {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
@@ -190,9 +184,7 @@ public class SlaveConsMesService {
                         Object preValue;
                         if ((preValue = cache.get(key)) instanceof String || preValue == null) {
                             cache.put(key, message.command.getValue());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("put").build());
                         } else {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("put").setResult("e").build());
                         }
                         break;
                     }
@@ -207,10 +199,8 @@ public class SlaveConsMesService {
                             afterValue = String.valueOf(Integer.parseInt((String) cache.get(message.command.getKey())) + 1);
                             cache.put(key, afterValue);
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("incr").setResult("e").build());
                             break;
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("incr").setResult(afterValue).build());
                         break;
                     }
                     case "decr": {
@@ -219,15 +209,13 @@ public class SlaveConsMesService {
                         }
                         PersistenceService.writeJournal(message.command);
                         String key = message.command.getKey();
-                        String afterValue ;
+                        String afterValue;
                         try {
                             afterValue = String.valueOf(Integer.parseInt((String) cache.get(message.command.getKey())) - 1);
                             cache.put(key, afterValue);
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("decr").setResult("e").build());
                             break;
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("decr").setResult(afterValue).build());
                         break;
                     }
                     case "hput": {
@@ -238,13 +226,11 @@ public class SlaveConsMesService {
                         PersistenceService.writeJournal(message.command);
                         String key = message.command.getKey();
                         Object value;
-                        if ((value = cache.get(key)) !=null && !(value instanceof Map)){
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hput").setResult("e").build());
+                        if ((value = cache.get(key)) != null && !(value instanceof Map)) {
                             break;
                         }
-                        Map<String,String> values = SerialUtil.stringToMap(message.command.getValue());
-                        cache.put(key,values);
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hput").build());
+                        Map<String, String> values = SerialUtil.stringToMap(message.command.getValue());
+                        cache.put(key, values);
                         break;
                     }
                     case "hmerge": {
@@ -258,7 +244,6 @@ public class SlaveConsMesService {
                             Map<String, String> values = SerialUtil.stringToMap(message.command.getValue());
                             cache.put(key, values);
                         } else if (!(value instanceof Map)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hmerge").setResult("e").build());
                             break;
                         } else {
                             Map<String, String> mapValue = (Map<String, String>) value;
@@ -267,7 +252,6 @@ public class SlaveConsMesService {
                                 mapValue.put(entry.getKey(), entry.getValue());
                             }
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hmerge").build());
                         break;
                     }
                     case "lpush": {
@@ -280,13 +264,11 @@ public class SlaveConsMesService {
                         if ((value = cache.get(key)) == null) {
                             cache.put(key, SerialUtil.stringToList(message.command.getValue()));
                         } else if (!(value instanceof List)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("lpush").setResult("e").build());
                             break;
                         } else {
                             List<String> listValue = (List<String>) value;
                             listValue.addAll(SerialUtil.stringToList(message.command.getValue()));
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("lpush").build());
                         break;
                     }
                     case "sadd": {
@@ -299,13 +281,11 @@ public class SlaveConsMesService {
                         if ((value = cache.get(key)) == null) {
                             cache.put(key, SerialUtil.stringToSet(message.command.getValue()));
                         } else if (!(value instanceof Set)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zadd").setResult("e").build());
                             break;
                         } else {
                             Set<String> setValue = (Set<String>) value;
                             setValue.addAll(SerialUtil.stringToList(message.command.getValue()));
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("lpush").build());
                         break;
                     }
                     case "zadd": {
@@ -330,9 +310,7 @@ public class SlaveConsMesService {
                                 ((Zset) value).zadd(Double.parseDouble(scoreMem[0]), scoreMem[1]);
                             }
                         } else {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zadd").setResult("e").build());
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zadd").build());
                         break;
                     }
                     case "hset": {
@@ -346,67 +324,24 @@ public class SlaveConsMesService {
                             Map<String, String> values = SerialUtil.stringToMap(message.command.getValue());
                             cache.put(key, values);
                         } else if (!(value instanceof Map)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hset").setResult("e").build());
                             break;
                         } else {
                             Map<String, String> mapValue = (Map<String, String>) value;
                             String[] keyValue = message.command.getValue().split("©");
-                            mapValue.put(keyValue[0],keyValue[1]);
-                        }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hset").build());
-                        break;
-                    }
-                    case "hget": {
-                        try {
-                            Map<String, String> values = (Map<String, String>) cache.get(message.command.getKey());
-                            if (values == null) {
-                                message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hget").setResult("null").build());
-                            } else {
-                                String result;
-                                message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hget").setResult((result = values.get(message.command.getValue())) == null ? "null" : result).build());
-                            }
-                        } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("hget").setResult("e").build());
+                            mapValue.put(keyValue[0], keyValue[1]);
                         }
                         break;
                     }
-                    case "getList": {
-                        try {
-                            List<String> values = (List<String>) cache.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getList").setResult(values == null ? "null" : SerialUtil.collectionToString(values)).build());
-                        } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getList").setResult("e").build());
-                        }
-                        break;
-                    }
-                    case "getSet": {
-                        try {
-                            Set<String> values = (Set<String>) cache.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getSet").setResult(values == null ? "null" : SerialUtil.collectionToString(values)).build());
-                        } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("getSet").setResult("e").build());
-                        }
-                        break;
-                    }
-                    case "scontain": {
-                        try {
-                            Set<String> values = (Set<String>) cache.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("scontain").setResult(String.valueOf(values.contains(message.command.getValue()))).build());
-                        } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("scontain").setResult("e").build());
-                        }
-                        break;
-                    }
+
                     case "expire": {
                         String key = message.command.getKey();
                         if (cache.get(key) == null) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("expire").setResult("0").build());
+
                         } else {
                             long expireTime = Instant.now().toEpochMilli() + (Long.parseLong(message.command.getValue()) * 1000);
                             ExpireService.setKeyAndTime(key, expireTime);
                             PersistenceService.writeExpireJournal(key +
                                     "ÈÈ" + expireTime);
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("expire").setResult("1").build());
                         }
                         break;
                     }
@@ -416,22 +351,9 @@ public class SlaveConsMesService {
                         }
                         PersistenceService.writeJournal(message.command);
                         cache.remove(message.command.getKey());
-                        if (message.channelHandlerContext != null) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("remove").build());
-                        }
                         break;
                     }
-                    case "zrange": {
-                        try {
-                            Zset zset = (Zset) cache.get(message.command.getKey());
-                            String[] startAndEnd = message.command.getValue().split("©");
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zrange")
-                                    .setResult(zset.zrange(Long.parseLong(startAndEnd[0]), Long.parseLong(startAndEnd[1]))).build());
-                        } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setType("zrange").setResult("e").build());
-                        }
-                        break;
-                    }
+
                     case "zrem": {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
@@ -484,9 +406,12 @@ public class SlaveConsMesService {
                     default:
                         throw new IllegalStateException("Unexpected value: " + message.command.getType());
                 }
+            } catch (InterruptedException e) {
+                //一秒钟内没请求过来
+            } catch (NullPointerException e) {
+                logger.info("关闭从节点消费队列服务");
+                break;
             }
-        } catch (NullPointerException e) {
-            logger.info("关闭从节点消费队列服务");
         }
     }
 
@@ -495,11 +420,17 @@ public class SlaveConsMesService {
      *
      * @Return
      **/
-    private static void recoverData(Message message){
-        String snapshots = message.command.getKey();
-        String journal = message.command.getValue();
+    private static void recoverData(Message message) {
+        String[] snaps = message.command.getKey().split("■■■■■");
+        String[] jours = message.command.getValue().split("■■■■■");
+        String snapshots = snaps[0];
+        String journal = jours.length > 0 ? jours[0] : "";
+        String expireSnap = snaps[1];
+        String expireJour = jours.length == 2 ? jours[1] : "";
+        FileUtil.generateFileIfNotExist(new File("./persistence/corecache"));
+        FileUtil.generateFileIfNotExist(new File("./persistence/expire"));
         File journalFile = new File("./persistence/corecache/journal.txt");
-        byte[] journalBytes = journal.getBytes();
+        byte[] journalBytes = SerialUtil.toByteArray(journal);
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(journalFile);
@@ -517,10 +448,9 @@ public class SlaveConsMesService {
             }
         }
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
-            File file = new File("./persistence/corecache/snapshot.ser");
             ObjectInputStream objectInputStream = null;
             try {
-                objectInputStream = new ObjectInputStream(new ByteArrayInputStream(snapshots.getBytes()));
+                objectInputStream = new ObjectInputStream(new ByteArrayInputStream(SerialUtil.toByteArray(snapshots)));
                 cache = (AutoDeleteMap<String, Object>) objectInputStream.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);

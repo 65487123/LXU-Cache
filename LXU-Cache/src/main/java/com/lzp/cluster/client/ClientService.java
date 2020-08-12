@@ -1,6 +1,7 @@
 package com.lzp.cluster.client;
 
 import com.lzp.common.protocol.CommandDTO;
+import com.lzp.common.util.FileUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -9,7 +10,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.locks.LockSupport;
 
 /**
  * Description:启动从节点，从节点会向主节点发起连接，发送全量同步请求，发完断开连接。
@@ -34,7 +34,7 @@ public class ClientService {
     public static void sentFullSyncReq(String masterIp, int masterPort) {
         try {
             Channel channel = serverBootstrap.connect(masterIp, masterPort).sync().channel();
-            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").build());
+            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(FileUtil.getProperty("port")).build());
             channel.close().sync();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);
