@@ -2,6 +2,7 @@ package com.lzp.common.datastructure.queue;
 
 import com.lzp.common.util.HashUtil;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 
@@ -41,7 +42,6 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
 
     @Override
     public E take() throws InterruptedException {
-
         Object e;
         int p = tail++ & m;
         while ((e = array.get(p)) == null) {
@@ -51,4 +51,21 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
         return (E) e;
     }
 
+    public E take(long timeout, TimeUnit unit) {
+        long now = 0;
+        long time = unit.toMillis(timeout);
+        Object e;
+        int p = tail++ & m;
+        while ((e = array.get(p)) == null) {
+            if (now == 0) {
+                now = System.currentTimeMillis();
+            } else if (System.currentTimeMillis() - now > time) {
+                break;
+            } else {
+                Thread.yield();
+            }
+        }
+        array.set(p, null);
+        return (E) e;
+    }
 }

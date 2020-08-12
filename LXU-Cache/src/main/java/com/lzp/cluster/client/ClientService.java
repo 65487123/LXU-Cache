@@ -9,6 +9,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.locks.LockSupport;
+
 /**
  * Description:启动从节点，从节点会向主节点发起连接，发送全量同步请求，发完断开连接。
  * 主节点收到请求后向这个从节点发起长连接，进行全量同步，同步完成后实时增量同步。并且
@@ -50,4 +52,5 @@ public class ClientService {
         }
         return null;
     }
+
 }

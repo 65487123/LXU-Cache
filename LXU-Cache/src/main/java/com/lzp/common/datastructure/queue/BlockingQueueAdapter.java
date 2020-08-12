@@ -23,6 +23,11 @@ public abstract class BlockingQueueAdapter<E> implements BlockingQueue<E> {
     }
 
     @Override
+    public E poll(long timeout, TimeUnit unit) throws InterruptedException {
+        return null;
+    }
+
+    @Override
     public boolean add(E e) {
         return false;
     }
@@ -58,11 +63,6 @@ public abstract class BlockingQueueAdapter<E> implements BlockingQueue<E> {
         return false;
     }
 
-
-    @Override
-    public E poll(long timeout, TimeUnit unit) throws InterruptedException {
-        return null;
-    }
 
     @Override
     public int remainingCapacity() {

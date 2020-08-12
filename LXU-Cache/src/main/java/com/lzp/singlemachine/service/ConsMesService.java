@@ -1,6 +1,5 @@
 package com.lzp.singlemachine.service;
 
-import com.google.protobuf.ByteString;
 import com.lzp.cluster.client.ClientService;
 import com.lzp.common.cache.AutoDeleteMap;
 import com.lzp.common.cache.Cache;
@@ -9,6 +8,7 @@ import com.lzp.common.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.protocol.ResponseDTO;
+import com.lzp.common.service.ExpireService;
 import com.lzp.common.util.FileUtil;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.util.SerialUtil;
@@ -35,9 +35,6 @@ public class ConsMesService {
     private static final Cache<String, Object> CACHE;
 
     private static final Logger logger = LoggerFactory.getLogger(ConsMesService.class);
-
-    /**只有集群模式下有用*/
-    private static List<Channel> slaves = new ArrayList<>();
 
     private final static int SNAPSHOT_BATCH_COUNT_D1;
 
@@ -513,10 +510,6 @@ public class ConsMesService {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    //只有集群模式下才会有
-                    case "fullSynz": {
-                        connectSlaveAndSendSyncData(message);
-                    }
                     default:
                         throw new IllegalStateException("Unexpected value: " + message.command.getType());
                 }
@@ -525,62 +518,7 @@ public class ConsMesService {
             logger.error(e.getMessage(), e);
         }
     }
-    /**
-     * Description ：和从节点建立长连接并把持久化文件发过去，通知原有从节点去建立长连接。
-     *
-     * @Return
-     **/
-    private static void connectSlaveAndSendSyncData(Message message) {
-        InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
-        String ip = inetSocketAddress.getAddress().getHostAddress();
-        int port = inetSocketAddress.getPort();
-        noticeAllSlave(ip, port);
-        Channel channel = ClientService.getConnection(ip, port);
-        FileInputStream snapshotFileInputStream = null;
-        FileInputStream journalFileInputStream = null;
-        try {
-            snapshotFileInputStream = new FileInputStream("./persistence/corecache/snapshot.ser");
-            byte[] snapshotsBytes = new byte[snapshotFileInputStream.available()];
-            snapshotFileInputStream.read(snapshotsBytes);
-            journalFileInputStream = new FileInputStream("./persistence/corecache/journal.txt");
-            byte[] journalBytes = new byte[journalFileInputStream.available()];
-            journalFileInputStream.read(journalBytes);
-            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(new String(snapshotsBytes))
-                    .setValue(new String(journalBytes)).build());
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (snapshotFileInputStream != null) {
-                try {
-                    snapshotFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-            if (journalFileInputStream != null) {
-                try {
-                    journalFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-        }
-        slaves.add(channel);
-    }
 
-
-    /**
-     * Description ：只有集群环境下有用
-     *
-     * @param ip 新创建的从节点ip
-     * @param port 新创建的从节点端口
-     * @Return
-     **/
-    private static void noticeAllSlave(String ip, int port) {
-        for (Channel channel : slaves) {
-            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("notice").setKey(ip).setValue(String.valueOf(port)).build());
-        }
-    }
 
     public static void addMessage(ConsMesService.Message message, int threadId) {
         try {

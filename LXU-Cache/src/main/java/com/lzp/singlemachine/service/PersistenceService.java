@@ -1,6 +1,7 @@
 package com.lzp.singlemachine.service;
 
 import com.lzp.common.protocol.CommandDTO;
+import com.lzp.common.service.ExpireService;
 import com.lzp.common.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

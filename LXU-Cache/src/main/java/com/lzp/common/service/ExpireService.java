@@ -1,7 +1,10 @@
-package com.lzp.singlemachine.service;
+package com.lzp.common.service;
 
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.util.FileUtil;
+import com.lzp.singlemachine.service.ConsMesService;
+import com.lzp.singlemachine.service.PersistenceService;
+import com.lzp.singlemachine.service.ThreadFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
