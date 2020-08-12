@@ -1,7 +1,6 @@
-package com.lzp.singlemachine.service;
+package com.lzp.common.service;
 
 import com.lzp.common.protocol.CommandDTO;
-import com.lzp.common.service.ExpireService;
 import com.lzp.common.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +36,6 @@ public class PersistenceService {
 
     /**暂时先配置死为16384*/
     private final static int EX_SNAPSHOT_BATCH_COUNT_D1 = 16383;
-
 
     static {
         //生成文件目录
@@ -171,4 +169,7 @@ public class PersistenceService {
         });
     }
 
+    public static Future submitTask(Runnable runnable){
+        return JOURNAL_THREAD_POOL.submit(runnable);
+    }
 }

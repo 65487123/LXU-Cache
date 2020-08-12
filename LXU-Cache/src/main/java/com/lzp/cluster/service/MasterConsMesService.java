@@ -13,8 +13,8 @@ import com.lzp.common.util.HashUtil;
 import com.lzp.common.util.SerialUtil;
 import com.lzp.singlemachine.service.ConsMesService;
 import com.lzp.common.service.ExpireService;
-import com.lzp.singlemachine.service.PersistenceService;
-import com.lzp.singlemachine.service.ThreadFactoryImpl;
+import com.lzp.common.service.PersistenceService;
+import com.lzp.common.service.ThreadFactoryImpl;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -27,10 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Description:有一个消息队列的缓存服务，对应一个消费消息的线程。
@@ -569,67 +566,73 @@ public class MasterConsMesService {
     }
     /**
      * Description ：和从节点建立长连接并把持久化文件发过去，通知原有从节点去建立长连接。
-     *
+     *  丢到专门持久化的单线程线程池中执行。等待执行完成再返回。因为必须得保证同步过去的数据是最新的。
      * @Return
      **/
     private static void connectSlaveAndSendSyncData(Message message) {
-        InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
-        String ip = inetSocketAddress.getAddress().getHostAddress();
-        int port = Integer.parseInt(message.command.getKey());
-        noticeAllSlave(ip, port);
-        Channel channel = ClientService.getConnection(ip, port);
-        FileInputStream snapshotFileInputStream = null;
-        FileInputStream journalFileInputStream = null;
-        FileInputStream expireSnapshotFileInputStream = null;
-        FileInputStream expireJournalFileInputStream = null;
         try {
-            snapshotFileInputStream = new FileInputStream("./persistence/corecache/snapshot.ser");
-            byte[] snapshotsBytes = new byte[snapshotFileInputStream.available()];
-            snapshotFileInputStream.read(snapshotsBytes);
-            journalFileInputStream = new FileInputStream("./persistence/corecache/journal.txt");
-            byte[] journalBytes = new byte[journalFileInputStream.available()];
-            journalFileInputStream.read(journalBytes);
-            expireSnapshotFileInputStream = new FileInputStream("./persistence/expire/snapshot.ser");
-            byte[] expireSnapshotsBytes = new byte[expireSnapshotFileInputStream.available()];
-            expireSnapshotFileInputStream.read(expireSnapshotsBytes);
-            expireJournalFileInputStream = new FileInputStream("./persistence/expire/journal.txt");
-            byte[] expireJournalBytes = new byte[expireJournalFileInputStream.available()];
-            expireJournalFileInputStream.read(expireJournalBytes);
-            channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(SerialUtil.toHexString(snapshotsBytes) + "■■■■■" + SerialUtil.toHexString(expireSnapshotsBytes))
-                    .setValue(SerialUtil.toHexString(journalBytes) + "■■■■■" + SerialUtil.toHexString(expireJournalBytes)).build());
+            PersistenceService.submitTask(() -> {
+                InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
+                String ip = inetSocketAddress.getAddress().getHostAddress();
+                int port = Integer.parseInt(message.command.getKey());
+                noticeAllSlave(ip, port);
+                Channel channel = ClientService.getConnection(ip, port);
+                FileInputStream snapshotFileInputStream = null;
+                FileInputStream journalFileInputStream = null;
+                FileInputStream expireSnapshotFileInputStream = null;
+                FileInputStream expireJournalFileInputStream = null;
+                try {
+                    snapshotFileInputStream = new FileInputStream("./persistence/corecache/snapshot.ser");
+                    byte[] snapshotsBytes = new byte[snapshotFileInputStream.available()];
+                    snapshotFileInputStream.read(snapshotsBytes);
+                    journalFileInputStream = new FileInputStream("./persistence/corecache/journal.txt");
+                    byte[] journalBytes = new byte[journalFileInputStream.available()];
+                    journalFileInputStream.read(journalBytes);
+                    expireSnapshotFileInputStream = new FileInputStream("./persistence/expire/snapshot.ser");
+                    byte[] expireSnapshotsBytes = new byte[expireSnapshotFileInputStream.available()];
+                    expireSnapshotFileInputStream.read(expireSnapshotsBytes);
+                    expireJournalFileInputStream = new FileInputStream("./persistence/expire/journal.txt");
+                    byte[] expireJournalBytes = new byte[expireJournalFileInputStream.available()];
+                    expireJournalFileInputStream.read(expireJournalBytes);
+                    channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(SerialUtil.toHexString(snapshotsBytes) + "■■■■■" + SerialUtil.toHexString(expireSnapshotsBytes))
+                            .setValue(SerialUtil.toHexString(journalBytes) + "■■■■■" + SerialUtil.toHexString(expireJournalBytes)).build());
+                } catch (Exception e) {
+                    logger.error(e.getMessage(), e);
+                } finally {
+                    if (snapshotFileInputStream != null) {
+                        try {
+                            snapshotFileInputStream.close();
+                        } catch (IOException e) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                    if (journalFileInputStream != null) {
+                        try {
+                            journalFileInputStream.close();
+                        } catch (IOException e) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                    if (expireJournalFileInputStream != null) {
+                        try {
+                            expireJournalFileInputStream.close();
+                        } catch (IOException e) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                    if (expireSnapshotFileInputStream != null) {
+                        try {
+                            expireSnapshotFileInputStream.close();
+                        } catch (IOException e) {
+                            logger.error(e.getMessage(), e);
+                        }
+                    }
+                }
+                slaves.add(channel);
+            }).get();
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (snapshotFileInputStream != null) {
-                try {
-                    snapshotFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-            if (journalFileInputStream != null) {
-                try {
-                    journalFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-            if (expireJournalFileInputStream != null) {
-                try {
-                    expireJournalFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
-            if (expireSnapshotFileInputStream != null) {
-                try {
-                    expireSnapshotFileInputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
+            logger.error(e.getMessage(),e);
         }
-        slaves.add(channel);
     }
 
 

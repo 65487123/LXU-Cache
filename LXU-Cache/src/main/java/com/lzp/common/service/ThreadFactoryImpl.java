@@ -1,4 +1,4 @@
-package com.lzp.singlemachine.service;
+package com.lzp.common.service;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

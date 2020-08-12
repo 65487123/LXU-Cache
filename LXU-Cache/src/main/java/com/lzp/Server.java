@@ -8,7 +8,7 @@ import com.lzp.cluster.service.SlaveConsMesService;
 import com.lzp.singlemachine.handler.ServerInitializer;
 import com.lzp.singlemachine.service.ConsMesService;
 import com.lzp.common.util.FileUtil;
-import com.lzp.singlemachine.service.ThreadFactoryImpl;
+import com.lzp.common.service.ThreadFactoryImpl;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
