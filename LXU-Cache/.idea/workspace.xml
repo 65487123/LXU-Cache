@@ -3,17 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/service/ExpireService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/OneToOneBlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/OneToOneBlockingQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/model/response.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/model/response.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/ResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/PersistenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ThreadFactoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/service/ThreadFactoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,86 +35,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="172" column="52" selection-start-line="172" selection-start-column="52" selection-end-line="172" selection-end-column="52" />
-              <folding>
-                <element signature="e#6079#6080#0" expanded="true" />
-                <element signature="e#6129#6130#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/ExpireService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="574" column="44" lean-forward="true" selection-start-line="574" selection-start-column="44" selection-end-line="574" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://D:/java/src.zip!/java/util/concurrent/ExecutorService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="262" column="7" lean-forward="true" selection-start-line="262" selection-start-column="7" selection-end-line="262" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://D:/java/src.zip!/java/util/concurrent/Callable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/ThreadFactoryImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -126,14 +45,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" />
-      </list>
-    </option>
-  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -141,127 +52,8 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="240" />
-    <option name="y" value="125" />
-    <option name="width" value="1440" />
-    <option name="height" value="775" />
-  </component>
   <component name="ProjectId" id="1d9mVzBR9tfyLze6YB0bSjKnpSc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="cluster" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="cluster" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="singlemachine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="singlemachine" type="462c0819:PsiDirectoryNode" />
-              <item name="handler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LXU-Cache" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LXU-Cache" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="lzp" type="462c0819:PsiDirectoryNode" />
-              <item name="singlemachine" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -273,7 +65,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/lzp/common/model" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -284,18 +76,18 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\model" />
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\protocol" />
       <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\java\com\lzp\datastructure\zset" />
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp" />
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\protocol" />
-      <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\java\com\lzp\protocol" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lzp.common.protocol" />
       <recent name="com.lzp.cluster.handler" />
       <recent name="com.lzp.cluster.service" />
       <recent name="com.lzp.cluster.client" />
       <recent name="com.lzp.cluster" />
-      <recent name="com.lzp.protocol" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\model\compileUtil" />
@@ -303,18 +95,6 @@
       <recent name="E:\project\新建文件夹\LXU-Cache\LXU-Cache\src\main\java\com\lzp\common\model" />
       <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\resources\log4j" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.Server">
     <configuration name="Server" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
@@ -351,16 +131,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Unnamed" type="Remote" nameIsGenerated="true">
+    <configuration name="Unnamed" type="Remote" singleton="false" nameIsGenerated="true">
       <module name="LXU-Cache" />
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" />
       <option name="HOST" value="10.240.30.78" />
-      <option name="PORT" value="9090" />
+      <option name="PORT" value="5008" />
       <option name="AUTO_RESTART" value="false" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="9090" />
+        <option name="DEBUG_PORT" value="5008" />
         <option name="LOCAL" value="false" />
       </RunnerSettings>
       <method v="2" />
@@ -461,47 +241,6 @@
     <option name="localTasksCounter" value="7" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1065000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Capture Tool" />
-      <window_info id="Web" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Spring" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Bean Validation" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -517,10 +256,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1592474340485" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597213981394">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597300565476">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597213981394" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597300565476" />
     <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596789732143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -541,58 +280,58 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="739" y="399" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1592470794130" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597127001787">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597315780300">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597127001787" />
-    <state x="477" y="734" width="1003" height="306" key="#xdebugger.evaluate" timestamp="1597222809624">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597315780300" />
+    <state x="586" y="537" width="1003" height="503" key="#xdebugger.evaluate" timestamp="1597299572337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="477" y="734" width="1003" height="306" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597222809624" />
+    <state x="586" y="537" width="1003" height="503" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597299572337" />
     <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597227203783">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597227203783" />
-    <state width="564" height="466" key="DebuggerActiveHint" timestamp="1597223549713">
+    <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597300050415">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="564" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1597223549713" />
+    <state width="848" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1597300050415" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1591845839562">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1632" height="272" key="GridCell.Tab.0.bottom" timestamp="1597226778932">
+    <state width="1721" height="299" key="GridCell.Tab.0.bottom" timestamp="1597316428592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="272" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597226778932" />
-    <state width="1632" height="272" key="GridCell.Tab.0.center" timestamp="1597226778932">
+    <state width="1721" height="299" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597316428592" />
+    <state width="1721" height="299" key="GridCell.Tab.0.center" timestamp="1597316428592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="272" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597226778932" />
-    <state width="1632" height="272" key="GridCell.Tab.0.left" timestamp="1597226778932">
+    <state width="1721" height="299" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597316428592" />
+    <state width="1721" height="299" key="GridCell.Tab.0.left" timestamp="1597316428592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="272" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597226778932" />
-    <state width="1632" height="272" key="GridCell.Tab.0.right" timestamp="1597226778932">
+    <state width="1721" height="299" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597316428592" />
+    <state width="1721" height="299" key="GridCell.Tab.0.right" timestamp="1597316428592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="272" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597226778932" />
-    <state width="1632" height="249" key="GridCell.Tab.1.bottom" timestamp="1597223594806">
+    <state width="1721" height="299" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597316428592" />
+    <state width="1632" height="240" key="GridCell.Tab.1.bottom" timestamp="1597300623067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="249" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597223594806" />
-    <state width="1632" height="249" key="GridCell.Tab.1.center" timestamp="1597223594806">
+    <state width="1632" height="240" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597300623067" />
+    <state width="1632" height="240" key="GridCell.Tab.1.center" timestamp="1597300623067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="249" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597223594806" />
-    <state width="1632" height="249" key="GridCell.Tab.1.left" timestamp="1597223594806">
+    <state width="1632" height="240" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597300623067" />
+    <state width="1632" height="240" key="GridCell.Tab.1.left" timestamp="1597300623067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="249" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597223594806" />
-    <state width="1632" height="249" key="GridCell.Tab.1.right" timestamp="1597223594806">
+    <state width="1632" height="240" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597300623067" />
+    <state width="1632" height="240" key="GridCell.Tab.1.right" timestamp="1597300623067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1632" height="249" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597223594806" />
+    <state width="1632" height="240" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597300623067" />
     <state x="497" y="158" width="1087" height="882" key="SettingsEditor" timestamp="1597039407855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -613,10 +352,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597031795981" />
-    <state x="850" y="179" width="1058" height="600" key="find.popup" timestamp="1597215224474">
+    <state x="357" y="334" width="1058" height="600" key="find.popup" timestamp="1597315612003">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="850" y="179" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597215224474" />
+    <state x="357" y="334" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597315612003" />
     <state x="334" y="221" key="new project wizard" timestamp="1592475187725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -636,38 +375,52 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/Test.java</url>
           <line>53</line>
-          <properties />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
-          <line>456</line>
-          <properties />
+          <line>454</line>
           <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
-          <line>57</line>
-          <properties />
-          <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
           <line>238</line>
-          <properties />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>393</line>
-          <properties />
+          <line>395</line>
           <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>424</line>
-          <properties />
+          <line>432</line>
           <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
+          <line>577</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
+          <line>506</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
+          <line>176</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/common/datastructure/queue/OneToOneBlockingQueue.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -676,67 +429,5 @@
     <SUITE FILE_PATH="coverage/LXU_Cache$Server.ic" NAME="Server Coverage Results" MODIFIED="1595903218514" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.lzp.nettyserver.*</FILTER>
     </SUITE>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/Handler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/ThreadFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/ExpireService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/concurrent/Callable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/java/src.zip!/java/util/concurrent/ExecutorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="262" column="7" lean-forward="true" selection-start-line="262" selection-start-column="7" selection-end-line="262" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="172" column="52" selection-start-line="172" selection-start-column="52" selection-end-line="172" selection-end-column="52" />
-          <folding>
-            <element signature="e#6079#6080#0" expanded="true" />
-            <element signature="e#6129#6130#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="574" column="44" lean-forward="true" selection-start-line="574" selection-start-column="44" selection-end-line="574" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

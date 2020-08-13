@@ -61,6 +61,7 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
             if (now == 0) {
                 now = System.currentTimeMillis();
             } else if (System.currentTimeMillis() - now > time) {
+                tail--;
                 throw new InterruptedException();
             } else {
                 Thread.yield();

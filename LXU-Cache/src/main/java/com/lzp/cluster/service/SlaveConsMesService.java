@@ -6,6 +6,7 @@ import com.lzp.common.cache.Cache;
 import com.lzp.common.datastructure.queue.OneToOneBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
+import com.lzp.common.protocol.ResponseDTO;
 import com.lzp.common.service.ExpireService;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.service.PersistenceService;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -399,7 +401,13 @@ public class SlaveConsMesService {
                         break;
                     }
                     case "refreshMaster": {
-                        //todo 修改配置文件，把主修改为新主
+                        InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
+                        String newMaster = inetSocketAddress.getHostString() + ":" + inetSocketAddress.getPort();
+                        FileUtil.setProperty("masterIpAndPort", newMaster);
+                        break;
+                    }
+                    case "getMaster": {
+                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(FileUtil.getProperty("masterIpAndPort")));
                         break;
                     }
                     default:

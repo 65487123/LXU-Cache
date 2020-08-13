@@ -32,6 +32,7 @@ public class SlaveHandler extends SimpleChannelInboundHandler<CommandDTO.Command
         String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
         if (masterIpAndPort[0].equals(inetSocketAddress.getAddress().getHostAddress())) {
             if (channelNum.intValue() == 0) {
+                FileUtil.setProperty("isMaster", "yes");
                 Server.upgradeTomasterNode(SlaveConsMesService.laterSlaves);
             }
             for (Channel channel : SlaveConsMesService.laterSlaves) {

@@ -3,6 +3,5 @@ option java_outer_classname = "ResponseDTO";
 option optimize_for = SPEED;
 option java_package = "com.lzp.common.protocol";
 message Response {
-    string type = 1;
-    string result = 2;
+    string result = 1;
 }

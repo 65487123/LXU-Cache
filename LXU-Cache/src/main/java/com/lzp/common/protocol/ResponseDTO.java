@@ -19,21 +19,11 @@ public final class ResponseDTO {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string type = 1;</code>
+     * <code>string result = 1;</code>
      */
-    String getType();
+    java.lang.String getResult();
     /**
-     * <code>string type = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getTypeBytes();
-
-    /**
-     * <code>string result = 2;</code>
-     */
-    String getResult();
-    /**
-     * <code>string result = 2;</code>
+     * <code>string result = 1;</code>
      */
     com.google.protobuf.ByteString
         getResultBytes();
@@ -51,11 +41,10 @@ public final class ResponseDTO {
       super(builder);
     }
     private Response() {
-      type_ = "";
       result_ = "";
     }
 
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -66,7 +55,7 @@ public final class ResponseDTO {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new NullPointerException();
+        throw new java.lang.NullPointerException();
       }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -80,13 +69,7 @@ public final class ResponseDTO {
               done = true;
               break;
             case 10: {
-              String s = input.readStringRequireUtf8();
-
-              type_ = s;
-              break;
-            }
-            case 18: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               result_ = s;
               break;
@@ -112,78 +95,44 @@ public final class ResponseDTO {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ResponseDTO.internal_static_Response_descriptor;
+      return com.lzp.common.protocol.ResponseDTO.internal_static_Response_descriptor;
     }
 
-    @Override
-    protected FieldAccessorTable
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ResponseDTO.internal_static_Response_fieldAccessorTable
+      return com.lzp.common.protocol.ResponseDTO.internal_static_Response_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              Response.class, Builder.class);
+              com.lzp.common.protocol.ResponseDTO.Response.class, com.lzp.common.protocol.ResponseDTO.Response.Builder.class);
     }
 
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private volatile Object type_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private volatile java.lang.Object result_;
     /**
-     * <code>string type = 1;</code>
+     * <code>string result = 1;</code>
      */
-    public String getType() {
-      Object ref = type_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getResult() {
+      java.lang.Object ref = result_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        type_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string type = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTypeBytes() {
-      Object ref = type_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        type_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 2;
-    private volatile Object result_;
-    /**
-     * <code>string result = 2;</code>
-     */
-    public String getResult() {
-      Object ref = result_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         result_ = s;
         return s;
       }
     }
     /**
-     * <code>string result = 2;</code>
+     * <code>string result = 1;</code>
      */
     public com.google.protobuf.ByteString
         getResultBytes() {
-      Object ref = result_;
-      if (ref instanceof String) {
+      java.lang.Object ref = result_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         result_ = b;
         return b;
       } else {
@@ -192,7 +141,7 @@ public final class ResponseDTO {
     }
 
     private byte memoizedIsInitialized = -1;
-    @Override
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -202,63 +151,53 @@ public final class ResponseDTO {
       return true;
     }
 
-    @Override
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getTypeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
-      }
       if (!getResultBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, result_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, result_);
       }
       unknownFields.writeTo(output);
     }
 
-    @Override
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
-      if (!getTypeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
-      }
       if (!getResultBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, result_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, result_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof Response)) {
+      if (!(obj instanceof com.lzp.common.protocol.ResponseDTO.Response)) {
         return super.equals(obj);
       }
-      Response other = (Response) obj;
+      com.lzp.common.protocol.ResponseDTO.Response other = (com.lzp.common.protocol.ResponseDTO.Response) obj;
 
       boolean result = true;
-      result = result && getType()
-          .equals(other.getType());
       result = result && getResult()
           .equals(other.getResult());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
-    @Override
+    @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getType().hashCode();
       hash = (37 * hash) + RESULT_FIELD_NUMBER;
       hash = (53 * hash) + getResult().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -266,69 +205,69 @@ public final class ResponseDTO {
       return hash;
     }
 
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Response parseFrom(byte[] data)
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Response parseFrom(java.io.InputStream input)
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Response parseDelimitedFrom(java.io.InputStream input)
+    public static com.lzp.common.protocol.ResponseDTO.Response parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Response parseDelimitedFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Response parseFrom(
+    public static com.lzp.common.protocol.ResponseDTO.Response parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -336,23 +275,23 @@ public final class ResponseDTO {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @Override
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Response prototype) {
+    public static Builder newBuilder(com.lzp.common.protocol.ResponseDTO.Response prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @Override
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -362,18 +301,18 @@ public final class ResponseDTO {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Response)
-        ResponseOrBuilder {
+        com.lzp.common.protocol.ResponseDTO.ResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return ResponseDTO.internal_static_Response_descriptor;
+        return com.lzp.common.protocol.ResponseDTO.internal_static_Response_descriptor;
       }
 
-      @Override
-      protected FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return ResponseDTO.internal_static_Response_fieldAccessorTable
+        return com.lzp.common.protocol.ResponseDTO.internal_static_Response_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                Response.class, Builder.class);
+                com.lzp.common.protocol.ResponseDTO.Response.class, com.lzp.common.protocol.ResponseDTO.Response.Builder.class);
       }
 
       // Construct using com.lzp.common.protocol.ResponseDTO.Response.newBuilder()
@@ -382,7 +321,7 @@ public final class ResponseDTO {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -391,93 +330,86 @@ public final class ResponseDTO {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @Override
+      @java.lang.Override
       public Builder clear() {
         super.clear();
-        type_ = "";
-
         result_ = "";
 
         return this;
       }
 
-      @Override
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return ResponseDTO.internal_static_Response_descriptor;
+        return com.lzp.common.protocol.ResponseDTO.internal_static_Response_descriptor;
       }
 
-      @Override
-      public Response getDefaultInstanceForType() {
-        return Response.getDefaultInstance();
+      @java.lang.Override
+      public com.lzp.common.protocol.ResponseDTO.Response getDefaultInstanceForType() {
+        return com.lzp.common.protocol.ResponseDTO.Response.getDefaultInstance();
       }
 
-      @Override
-      public Response build() {
-        Response result = buildPartial();
+      @java.lang.Override
+      public com.lzp.common.protocol.ResponseDTO.Response build() {
+        com.lzp.common.protocol.ResponseDTO.Response result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @Override
-      public Response buildPartial() {
-        Response result = new Response(this);
-        result.type_ = type_;
+      @java.lang.Override
+      public com.lzp.common.protocol.ResponseDTO.Response buildPartial() {
+        com.lzp.common.protocol.ResponseDTO.Response result = new com.lzp.common.protocol.ResponseDTO.Response(this);
         result.result_ = result_;
         onBuilt();
         return result;
       }
 
-      @Override
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
-      @Override
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
-      @Override
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
-      @Override
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
-      @Override
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
-      @Override
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
-      @Override
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Response) {
-          return mergeFrom((Response)other);
+        if (other instanceof com.lzp.common.protocol.ResponseDTO.Response) {
+          return mergeFrom((com.lzp.common.protocol.ResponseDTO.Response)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Response other) {
-        if (other == Response.getDefaultInstance()) return this;
-        if (!other.getType().isEmpty()) {
-          type_ = other.type_;
-          onChanged();
-        }
+      public Builder mergeFrom(com.lzp.common.protocol.ResponseDTO.Response other) {
+        if (other == com.lzp.common.protocol.ResponseDTO.Response.getDefaultInstance()) return this;
         if (!other.getResult().isEmpty()) {
           result_ = other.result_;
           onChanged();
@@ -487,21 +419,21 @@ public final class ResponseDTO {
         return this;
       }
 
-      @Override
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @Override
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        Response parsedMessage = null;
+        com.lzp.common.protocol.ResponseDTO.Response parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Response) e.getUnfinishedMessage();
+          parsedMessage = (com.lzp.common.protocol.ResponseDTO.Response) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -511,101 +443,32 @@ public final class ResponseDTO {
         return this;
       }
 
-      private Object type_ = "";
+      private java.lang.Object result_ = "";
       /**
-       * <code>string type = 1;</code>
+       * <code>string result = 1;</code>
        */
-      public String getType() {
-        Object ref = type_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getResult() {
+        java.lang.Object ref = result_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          type_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      /**
-       * <code>string type = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTypeBytes() {
-        Object ref = type_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
-          type_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string type = 1;</code>
-       */
-      public Builder setType(
-          String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string type = 1;</code>
-       */
-      public Builder clearType() {
-        
-        type_ = getDefaultInstance().getType();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string type = 1;</code>
-       */
-      public Builder setTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        type_ = value;
-        onChanged();
-        return this;
-      }
-
-      private Object result_ = "";
-      /**
-       * <code>string result = 2;</code>
-       */
-      public String getResult() {
-        Object ref = result_;
-        if (!(ref instanceof String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           result_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string result = 2;</code>
+       * <code>string result = 1;</code>
        */
       public com.google.protobuf.ByteString
           getResultBytes() {
-        Object ref = result_;
+        java.lang.Object ref = result_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           result_ = b;
           return b;
         } else {
@@ -613,10 +476,10 @@ public final class ResponseDTO {
         }
       }
       /**
-       * <code>string result = 2;</code>
+       * <code>string result = 1;</code>
        */
       public Builder setResult(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -626,7 +489,7 @@ public final class ResponseDTO {
         return this;
       }
       /**
-       * <code>string result = 2;</code>
+       * <code>string result = 1;</code>
        */
       public Builder clearResult() {
         
@@ -635,7 +498,7 @@ public final class ResponseDTO {
         return this;
       }
       /**
-       * <code>string result = 2;</code>
+       * <code>string result = 1;</code>
        */
       public Builder setResultBytes(
           com.google.protobuf.ByteString value) {
@@ -648,13 +511,13 @@ public final class ResponseDTO {
         onChanged();
         return this;
       }
-      @Override
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
-      @Override
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -665,18 +528,18 @@ public final class ResponseDTO {
     }
 
     // @@protoc_insertion_point(class_scope:Response)
-    private static final Response DEFAULT_INSTANCE;
+    private static final com.lzp.common.protocol.ResponseDTO.Response DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Response();
+      DEFAULT_INSTANCE = new com.lzp.common.protocol.ResponseDTO.Response();
     }
 
-    public static Response getDefaultInstance() {
+    public static com.lzp.common.protocol.ResponseDTO.Response getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<Response>
         PARSER = new com.google.protobuf.AbstractParser<Response>() {
-      @Override
+      @java.lang.Override
       public Response parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -689,13 +552,13 @@ public final class ResponseDTO {
       return PARSER;
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<Response> getParserForType() {
       return PARSER;
     }
 
-    @Override
-    public Response getDefaultInstanceForType() {
+    @java.lang.Override
+    public com.lzp.common.protocol.ResponseDTO.Response getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -714,10 +577,10 @@ public final class ResponseDTO {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
-      "\n\016response.proto\"(\n\010Response\022\014\n\004type\030\001 \001" +
-      "(\t\022\016\n\006result\030\002 \001(\tB!\n\020com.lzp.protocolB\013" +
-      "ResponseDTOH\001b\006proto3"
+    java.lang.String[] descriptorData = {
+      "\n\016response.proto\"\032\n\010Response\022\016\n\006result\030\001" +
+      " \001(\tB(\n\027com.lzp.common.protocolB\013Respons" +
+      "eDTOH\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -736,7 +599,7 @@ public final class ResponseDTO {
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
-        new String[] { "Type", "Result", });
+        new java.lang.String[] { "Result", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
