@@ -579,6 +579,7 @@ public class MasterConsMesService {
                 InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
                 String ip = inetSocketAddress.getAddress().getHostAddress();
                 int port = Integer.parseInt(message.command.getKey());
+                message.channelHandlerContext.channel().close();
                 noticeAllSlave(ip, port);
                 Channel channel = ClientService.getConnection(ip, port);
                 FileInputStream snapshotFileInputStream = null;

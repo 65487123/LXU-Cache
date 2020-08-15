@@ -35,7 +35,7 @@ public class ClientService {
         try {
             Channel channel = serverBootstrap.connect(masterIp, masterPort).sync().channel();
             channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(FileUtil.getProperty("port")).build());
-            channel.close().sync();
+            channel.closeFuture().sync();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);
         }

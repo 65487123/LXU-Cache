@@ -407,7 +407,7 @@ public class SlaveConsMesService {
                         break;
                     }
                     case "getMaster": {
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(FileUtil.getProperty("masterIpAndPort")));
+                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(FileUtil.getProperty("masterIpAndPort")).build());
                         break;
                     }
                     default:

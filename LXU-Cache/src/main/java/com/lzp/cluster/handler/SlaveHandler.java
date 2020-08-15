@@ -28,10 +28,11 @@ public class SlaveHandler extends SimpleChannelInboundHandler<CommandDTO.Command
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
+        int clientNum = channelNum.decrementAndGet();
         InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
         String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
         if (masterIpAndPort[0].equals(inetSocketAddress.getAddress().getHostAddress())) {
-            if (channelNum.intValue() == 0) {
+            if (clientNum == 0) {
                 FileUtil.setProperty("isMaster", "yes");
                 Server.upgradeTomasterNode(SlaveConsMesService.laterSlaves);
             }
