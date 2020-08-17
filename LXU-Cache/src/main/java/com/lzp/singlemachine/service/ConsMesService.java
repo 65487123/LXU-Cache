@@ -7,7 +7,6 @@ import com.lzp.common.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.protocol.ResponseDTO;
-import com.lzp.common.service.ExpireService;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
 import com.lzp.common.util.FileUtil;
@@ -74,7 +73,7 @@ public class ConsMesService {
                 }
                 BufferedReader bufferedReader = null;
                 try {
-                    bufferedReader = new BufferedReader(new FileReader(new File("./persistence/corecache/journal.txt")));
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/corecache/journal.txt"),"UTF-8"));
                     String cmd;
                     bufferedReader.readLine();
                     while ((cmd = bufferedReader.readLine()) != null) {

@@ -5,6 +5,7 @@ import com.lzp.cluster.handler.MasterServerInitializer;
 import com.lzp.cluster.handler.SlaveServerInitializer;
 import com.lzp.cluster.service.MasterConsMesService;
 import com.lzp.cluster.service.SlaveConsMesService;
+import com.lzp.cluster.service.SlaveExpireService;
 import com.lzp.singlemachine.handler.ServerInitializer;
 import com.lzp.singlemachine.service.ConsMesService;
 import com.lzp.common.util.FileUtil;
@@ -49,7 +50,7 @@ public class Server {
         if (!"yes".equals(FileUtil.getProperty("cluster-enabled"))) {
             try {
                 Class.forName("com.lzp.singlemachine.service.ConsMesService");
-                Class.forName("com.lzp.common.service.ExpireService");
+                Class.forName("com.lzp.singlemachine.service.ExpireService");
                 workerGroup = new NioEventLoopGroup(ConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
                         .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new ServerInitializer());
@@ -60,7 +61,7 @@ public class Server {
             //集群模式主节点
             try {
                 Class.forName("com.lzp.cluster.service.MasterConsMesService");
-                Class.forName("com.lzp.common.service.ExpireService");
+                Class.forName("com.lzp.cluster.service.MasterExpireService");
                 workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
                         .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new MasterServerInitializer());
@@ -101,9 +102,10 @@ public class Server {
                 //升级为主节点，初始化消息队列服务，恢复持久化文件，并把原来和其他从节点建立的连接传入
                 MasterConsMesService.setSlaves(slaves);
                 try {
-                    Class.forName("com.lzp.common.service.ExpireService");
+                    Class.forName("com.lzp.cluster.service.MasterConsMesService");
                     bossGroup = new NioEventLoopGroup(1);
                     workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
+                    serverBootstrap = new ServerBootstrap();
                     serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
                             .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new MasterServerInitializer());
                     serverChannel = serverBootstrap.bind(PORT).sync().channel();
@@ -126,6 +128,7 @@ public class Server {
      * @param
      */
     public static void upgradeTomasterNode(List<Channel> slaves) {
+        SlaveExpireService.close();
         startMasterServer(slaves);
     }
 

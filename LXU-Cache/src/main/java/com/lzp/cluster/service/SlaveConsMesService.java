@@ -7,7 +7,7 @@ import com.lzp.common.datastructure.queue.OneToOneBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.protocol.ResponseDTO;
-import com.lzp.common.service.ExpireService;
+import com.lzp.singlemachine.service.ExpireService;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -50,14 +50,15 @@ public class SlaveConsMesService {
 
     public static final int THREAD_NUM;
 
+    private static ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("operCache"));
+
+
     public static List<Channel> laterSlaves = new ArrayList<>();
 
     static {
         int approHalfCpuCore;
         THREAD_NUM = (approHalfCpuCore = HashUtil.tableSizeFor(Runtime.getRuntime().availableProcessors()) / 2) < 1 ? 1 : approHalfCpuCore;
         SNAPSHOT_BATCH_COUNT_D1 = Integer.parseInt(FileUtil.getProperty("snapshot-batch-count")) - 1;
-        ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
-
         queue = new OneToOneBlockingQueue<>(Integer.parseInt(FileUtil.getProperty("queueSize")));
         threadPool.execute(() -> operCache());
     }
@@ -336,11 +337,9 @@ public class SlaveConsMesService {
 
                     case "expire": {
                         String key = message.command.getKey();
-                        if (cache.get(key) == null) {
-
-                        } else {
+                        if (cache.get(key) != null) {
                             long expireTime = Instant.now().toEpochMilli() + (Long.parseLong(message.command.getValue()) * 1000);
-                            ExpireService.setKeyAndTime(key, expireTime);
+                            SlaveExpireService.setKeyAndTime(key, expireTime);
                             PersistenceService.writeExpireJournal(key +
                                     "ÈÈ" + expireTime);
                         }
@@ -517,6 +516,8 @@ public class SlaveConsMesService {
      **/
     public static void close() {
         queue = null;
+        threadPool.shutdown();
+        threadPool = null;
         cache = null;
         logger = null;
     }

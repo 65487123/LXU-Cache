@@ -12,7 +12,7 @@ import com.lzp.common.util.FileUtil;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.util.SerialUtil;
 import com.lzp.singlemachine.service.ConsMesService;
-import com.lzp.common.service.ExpireService;
+import com.lzp.singlemachine.service.ExpireService;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
 import io.netty.channel.Channel;
@@ -83,7 +83,7 @@ public class MasterConsMesService {
                 }
                 BufferedReader bufferedReader = null;
                 try {
-                    bufferedReader = new BufferedReader(new FileReader(new File("./persistence/corecache/journal.txt")));
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/corecache/journal.txt"),"UTF-8"));
                     String cmd;
                     bufferedReader.readLine();
                     while ((cmd = bufferedReader.readLine()) != null) {
@@ -480,7 +480,7 @@ public class MasterConsMesService {
                             message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("0").build());
                         } else {
                             long expireTime = Instant.now().toEpochMilli() + (Long.parseLong(message.command.getValue()) * 1000);
-                            ExpireService.setKeyAndTime(key, expireTime);
+                            MasterExpireService.setKeyAndTime(key, expireTime);
                             PersistenceService.writeExpireJournal(key +
                                     "ÈÈ" + expireTime);
                             for (Channel channel : slaves) {

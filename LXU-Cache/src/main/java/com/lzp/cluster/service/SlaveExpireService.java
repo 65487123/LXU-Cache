@@ -1,6 +1,8 @@
-package com.lzp.common.service;
+package com.lzp.cluster.service;
 
 import com.lzp.common.protocol.CommandDTO;
+import com.lzp.common.service.PersistenceService;
+import com.lzp.common.service.ThreadFactoryImpl;
 import com.lzp.common.util.FileUtil;
 import com.lzp.singlemachine.service.ConsMesService;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ import java.util.concurrent.*;
  * @author: Lu ZePing
  * @date: 2019/7/14 11:07
  */
-public class ExpireService {
+public class SlaveExpireService {
     /**
      * 用来存放设置过期时间的key以及它的具体过期时刻
      */
@@ -36,11 +38,11 @@ public class ExpireService {
     /**
      * 处理过期key的线程
      */
-    private static final ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue(1), new ThreadFactoryImpl("expire handler"));
+    private static ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue(1), new ThreadFactoryImpl("expire handler"));
 
     private static final long pollingInterval;
 
-    private static final Logger logger = LoggerFactory.getLogger(ExpireService.class);
+    private static Logger logger = LoggerFactory.getLogger(SlaveExpireService.class);
 
     static {
         File file = new File("./persistence/expire/snapshot.ser");
@@ -65,7 +67,7 @@ public class ExpireService {
             }
             BufferedReader bufferedReader = null;
             try {
-                bufferedReader = new BufferedReader(new FileReader(new File("./persistence/expire/journal.txt")));
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/expire/journal.txt"),"UTF-8"));
                 String cmd;
                 bufferedReader.readLine();
                 while ((cmd = bufferedReader.readLine()) != null) {
@@ -97,9 +99,9 @@ public class ExpireService {
                     while (iterator.hasNext()) {
                         Map.Entry<String, Long> entry = iterator.next();
                         if (now > entry.getValue()) {
-                            ConsMesService.addMessage(new ConsMesService.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(), null), 0);
-                            iterator.remove();
+                            SlaveConsMesService.addMessage(new SlaveConsMesService.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(), null));
                             PersistenceService.writeExpireJournal(entry.getKey());
+                            iterator.remove();
                         }
                     }
                     try {
@@ -122,5 +124,12 @@ public class ExpireService {
 
     public static void setKeyAndTime(String key, Long expireTime) {
         keyTimeMap.put(key, expireTime);
+    }
+
+    public static void close() {
+        threadPool.shutdownNow();
+        threadPool = null;
+        logger = null;
+        keyTimeMap = null;
     }
 }

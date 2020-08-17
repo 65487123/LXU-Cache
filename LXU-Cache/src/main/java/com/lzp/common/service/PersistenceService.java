@@ -2,6 +2,7 @@ package com.lzp.common.service;
 
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.util.FileUtil;
+import com.lzp.singlemachine.service.ExpireService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,7 +101,7 @@ public class PersistenceService {
             if (bufferedWriter!=null) {
                 bufferedWriter.close();
             }
-            bufferedWriter = new BufferedWriter(new FileWriter(new File("./persistence/corecache/journal.txt")));
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./persistence/corecache/journal.txt"),"UTF-8"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
@@ -111,7 +112,7 @@ public class PersistenceService {
             if (expireBufferedWriter != null) {
                 expireBufferedWriter.close();
             }
-            expireBufferedWriter = new BufferedWriter(new FileWriter(new File("./persistence/expire/journal.txt")));
+            expireBufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./persistence/expire/journal.txt"),"UTF-8"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }

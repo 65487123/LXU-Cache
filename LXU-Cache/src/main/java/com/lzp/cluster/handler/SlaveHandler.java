@@ -35,12 +35,11 @@ public class SlaveHandler extends SimpleChannelInboundHandler<CommandDTO.Command
             if (clientNum == 0) {
                 FileUtil.setProperty("isMaster", "yes");
                 Server.upgradeTomasterNode(SlaveConsMesService.laterSlaves);
-            }
-            for (Channel channel : SlaveConsMesService.laterSlaves) {
-                channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("refreshMaster").build());
+                for (Channel channel : SlaveConsMesService.laterSlaves) {
+                    channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("refreshMaster").setKey(FileUtil.getProperty("port")).build());
+                }
             }
         }
-
     }
 
     @Override
