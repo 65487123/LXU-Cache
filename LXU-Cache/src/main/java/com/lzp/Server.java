@@ -96,13 +96,13 @@ public class Server {
         new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue(), new ThreadFactoryImpl("startMasterServer")).execute(() -> {
             try {
                 //释放资源，并停止接受消息
+                SlaveExpireService.close();
                 SlaveConsMesService.close();
                 //释放监听端口，close后，主方法里就会收到通知，并调用shutdownGracefully方法。
                 serverChannel.close().sync();
                 //升级为主节点，初始化消息队列服务，恢复持久化文件，并把原来和其他从节点建立的连接传入
                 MasterConsMesService.setSlaves(slaves);
                 try {
-                    Class.forName("com.lzp.cluster.service.MasterConsMesService");
                     bossGroup = new NioEventLoopGroup(1);
                     workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
                     serverBootstrap = new ServerBootstrap();
@@ -128,7 +128,6 @@ public class Server {
      * @param
      */
     public static void upgradeTomasterNode(List<Channel> slaves) {
-        SlaveExpireService.close();
         startMasterServer(slaves);
     }
 

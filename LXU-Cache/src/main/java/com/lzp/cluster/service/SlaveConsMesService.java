@@ -401,7 +401,7 @@ public class SlaveConsMesService {
                     }
                     case "refreshMaster": {
                         InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
-                        String newMaster = inetSocketAddress.getHostString() + ":" + inetSocketAddress.getPort();
+                        String newMaster = inetSocketAddress.getHostString() + ":" + message.command.getKey();
                         FileUtil.setProperty("masterIpAndPort", newMaster);
                         break;
                     }

@@ -557,7 +557,7 @@ public class MasterConsMesService {
                         break;
                     }
                     case "getMaster": {
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("yes"));
+                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("yes").build());
                         break;
                     }
                     default:
