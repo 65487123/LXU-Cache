@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
@@ -63,17 +64,11 @@ public class ConsMesService {
                     logger.error("持久化文件的缓存淘汰策略和配置文件不一致");
                     throw e;
                 } finally {
-                    if (objectInputStream != null) {
-                        try {
-                            objectInputStream.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
+                    FileUtil.closeResource(objectInputStream);
                 }
                 BufferedReader bufferedReader = null;
                 try {
-                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/corecache/journal.txt"),"UTF-8"));
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/corecache/journal.txt"), StandardCharsets.UTF_8));
                     String cmd;
                     bufferedReader.readLine();
                     while ((cmd = bufferedReader.readLine()) != null) {
@@ -83,13 +78,7 @@ public class ConsMesService {
                     logger.error(e.getMessage(), e);
                     throw new RuntimeException();
                 } finally {
-                    if (bufferedReader != null) {
-                        try {
-                            bufferedReader.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
+                    FileUtil.closeResource(bufferedReader);
                 }
 
             }

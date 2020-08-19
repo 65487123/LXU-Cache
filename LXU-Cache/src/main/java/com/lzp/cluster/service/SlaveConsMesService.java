@@ -7,7 +7,6 @@ import com.lzp.common.datastructure.queue.OneToOneBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.protocol.ResponseDTO;
-import com.lzp.singlemachine.service.ExpireService;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -60,7 +59,7 @@ public class SlaveConsMesService {
         THREAD_NUM = (approHalfCpuCore = HashUtil.tableSizeFor(Runtime.getRuntime().availableProcessors()) / 2) < 1 ? 1 : approHalfCpuCore;
         SNAPSHOT_BATCH_COUNT_D1 = Integer.parseInt(FileUtil.getProperty("snapshot-batch-count")) - 1;
         queue = new OneToOneBlockingQueue<>(Integer.parseInt(FileUtil.getProperty("queueSize")));
-        threadPool.execute(() -> operCache());
+        threadPool.execute(SlaveConsMesService::operCache);
     }
 
 
@@ -437,21 +436,23 @@ public class SlaveConsMesService {
         FileUtil.generateFileIfNotExist(new File("./persistence/expire"));
         File journalFile = new File("./persistence/corecache/journal.txt");
         byte[] journalBytes = SerialUtil.toByteArray(journal);
-        FileOutputStream fileOutputStream = null;
+        FileOutputStream jourfileOutputStream = null;
+        FileOutputStream expJourFileOutputStream = null;
+        FileOutputStream expSnapFileOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream(journalFile);
-            fileOutputStream.write(journalBytes);
-            fileOutputStream.flush();
+            jourfileOutputStream = new FileOutputStream(journalFile);
+            jourfileOutputStream.write(journalBytes);
+            jourfileOutputStream.flush();
+            expJourFileOutputStream = new FileOutputStream("./persistence/expire/journal.txt");
+            expJourFileOutputStream.write(SerialUtil.toByteArray(expireJour));
+            expJourFileOutputStream.flush();
+            expSnapFileOutputStream = new FileOutputStream("./persistence/expire/snapshot.ser");
+            expSnapFileOutputStream.write(SerialUtil.toByteArray(expireSnap));
+            expSnapFileOutputStream.flush();
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-            }
+            FileUtil.closeResource(jourfileOutputStream,expJourFileOutputStream,expSnapFileOutputStream);
         }
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
             ObjectInputStream objectInputStream = null;
@@ -465,13 +466,7 @@ public class SlaveConsMesService {
                 logger.error("持久化文件的缓存淘汰策略和配置文件不一致");
                 throw e;
             } finally {
-                if (objectInputStream != null) {
-                    try {
-                        objectInputStream.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(objectInputStream);
             }
             BufferedReader bufferedReader = null;
             try {
@@ -485,19 +480,18 @@ public class SlaveConsMesService {
                 logger.error(e.getMessage(), e);
                 throw new RuntimeException();
             } finally {
-                if (bufferedReader != null) {
-                    try {
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(bufferedReader);
             }
         } else {
             //todo 和lrucache一样的逻辑
         }
         //清空持久化文件，生成一次快照
         PersistenceService.generateSnapshot(cache);
+        try {
+            Class.forName("com.lzp.cluster.service.SlaveExpireService");
+        } catch (ClassNotFoundException e) {
+            logger.error(e.getMessage(),e);
+        }
     }
 
 

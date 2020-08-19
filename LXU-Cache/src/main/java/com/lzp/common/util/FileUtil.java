@@ -1,6 +1,5 @@
 package com.lzp.common.util;
 
-import com.lzp.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,6 +57,18 @@ public class FileUtil {
         if (!file.exists()) {
             file.getParentFile().mkdir();
             file.mkdir();
+        }
+    }
+
+    public static void closeResource(Closeable ... closeables){
+        for (int i=0;i<closeables.length;i++){
+            if (closeables[i]!=null){
+                try {
+                    closeables[i].close();
+                } catch (IOException e) {
+                    logger.error(e.getMessage(),e);
+                }
+            }
         }
     }
 }

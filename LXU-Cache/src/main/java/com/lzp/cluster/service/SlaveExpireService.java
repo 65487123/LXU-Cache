@@ -57,13 +57,7 @@ public class SlaveExpireService {
                 logger.error(e.getMessage(), e);
                 throw new RuntimeException();
             } finally {
-                if (objectInputStream != null) {
-                    try {
-                        objectInputStream.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(objectInputStream);
             }
             BufferedReader bufferedReader = null;
             try {
@@ -77,13 +71,7 @@ public class SlaveExpireService {
                 logger.error(e.getMessage(), e);
                 throw new RuntimeException();
             } finally {
-                if (bufferedReader != null) {
-                    try {
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(bufferedReader);
             }
         }
         //清空持久化文件，生成一次快照

@@ -1,6 +1,5 @@
 package com.lzp.singlemachine.service;
 
-import com.lzp.cluster.service.SlaveConsMesService;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -38,9 +37,9 @@ public class ExpireService {
     /**
      * 处理过期key的线程
      */
-    private static final ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue(1), new ThreadFactoryImpl("expire handler"));
+    private static final ExecutorService THREAD_POOL = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue(1), new ThreadFactoryImpl("expire handler"));
 
-    private static final long pollingInterval;
+    private static final long POLLING_INTERVAL;
 
     private static final Logger logger = LoggerFactory.getLogger(ExpireService.class);
 
@@ -58,13 +57,7 @@ public class ExpireService {
                 logger.error(e.getMessage(), e);
                 throw new RuntimeException();
             } finally {
-                if (objectInputStream != null) {
-                    try {
-                        objectInputStream.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(objectInputStream);
             }
             BufferedReader bufferedReader = null;
             try {
@@ -78,19 +71,13 @@ public class ExpireService {
                 logger.error(e.getMessage(), e);
                 throw new RuntimeException();
             } finally {
-                if (bufferedReader != null) {
-                    try {
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        logger.error(e.getMessage(), e);
-                    }
-                }
+                FileUtil.closeResource(bufferedReader);
             }
         }
         //清空持久化文件，生成一次快照
         PersistenceService.generateExpireSnapshot(keyTimeMap);
-        pollingInterval = Long.parseLong(FileUtil.getProperty("pollingInterval"));
-        threadPool.execute(new Runnable() {
+        POLLING_INTERVAL = Long.parseLong(FileUtil.getProperty("pollingInterval"));
+        THREAD_POOL.execute(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -106,7 +93,7 @@ public class ExpireService {
                         }
                     }
                     try {
-                        Thread.sleep(pollingInterval);
+                        Thread.sleep(POLLING_INTERVAL);
                     } catch (InterruptedException e) {
                         logger.error(e.getMessage(), e);
                     }

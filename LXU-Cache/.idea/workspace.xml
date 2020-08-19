@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterExpireService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ExpireService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +212,7 @@
       <workItem from="1596262697572" duration="13134000" />
       <workItem from="1597194237403" duration="29942000" />
       <workItem from="1597235106583" duration="1065000" />
-      <workItem from="1597744315547" duration="1206000" />
+      <workItem from="1597744315547" duration="6095000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -259,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597666364974</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix">
+      <created>1597745546487</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1597745546487</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,10 +320,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="397" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597744689805" />
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597227203783">
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597824562678">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597227203783" />
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597824562678" />
     <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597744898987">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -389,14 +400,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="499" y="256" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1595903229166" />
-    <state x="690" y="284" key="extract.method.dialog" timestamp="1597031795981">
+    <state x="690" y="284" key="extract.method.dialog" timestamp="1597825064555">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597031795981" />
-    <state x="357" y="334" width="1058" height="600" key="find.popup" timestamp="1597665495977">
+    <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597825064555" />
+    <state x="357" y="334" width="1058" height="600" key="find.popup" timestamp="1597827181720">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="357" y="334" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597665495977" />
+    <state x="357" y="334" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597827181720" />
     <state x="334" y="221" key="new project wizard" timestamp="1592475187725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -420,12 +431,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
-          <line>453</line>
+          <line>442</line>
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>555</line>
+          <line>554</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -440,17 +451,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>478</line>
+          <line>477</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java</url>
-          <line>520</line>
+          <line>509</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>493</line>
+          <line>492</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -470,17 +481,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>559</line>
+          <line>558</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>408</line>
+          <line>407</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>402</line>
+          <line>401</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

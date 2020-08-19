@@ -12,7 +12,6 @@ import com.lzp.common.util.FileUtil;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.util.SerialUtil;
 import com.lzp.singlemachine.service.ConsMesService;
-import com.lzp.singlemachine.service.ExpireService;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
 import io.netty.channel.Channel;
@@ -604,34 +603,7 @@ public class MasterConsMesService {
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
                 } finally {
-                    if (snapshotFileInputStream != null) {
-                        try {
-                            snapshotFileInputStream.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-                    if (journalFileInputStream != null) {
-                        try {
-                            journalFileInputStream.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-                    if (expireJournalFileInputStream != null) {
-                        try {
-                            expireJournalFileInputStream.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
-                    if (expireSnapshotFileInputStream != null) {
-                        try {
-                            expireSnapshotFileInputStream.close();
-                        } catch (IOException e) {
-                            logger.error(e.getMessage(), e);
-                        }
-                    }
+                    FileUtil.closeResource(snapshotFileInputStream,journalFileInputStream,expireJournalFileInputStream,expireSnapshotFileInputStream);
                 }
                 slaves.add(channel);
             }).get();
