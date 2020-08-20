@@ -29,7 +29,9 @@ import java.util.concurrent.*;
  * @author: Lu ZePing
  * @date: 2019/7/14 11:07
  */
-public class SlaveExpireService {
+public class
+
+SlaveExpireService {
     /**
      * 用来存放设置过期时间的key以及它的具体过期时刻
      */

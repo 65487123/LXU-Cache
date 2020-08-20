@@ -51,6 +51,8 @@ public class SlaveConsMesService {
 
     private static ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("operCache"));
 
+    private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
+
 
     public static List<Channel> laterSlaves = new ArrayList<>();
 
@@ -60,6 +62,7 @@ public class SlaveConsMesService {
         SNAPSHOT_BATCH_COUNT_D1 = Integer.parseInt(FileUtil.getProperty("snapshot-batch-count")) - 1;
         queue = new OneToOneBlockingQueue<>(Integer.parseInt(FileUtil.getProperty("queueSize")));
         threadPool.execute(SlaveConsMesService::operCache);
+        heartBeatThreadPool.execute(SlaveConsMesService::heartBeat);
     }
 
 
@@ -73,6 +76,20 @@ public class SlaveConsMesService {
         }
 
     }
+
+    private static void heartBeat(){
+        while (true) {
+            for (Channel channel : laterSlaves) {
+                channel.writeAndFlush(CommandDTO.Command.newBuilder().build());
+            }
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(),e);
+            }
+        }
+    }
+
     private static void restoreData(String[] strings){
         switch (strings[0]){
             case "put": {

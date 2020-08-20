@@ -53,7 +53,7 @@ public class Server {
                 Class.forName("com.lzp.singlemachine.service.ExpireService");
                 workerGroup = new NioEventLoopGroup(ConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
-                        .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new ServerInitializer());
+                        .childHandler(new ServerInitializer());
             } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);
             }
@@ -64,7 +64,7 @@ public class Server {
                 Class.forName("com.lzp.cluster.service.MasterExpireService");
                 workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
-                        .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new MasterServerInitializer());
+                        .childHandler(new MasterServerInitializer());
             } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);
             }
@@ -72,7 +72,7 @@ public class Server {
             //集群模式从节点
             workerGroup = new NioEventLoopGroup(1);
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new SlaveServerInitializer());
+                    .childHandler(new SlaveServerInitializer());
         }
     }
 

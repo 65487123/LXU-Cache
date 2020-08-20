@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="fix">
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="增加心跳检测">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterServerInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterExpireService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ExpireService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +99,7 @@
       <recent name="D:\pro\LXU-Cache\LXU-Cache\src\main\resources\log4j" />
     </key>
   </component>
-  <component name="RunManager" selected="Remote.Unnamed (1)">
+  <component name="RunManager" selected="Remote.Unnamed">
     <configuration name="Server" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lzp.Server" />
       <module name="LXU-Cache" />
@@ -152,7 +153,7 @@
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" />
-      <option name="HOST" value="10.240.30.78" />
+      <option name="HOST" value="127.0.0.1" />
       <option name="PORT" value="5005" />
       <option name="AUTO_RESTART" value="false" />
       <RunnerSettings RunnerId="Debug">
@@ -212,7 +213,7 @@
       <workItem from="1596262697572" duration="13134000" />
       <workItem from="1597194237403" duration="29942000" />
       <workItem from="1597235106583" duration="1065000" />
-      <workItem from="1597744315547" duration="6095000" />
+      <workItem from="1597744315547" duration="29090000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -270,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597745546487</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix">
+      <created>1597827412633</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1597827412633</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,25 +289,30 @@
     <MESSAGE value="ENHANCE 增加持久化功能" />
     <MESSAGE value="ENHANCE 增加集群功能" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="增加心跳检测" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加心跳检测" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592474340485">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1592474340485" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597742930053">
+    <state x="1096" y="278" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1597902528388">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597742930053" />
+    <state x="1096" y="278" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597902528388" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597921217190">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597921217190" />
     <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1596789732143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1128" y="233" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1596789732143" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597642313665">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597896918756">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1597642313665" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1597896918756" />
     <state x="626" y="445" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1597109533422">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -316,18 +329,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597641861892" />
-    <state x="397" y="298" width="1169" height="742" key="#xdebugger.evaluate" timestamp="1597744689805">
+    <state x="751" y="298" width="1169" height="742" key="#xdebugger.evaluate" timestamp="1597903372417">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="397" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597744689805" />
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597824562678">
+    <state x="751" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597903372417" />
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1597924744746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597824562678" />
-    <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597744898987">
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597924744746" />
+    <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597921265466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="848" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1597744898987" />
+    <state width="848" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1597921265466" />
     <state x="114" y="148" width="1581" height="765" key="DiffContextDialog" timestamp="1597643022489">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -336,38 +349,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1709" height="256" key="GridCell.Tab.0.bottom" timestamp="1597745012228">
+    <state width="1656" height="216" key="GridCell.Tab.0.bottom" timestamp="1597921617325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.0.center" timestamp="1597745012228">
+    <state width="1656" height="216" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
+    <state width="1656" height="216" key="GridCell.Tab.0.center" timestamp="1597921617325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.0.left" timestamp="1597745012228">
+    <state width="1656" height="216" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
+    <state width="1656" height="216" key="GridCell.Tab.0.left" timestamp="1597921617325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.0.right" timestamp="1597745012228">
+    <state width="1656" height="216" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
+    <state width="1656" height="216" key="GridCell.Tab.0.right" timestamp="1597921617325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.1.bottom" timestamp="1597745012228">
+    <state width="1656" height="216" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
+    <state width="1656" height="284" key="GridCell.Tab.1.bottom" timestamp="1597921568360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.1.center" timestamp="1597745012228">
+    <state width="1656" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
+    <state width="1656" height="284" key="GridCell.Tab.1.center" timestamp="1597921568360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.1.left" timestamp="1597745012228">
+    <state width="1656" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
+    <state width="1656" height="284" key="GridCell.Tab.1.left" timestamp="1597921568360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
-    <state width="1709" height="256" key="GridCell.Tab.1.right" timestamp="1597745012228">
+    <state width="1656" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
+    <state width="1656" height="284" key="GridCell.Tab.1.right" timestamp="1597921568360">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1709" height="256" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597745012228" />
+    <state width="1656" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
     <state width="1721" height="332" key="GridCell.Tab.2.bottom" timestamp="1597631647861">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -404,10 +417,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597825064555" />
-    <state x="357" y="334" width="1058" height="600" key="find.popup" timestamp="1597827181720">
+    <state x="357" y="334" width="1058" height="600" key="find.popup" timestamp="1597924146874">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="357" y="334" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597827181720" />
+    <state x="357" y="334" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597924146874" />
     <state x="334" y="221" key="new project wizard" timestamp="1592475187725">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -416,10 +429,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597630046261" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597738856038">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1597905974733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597738856038" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597905974733" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -436,7 +449,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>554</line>
+          <line>571</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -445,13 +458,8 @@
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>477</line>
+          <line>494</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -461,7 +469,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>492</line>
+          <line>509</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -481,17 +489,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
-          <line>558</line>
+          <line>575</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>407</line>
+          <line>424</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java</url>
-          <line>401</line>
+          <line>418</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -503,6 +511,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/Server.java</url>
           <line>98</line>
           <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveHandler.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="189" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

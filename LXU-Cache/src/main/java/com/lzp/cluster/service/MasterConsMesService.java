@@ -43,6 +43,8 @@ public class MasterConsMesService {
 
     private static List<Channel> slaves = new ArrayList<>();
 
+    private static ThreadPoolExecutor heartBeatThreadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new ThreadFactoryImpl("heartBeat"));
+
     private final static int SNAPSHOT_BATCH_COUNT_D1;
 
     private static int journalNum = 0;
@@ -109,9 +111,10 @@ public class MasterConsMesService {
         threadPool.execute(() -> operCache());
         //清空持久化文件，生成一次快照
         PersistenceService.generateSnapshot(CACHE);
+        heartBeatThreadPool.execute(MasterConsMesService::heartBeat);
     }
 
-    public static class Message{
+    public static class Message {
         CommandDTO.Command command;
         ChannelHandlerContext channelHandlerContext;
 
@@ -121,6 +124,20 @@ public class MasterConsMesService {
         }
 
     }
+
+    private static void heartBeat(){
+        while (true) {
+            for (Channel channel : slaves) {
+                channel.writeAndFlush(CommandDTO.Command.newBuilder().build());
+            }
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(),e);
+            }
+        }
+    }
+
     private static void restoreData(String[] strings){
         switch (strings[0]){
             case "put": {
