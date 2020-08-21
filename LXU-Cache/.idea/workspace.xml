@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="增加心跳检测">
+    <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterServerInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveExpireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +207,7 @@
       <workItem from="1596262697572" duration="13134000" />
       <workItem from="1597194237403" duration="29942000" />
       <workItem from="1597235106583" duration="1065000" />
-      <workItem from="1597744315547" duration="29090000" />
+      <workItem from="1597744315547" duration="32878000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -278,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597827412633</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="增加心跳检测">
+      <created>1597924810477</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1597924810477</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,38 +350,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591845839562" />
-    <state width="1656" height="216" key="GridCell.Tab.0.bottom" timestamp="1597921617325">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="216" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
-    <state width="1656" height="216" key="GridCell.Tab.0.center" timestamp="1597921617325">
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="216" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
-    <state width="1656" height="216" key="GridCell.Tab.0.left" timestamp="1597921617325">
+    <state width="1877" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="216" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
-    <state width="1656" height="216" key="GridCell.Tab.0.right" timestamp="1597921617325">
+    <state width="1877" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="216" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597921617325" />
-    <state width="1656" height="284" key="GridCell.Tab.1.bottom" timestamp="1597921568360">
+    <state width="1877" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.1.bottom" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
-    <state width="1656" height="284" key="GridCell.Tab.1.center" timestamp="1597921568360">
+    <state width="1877" height="281" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.1.center" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
-    <state width="1656" height="284" key="GridCell.Tab.1.left" timestamp="1597921568360">
+    <state width="1877" height="281" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.1.left" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
-    <state width="1656" height="284" key="GridCell.Tab.1.right" timestamp="1597921568360">
+    <state width="1877" height="281" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
+    <state width="1877" height="281" key="GridCell.Tab.1.right" timestamp="1597981088192">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1656" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597921568360" />
+    <state width="1877" height="281" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597981088192" />
     <state width="1721" height="332" key="GridCell.Tab.2.bottom" timestamp="1597631647861">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -473,16 +474,6 @@
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java</url>
-          <line>138</line>
-          <option name="timeStamp" value="166" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/common/service/PersistenceService.java</url>
-          <line>137</line>
-          <option name="timeStamp" value="167" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java</url>
           <line>25</line>
           <option name="timeStamp" value="175" />
@@ -518,9 +509,9 @@
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/LzpMessageDecoder.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="189" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java</url>
+          <line>242</line>
+          <option name="timeStamp" value="196" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

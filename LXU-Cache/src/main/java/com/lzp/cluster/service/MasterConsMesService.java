@@ -248,8 +248,8 @@ public class MasterConsMesService {
                         break;
                     }
                     case "put": {
-                        PersistenceService.generateSnapshot(CACHE);
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
+                            PersistenceService.generateSnapshot(CACHE);
                         }
                         PersistenceService.writeJournal(message.command);
                         for (Channel channel:slaves){
