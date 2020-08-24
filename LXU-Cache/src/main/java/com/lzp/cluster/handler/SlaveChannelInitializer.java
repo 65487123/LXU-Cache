@@ -9,7 +9,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  * @Author：luzeping
  * @Date: 2019/1/6 20:39
  */
-public class SlaveServerInitializer extends ChannelInitializer {
+public class SlaveChannelInitializer extends ChannelInitializer {
     @Override
     protected void initChannel(Channel channel) {
         channel.pipeline().addLast(new IdleStateHandler(15,Integer.MAX_VALUE,Integer.MAX_VALUE)).addLast(new LzpMessageDecoder())

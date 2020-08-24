@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterChannelInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveChannelInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/ServerInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/handler/SocketChannelInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +209,7 @@
       <workItem from="1596262697572" duration="13134000" />
       <workItem from="1597194237403" duration="29942000" />
       <workItem from="1597235106583" duration="1065000" />
-      <workItem from="1597744315547" duration="32878000" />
+      <workItem from="1597744315547" duration="34261000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -279,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597924810477</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix">
+      <created>1597981360227</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597981360227</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,9 +298,9 @@
     <MESSAGE value="修改lrucache实现" />
     <MESSAGE value="ENHANCE 增加持久化功能" />
     <MESSAGE value="ENHANCE 增加集群功能" />
-    <MESSAGE value="fix" />
     <MESSAGE value="增加心跳检测" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加心跳检测" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1592474340485">

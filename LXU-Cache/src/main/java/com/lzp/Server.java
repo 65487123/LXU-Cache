@@ -1,12 +1,12 @@
 package com.lzp;
 
 import com.lzp.cluster.client.ClientService;
-import com.lzp.cluster.handler.MasterServerInitializer;
-import com.lzp.cluster.handler.SlaveServerInitializer;
+import com.lzp.cluster.handler.MasterChannelInitializer;
+import com.lzp.cluster.handler.SlaveChannelInitializer;
 import com.lzp.cluster.service.MasterConsMesService;
 import com.lzp.cluster.service.SlaveConsMesService;
 import com.lzp.cluster.service.SlaveExpireService;
-import com.lzp.singlemachine.handler.ServerInitializer;
+import com.lzp.singlemachine.handler.SocketChannelInitializer;
 import com.lzp.singlemachine.service.ConsMesService;
 import com.lzp.common.util.FileUtil;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -53,7 +53,7 @@ public class Server {
                 Class.forName("com.lzp.singlemachine.service.ExpireService");
                 workerGroup = new NioEventLoopGroup(ConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
-                        .childHandler(new ServerInitializer());
+                        .childHandler(new SocketChannelInitializer());
             } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);
             }
@@ -64,7 +64,7 @@ public class Server {
                 Class.forName("com.lzp.cluster.service.MasterExpireService");
                 workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
                 serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
-                        .childHandler(new MasterServerInitializer());
+                        .childHandler(new MasterChannelInitializer());
             } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);
             }
@@ -72,7 +72,7 @@ public class Server {
             //集群模式从节点
             workerGroup = new NioEventLoopGroup(1);
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(new SlaveServerInitializer());
+                    .childHandler(new SlaveChannelInitializer());
         }
     }
 
@@ -107,7 +107,7 @@ public class Server {
                     workerGroup = new NioEventLoopGroup(MasterConsMesService.THREAD_NUM);
                     serverBootstrap = new ServerBootstrap();
                     serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 1000)
-                            .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new MasterServerInitializer());
+                            .childOption(ChannelOption.SO_KEEPALIVE, true).childHandler(new MasterChannelInitializer());
                     serverChannel = serverBootstrap.bind(PORT).sync().channel();
                     serverChannel.closeFuture().sync();
                 } catch (Exception e) {
