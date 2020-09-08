@@ -33,15 +33,11 @@ public class FileUtil {
         properties.setProperty(key, value);
         FileOutputStream fos = null;
         try {
-            String path = FileUtil.class.getResource("/").getPath();
-            if (path.startsWith("file:")) {
-                path = path.split("file:")[1];
-            }
             fos = new FileOutputStream("config.properties");
             //将Properties中的属性列表（键和元素对）写入输出流
             properties.store(fos, "");
             String cmd = "jar uf lxucache-server-1.0-SNAPSHOT.jar config.properties";
-            Runtime.getRuntime().exec(new String[]{"/bin/sh","-c",cmd}).waitFor();
+            Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", cmd}).waitFor();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         } finally {

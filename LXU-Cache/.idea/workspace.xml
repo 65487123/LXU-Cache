@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/common/util/FileUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +207,7 @@
       <workItem from="1597194237403" duration="29942000" />
       <workItem from="1597235106583" duration="1065000" />
       <workItem from="1597744315547" duration="39380000" />
-      <workItem from="1598440340034" duration="1221000" />
+      <workItem from="1598440340034" duration="9914000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -293,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598238494446</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix">
+      <created>1598507529094</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1598507529094</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,10 +355,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="751" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597903372417" />
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1598507487630">
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1599549428551">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1598507487630" />
+    <state x="494" y="109" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1599549428551" />
     <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597921265466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
