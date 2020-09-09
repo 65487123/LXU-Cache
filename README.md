@@ -9,7 +9,7 @@
      and achieve the purpose of improving write cache efficiency.
      
 # The purpose of writing this project
-    The main purpose is to learn
+    The main purpose is to study
     1、Familiar with the various functions of redis:
     To write a distributed cache middleware similar to redis, 
     must know the various functions of redis.
