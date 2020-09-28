@@ -102,8 +102,12 @@
     and the client will automatically find the master node and perform load balancing. The new master will be found automatically when 
     the master hangs, and the user has no perception. Currently, it does not support adding a new master node or deleting the original 
     master node at runtime (you can add or delete slave nodes).
-_________________________________________________________________________________________________________________________________________________________________________________
-
+    
+ ##  Client source code URL
+     https://github.com/65487123/LxuCache-Client
+                          
+   __________________________________________________________________________________________________________________________________________________________________
+                          
 # 功能介绍
     和Redis类似，一个分布式缓存中间件。redis的主要功能基本都实现了，
     包括其主要五种数据结构（string、list、hash、set、zset)、缓存淘汰、
@@ -187,3 +191,6 @@ ________________________________________________________________________________
     5、客户端通过CacheClusterClient来连接集群。把所有节点当作参数传入客户端构造方法中，
     客户端会自动找到主节点并做负载均衡。主挂了会自动找到新的主，用户无感知，目前不支持
     运行时增加新的主节点或删除原有主节点（可以增删从节点)。
+    
+## 客户端源码地址
+    https://github.com/65487123/LxuCache-Client
