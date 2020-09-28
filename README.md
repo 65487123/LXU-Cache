@@ -3,10 +3,11 @@
 # Features
      Similar to Redis, a distributed cache middleware. The main 
      functions of redis are basically realized,Including its five 
-     main data structures, cache elimination, key setting expiration 
-     time, persistence, clustering and so on.It also provides various 
-     batch operation APIs to reduce the number of network IOs 
-     and achieve the purpose of improving write cache efficiency.
+     main data structures（string、list、hash、set、zset), cache 
+     elimination, key setting expiration ime, persistence, clustering 
+     and so on.
+     It also provides various batch operation APIs to reduce the number 
+     of network IOs and achieve the purpose of improving write cache efficiency.
      
 # The purpose of writing this project
     The main purpose is to study
@@ -105,7 +106,8 @@ ________________________________________________________________________________
 
 # 功能介绍
     和Redis类似，一个分布式缓存中间件。redis的主要功能基本都实现了，
-    包括其主要五种数据结构、缓存淘汰、key设置过期时间、持久化、集群等等。
+    包括其主要五种数据结构（string、list、hash、set、zset)、缓存淘汰、
+    key设置过期时间、持久化、集群等等。
     并且提供了各种批量操作api来减少网络IO次数，达到提升写缓存效率目的。
 # 写这个项目的目的
     主要目的就是用作学习
