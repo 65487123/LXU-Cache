@@ -6,7 +6,6 @@ import com.lzp.common.cache.Cache;
 import com.lzp.common.datastructure.queue.OneToOneBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
-import com.lzp.common.protocol.ResponseDTO;
 import com.lzp.common.util.HashUtil;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -19,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -422,7 +422,7 @@ public class SlaveConsMesService {
                         break;
                     }
                     case "getMaster": {
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(FileUtil.getProperty("masterIpAndPort")).build());
+                        message.channelHandlerContext.writeAndFlush(FileUtil.getProperty("masterIpAndPort").getBytes(StandardCharsets.UTF_8));
                         break;
                     }
                     default:

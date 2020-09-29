@@ -6,7 +6,6 @@ import com.lzp.common.cache.LfuCache;
 import com.lzp.common.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
-import com.lzp.common.protocol.ResponseDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
 import com.lzp.common.util.FileUtil;
@@ -205,7 +204,7 @@ public class ConsMesService {
                     case "get": {
                         Object retern = CACHE.get(message.command.getKey());
                         String result = retern == null ? "null" : retern.toString();
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(result).build());
+                        message.channelHandlerContext.writeAndFlush(result.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
                     case "put": {
@@ -217,9 +216,9 @@ public class ConsMesService {
                         Object preValue;
                         if ((preValue = CACHE.get(key)) instanceof String || preValue == null) {
                             CACHE.put(key, message.command.getValue());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                            message.channelHandlerContext.writeAndFlush(new byte[0]);
                         } else {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
@@ -234,10 +233,10 @@ public class ConsMesService {
                             afterValue = String.valueOf(Integer.parseInt((String) CACHE.get(message.command.getKey())) + 1);
                             CACHE.put(key, afterValue);
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(afterValue).build());
+                        message.channelHandlerContext.writeAndFlush(afterValue.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
                     case "decr": {
@@ -251,10 +250,10 @@ public class ConsMesService {
                             afterValue = String.valueOf(Integer.parseInt((String) CACHE.get(message.command.getKey())) - 1);
                             CACHE.put(key, afterValue);
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(afterValue).build());
+                        message.channelHandlerContext.writeAndFlush(afterValue.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
                     case "hput": {
@@ -266,12 +265,12 @@ public class ConsMesService {
                         String key = message.command.getKey();
                         Object value;
                         if ((value = CACHE.get(key)) !=null && !(value instanceof Map)){
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         }
                         Map<String,String> values = SerialUtil.stringToMap(message.command.getValue());
                         CACHE.put(key,values);
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "hmerge": {
@@ -285,7 +284,7 @@ public class ConsMesService {
                             Map<String, String> values = SerialUtil.stringToMap(message.command.getValue());
                             CACHE.put(key, values);
                         } else if (!(value instanceof Map)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         } else {
                             Map<String, String> mapValue = (Map<String, String>) value;
@@ -294,7 +293,7 @@ public class ConsMesService {
                                 mapValue.put(entry.getKey(), entry.getValue());
                             }
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "lpush": {
@@ -307,13 +306,13 @@ public class ConsMesService {
                         if ((value = CACHE.get(key)) == null) {
                             CACHE.put(key, SerialUtil.stringToList(message.command.getValue()));
                         } else if (!(value instanceof List)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         } else {
                             List<String> listValue = (List<String>) value;
                             listValue.addAll(SerialUtil.stringToList(message.command.getValue()));
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "sadd": {
@@ -326,13 +325,13 @@ public class ConsMesService {
                         if ((value = CACHE.get(key)) == null) {
                             CACHE.put(key, SerialUtil.stringToSet(message.command.getValue()));
                         } else if (!(value instanceof Set)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         } else {
                             Set<String> setValue = (Set<String>) value;
                             setValue.addAll(SerialUtil.stringToList(message.command.getValue()));
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "zadd": {
@@ -357,9 +356,9 @@ public class ConsMesService {
                                 ((Zset) value).zadd(Double.parseDouble(scoreMem[0]), scoreMem[1]);
                             }
                         } else {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "hset": {
@@ -373,67 +372,67 @@ public class ConsMesService {
                             Map<String, String> values = SerialUtil.stringToMap(message.command.getValue());
                             CACHE.put(key, values);
                         } else if (!(value instanceof Map)) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                             break;
                         } else {
                             Map<String, String> mapValue = (Map<String, String>) value;
                             String[] keyValue = message.command.getValue().split("©");
                             mapValue.put(keyValue[0],keyValue[1]);
                         }
-                        message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                        message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
                     case "hget": {
                         try {
                             Map<String, String> values = (Map<String, String>) CACHE.get(message.command.getKey());
                             if (values == null) {
-                                message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("null").build());
+                                message.channelHandlerContext.writeAndFlush("null".getBytes(StandardCharsets.UTF_8));
                             } else {
                                 String result;
-                                message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult((result = values.get(message.command.getValue())) == null ? "null" : result).build());
+                                message.channelHandlerContext.writeAndFlush((result = values.get(message.command.getValue())) == null ? "null".getBytes(StandardCharsets.UTF_8) : result.getBytes(StandardCharsets.UTF_8));
                             }
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
                     case "getList": {
                         try {
                             List<String> values = (List<String>) CACHE.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(values == null ? "null" : SerialUtil.collectionToString(values)).build());
+                            message.channelHandlerContext.writeAndFlush(values == null ? "null".getBytes(StandardCharsets.UTF_8) : SerialUtil.collectionToString(values).getBytes(StandardCharsets.UTF_8));
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
                     case "getSet": {
                         try {
                             Set<String> values = (Set<String>) CACHE.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(values == null ? "null" : SerialUtil.collectionToString(values)).build());
+                            message.channelHandlerContext.writeAndFlush(values == null ? "null".getBytes(StandardCharsets.UTF_8) : SerialUtil.collectionToString(values).getBytes(StandardCharsets.UTF_8));
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
                     case "scontain": {
                         try {
                             Set<String> values = (Set<String>) CACHE.get(message.command.getKey());
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult(String.valueOf(values.contains(message.command.getValue()))).build());
+                            message.channelHandlerContext.writeAndFlush(String.valueOf(values.contains(message.command.getValue())).getBytes(StandardCharsets.UTF_8));
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
                     case "expire": {
                         String key = message.command.getKey();
                         if (CACHE.get(key) == null) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("0").build());
+                            message.channelHandlerContext.writeAndFlush("0".getBytes(StandardCharsets.UTF_8));
                         } else {
                             long expireTime = Instant.now().toEpochMilli() + (Long.parseLong(message.command.getValue()) * 1000);
                             ExpireService.setKeyAndTime(key, expireTime);
                             PersistenceService.writeExpireJournal(key +
                                     "ÈÈ" + expireTime);
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("1").build());
+                            message.channelHandlerContext.writeAndFlush("1".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
@@ -444,7 +443,7 @@ public class ConsMesService {
                         PersistenceService.writeJournal(message.command);
                         CACHE.remove(message.command.getKey());
                         if (message.channelHandlerContext != null) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().build());
+                            message.channelHandlerContext.writeAndFlush(new byte[0]);
                         }
                         break;
                     }
@@ -452,10 +451,9 @@ public class ConsMesService {
                         try {
                             Zset zset = (Zset) CACHE.get(message.command.getKey());
                             String[] startAndEnd = message.command.getValue().split("©");
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder()
-                                    .setResult(zset.zrange(Long.parseLong(startAndEnd[0]), Long.parseLong(startAndEnd[1]))).build());
+                            message.channelHandlerContext.writeAndFlush(zset.zrange(Long.parseLong(startAndEnd[0]), Long.parseLong(startAndEnd[1])).getBytes(StandardCharsets.UTF_8));
                         } catch (Exception e) {
-                            message.channelHandlerContext.writeAndFlush(ResponseDTO.Response.newBuilder().setResult("e").build());
+                            message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
                         break;
                     }
