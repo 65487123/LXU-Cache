@@ -105,8 +105,8 @@
     
 ## Major changes in the new version
 
-    Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value to 
-    a single string, canceling protobuf serialization.
+    1.0.1：Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value 
+    to a single string, canceling protobuf serialization.
     
   [Source code of client](https://github.com/65487123/LxuCache-Client)
                           
