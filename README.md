@@ -85,7 +85,7 @@
     of cache entries, the key expiration strategy, and the number of log entries when generating 
     a snapshot by modifying the config.properties configuration file.
     3. Compile the project and generate the jar package
-    4. Throw it to the server and execute: nohup java -jar lxucache-server-1.0-SNAPSHOT.jar & 
+    4. Throw it to the server and execute: nohup java -jar lxucache-server-1.x.x.jar & 
     you can add other JVM startup parameters according to your needs
     
 ## Cluster mode
@@ -103,7 +103,11 @@
     the master hangs, and the user has no perception. Currently, it does not support adding a new master node or deleting the original 
     master node at runtime (you can add or delete slave nodes).
     
+## Major changes in the new version
 
+    Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value to 
+    a single string, canceling protobuf serialization.
+    
   [Source code of client](https://github.com/65487123/LxuCache-Client)
                           
    __________________________________________________________________________________________________________________________________________________________________
@@ -176,7 +180,7 @@
     2、通过修改config.properties配置文件设置缓存使用的端口、缓存淘汰策略、
     缓存最大条目数量、key过期策略、生成快照时的日志条目数等。
     3、编译项目，生成jar包
-    4、丢到服务器执行nohup java -jar lxucache-server-1.0-SNAPSHOT.jar & 
+    4、丢到服务器执行nohup java -jar lxucache-server-1.x.x.jar & 
     可以根据自己需求添加其他JVM启动参数
     
 ## 集群模式
@@ -192,4 +196,7 @@
     客户端会自动找到主节点并做负载均衡。主挂了会自动找到新的主，用户无感知，目前不支持
     运行时增加新的主节点或删除原有主节点（可以增删从节点)。
     
+## 新版本主要改动
+     1.0.1：原先返回值是一个Respnse对象，用的protobuf序列化，1.0.1版本把返回值改为单个字符串，取消protobuf序列化。
+     
  [客户端源码](https://github.com/65487123/LxuCache-Client)
