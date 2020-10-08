@@ -4,7 +4,6 @@ import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
 import com.lzp.common.util.FileUtil;
-import com.lzp.singlemachine.service.ConsMesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,7 @@ import java.util.concurrent.*;
  * <p>
  * 第一种方法影响读缓存效率，所以不考虑
  * 第二种办法可能会导致线程数量太多，也会影响性能。并且，一个key的超时时间只能设置一次，不能覆盖超时时间。
- * 所以这里选择用第三种方法来处理过期key。适量浪费单个cpu的资源问题也不是很大，用字符串常量池里的对象来当key，也不会造成额外内存占用过多
+ * 所以这里选择用第三种方法来处理过期key。适量浪费单个cpu的资源问题也不是很大
  *
  * @author: Lu ZePing
  * @date: 2019/7/14 11:07
@@ -63,7 +62,7 @@ public class MasterExpireService {
             }
             BufferedReader bufferedReader = null;
             try {
-                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/expire/journal.txt"),"UTF-8"));
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/expire/journal.txt"), "UTF-8"));
                 String cmd;
                 bufferedReader.readLine();
                 while ((cmd = bufferedReader.readLine()) != null) {
