@@ -1,5 +1,5 @@
 # LXU-Cache
-
+[中文](https://github.com/65487123/LXU-Cache/blob/master/README.md)|English 
 # Features
      Similar to Redis, a distributed cache middleware. The main 
      functions of redis are basically realized,Including its five 
