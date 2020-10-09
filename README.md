@@ -1,6 +1,6 @@
 # LXU-Cache
 
-                         
+   中文|[English](https://github.com/65487123/LXU-Cache/blob/master/README-EN.md)                         
 # 功能介绍
     和Redis类似，一个分布式缓存中间件。redis的主要功能基本都实现了，
     包括其主要五种数据结构（string、list、hash、set、zset)、缓存淘汰、
