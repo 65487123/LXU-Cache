@@ -14,8 +14,12 @@ import java.util.*;
  * @Date: 2019/1/6 20:35
  */
 public class Handler extends SimpleChannelInboundHandler<CommandDTO.Command> {
+    /**
+     * 由于handlerAdded()和channelRead0是在一个线程中执行的(netty的一个从reactor),
+     * 所以不会出现半初始化问题(synchronized不能防止指令重排序,需要加volatile),所以就不需要
+     * 线程安全的map，hashmap就行了。
+     */
     private static Map<EventLoop, Integer> eventLoopNumMap = new HashMap(32);
-
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, CommandDTO.Command command) {

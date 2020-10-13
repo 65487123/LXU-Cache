@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/client/ClientInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterChannelInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterChannelInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveChannelInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/SlaveChannelInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/MasterConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/service/SlaveConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/model/response.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/common/protocol/ResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/singlemachine/service/ConsMesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +208,7 @@
       <workItem from="1597744315547" duration="39380000" />
       <workItem from="1598440340034" duration="9914000" />
       <workItem from="1601366126851" duration="4148000" />
+      <workItem from="1602575989420" duration="261000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -362,10 +352,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="751" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597903372417" />
-    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1602129894025">
+    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1602576273837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602129894025" />
+    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602576273837" />
     <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597921265466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -450,10 +440,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="284" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597825064555" />
-    <state x="217" y="440" width="1058" height="600" key="find.popup" timestamp="1601369816566">
+    <state x="453" y="440" width="1058" height="600" key="find.popup" timestamp="1602576313114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="217" y="440" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601369816566" />
+    <state x="453" y="440" width="1058" height="600" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602576313114" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1597630046261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -503,7 +493,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java</url>
-          <line>25</line>
+          <line>30</line>
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
