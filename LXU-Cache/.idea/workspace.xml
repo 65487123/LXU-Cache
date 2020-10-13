@@ -2,7 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="603d91ab-a054-4971-a8f8-8fbcdf8e0f9c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lzp/cluster/handler/MasterHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/LXU-Cache.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +222,7 @@
       <workItem from="1597744315547" duration="39380000" />
       <workItem from="1598440340034" duration="9914000" />
       <workItem from="1601366126851" duration="4148000" />
-      <workItem from="1602575989420" duration="261000" />
+      <workItem from="1602575989420" duration="968000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <created>1592727066415</created>
@@ -308,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601366170587</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add notes">
+      <created>1602576359628</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1602576359628</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +342,8 @@
     <MESSAGE value="增加心跳检测" />
     <MESSAGE value="fix" />
     <MESSAGE value="修改版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改版本" />
+    <MESSAGE value="add notes" />
+    <option name="LAST_COMMIT_MESSAGE" value="add notes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1096" y="278" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1597902528388">
@@ -352,10 +374,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="751" y="298" width="1169" height="742" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597903372417" />
-    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1602576273837">
+    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2" timestamp="1602576358064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602576273837" />
+    <state x="389" y="148" width="1253" height="821" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1602576358064" />
     <state width="848" height="466" key="DebuggerActiveHint" timestamp="1597921265466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
