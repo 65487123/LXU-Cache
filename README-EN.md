@@ -42,8 +42,10 @@
     2. One-to-one: The same is a lock-free design and solved for sharing.
     In the stand-alone mode, all requests will be thrown into the many-to-one blocking queue for 
     consumption by another independent thread.
+    Since each array block is only occupied by one production thread, no CAS is required when placing elements, 
+    which further improves performance
     In cluster mode, all master nodes use many-to-one queues, and slave nodes use one-to-one queues
-
+    
 
 ## Persistence implementation
     There are two persistent files: memory snapshot file snapshot.ser and write cache log file
