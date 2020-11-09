@@ -4,6 +4,7 @@ import com.lzp.cluster.client.ClientService;
 import com.lzp.common.cache.AutoDeleteMap;
 import com.lzp.common.cache.Cache;
 import com.lzp.common.cache.LfuCache;
+import com.lzp.common.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.util.FileUtil;
@@ -34,7 +35,7 @@ import java.util.concurrent.*;
  * @date: 2019/7/1 18:13
  */
 public class MasterConsMesService {
-    private static final NoLockBlockingQueue<MasterConsMesService.Message> QUEUE;
+    private static final NoLockBlockingQueue<Message> QUEUE;
 
     private static final Cache<String, Object> CACHE;
 
