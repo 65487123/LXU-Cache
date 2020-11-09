@@ -13,14 +13,18 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * @date: 2019/7/20 12:19
  */
 public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
+    /**
+     * 指针压缩后4字节
+     */
     private AtomicReferenceArray<E> array;
+    /**
+     * 4字节，加上对象头12字节，一共20字节，还差44字节
+     */
     private final int m;
 
-    @sun.misc.Contended
-    private int head;
+    private int[] head = new int[27];
 
-    @sun.misc.Contended
-    private int tail;
+    private int[] tail = new int[16];
 
 
     public OneToOneBlockingQueue(int preferCapacity) {
@@ -32,7 +36,7 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
     @Override
     public void put(E obj) throws InterruptedException {
 
-        int p = head++ & m;
+        int p = head[11]++ & m;
         while (array.get(p) != null) {
             Thread.yield();
         }
@@ -43,7 +47,7 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
     @Override
     public E take() throws InterruptedException {
         Object e;
-        int p = tail++ & m;
+        int p = tail[0]++ & m;
         while ((e = array.get(p)) == null) {
             Thread.yield();
         }
@@ -56,12 +60,12 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
         long now = 0;
         long time = unit.toMillis(timeout);
         Object e;
-        int p = tail++ & m;
+        int p = tail[0]++ & m;
         while ((e = array.get(p)) == null) {
             if (now == 0) {
                 now = System.currentTimeMillis();
             } else if (System.currentTimeMillis() - now > time) {
-                tail--;
+                tail[0]--;
                 throw new InterruptedException();
             } else {
                 Thread.yield();

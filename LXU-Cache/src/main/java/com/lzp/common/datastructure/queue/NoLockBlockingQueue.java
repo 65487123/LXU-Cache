@@ -12,13 +12,21 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * @date: 2019/7/20 12:19
  */
 public class NoLockBlockingQueue<E> extends BlockingQueueAdapter<E> {
-    private AtomicReferenceArray<E>[] array;
-    private final int m;
     /**
-     * @sun.misc.Contended 这个注解修饰数组，数组里的元素可能还是会出现伪共享，所以还是自己填充解决好了
+     * 指针压缩后4字节
      */
+    private AtomicReferenceArray<E>[] array;
+    /**
+     * 4字节，加上对象头12字节，一共20字节，还差44字节
+     */
+    private final int m;
 
+    private int[] padding = new int[11];
+    /**
+     * @sun.misc.Contended 这个注解原理是前后都填充128字节，优点浪费内存，所以还是自己填充好了
+     */
     private int[] head;
+
     private int[] tail;
 
 
