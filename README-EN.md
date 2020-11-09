@@ -106,7 +106,8 @@
 
     1.0.1：Originally the return value was a Response object, which was serialized using protobuf. Version 1.0.1 changed the return value 
     to a single string, canceling protobuf serialization.
-    
+    1.0.1-sr1: Modify the queue used by the slave node, the official false-sharing solution is changed to memory filling by myself, 
+    benefits: 1. It takes up less memory 2. No need to add startup parameters
   [Source code of client](https://github.com/65487123/LxuCache-Client)
                           
  
