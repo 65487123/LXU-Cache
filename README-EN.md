@@ -94,8 +94,7 @@
     Need to configure the ip and port of the master node, example: masterIpAndPort=127.0.0.1:4445
     3. Start the master node first. If there are persistent files under the master node's directory, the data will be restored after startup.
     4. Start the slave node. After startup, it will automatically synchronize the data of the master node to the slave node. 
-    You can start multiple slave nodes.The performance of starting the slave node with the parameter -XX:-RestrictContended will be higher (
-    the queue used by the slave node is solved through the official implementation of false sharing).
+    You can start multiple slave nodes.
     Example: nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar &
     You can add other JVM startup parameters according to your needs
     5. The client connects to the cluster through CacheClusterClient. Pass all nodes as parameters into the client construction method, 
