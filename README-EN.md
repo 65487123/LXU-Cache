@@ -97,7 +97,7 @@
     3. Start the master node first. If there are persistent files under the master node's directory, the data will be restored after startup.
     4. Start the slave node. After startup, it will automatically synchronize the data of the master node to the slave node. 
     You can start multiple slave nodes.
-    Example: nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar &
+    Example: nohup java -jar lxucache-server-1.x.x.jar &
     You can add other JVM startup parameters according to your needs
     5. The client connects to the cluster through CacheClusterClient. Pass all nodes as parameters into the client construction method, 
     and the client will automatically find the master node and perform load balancing. The new master will be found automatically when 
