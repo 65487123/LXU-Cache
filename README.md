@@ -80,7 +80,7 @@
     需要配置为主节点的ip加端口,示例：masterIpAndPort=127.0.0.1:4445
     3、先启动主节点，主节点的目录下面如果有持久化文件，启动后会恢复数据。
     4、再启动从节点，启动后会自动同步主节点的数据到从节点中。可以启动多个从节点。
-    示例：nohup java -XX:-RestrictContended -jar lxucache-server-1.0-SNAPSHOT.jar & 
+    示例：nohup java -jar lxucache-server-1.x.x.jar & 
     可以根据自己需求添加其他JVM启动参数
     5、客户端通过CacheClusterClient来连接集群。把所有节点当作参数传入客户端构造方法中，
     客户端会自动找到主节点并做负载均衡。主挂了会自动找到新的主，用户无感知，目前不支持
