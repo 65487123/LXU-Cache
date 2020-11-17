@@ -48,7 +48,8 @@ public class NoLockBlockingQueue<E> extends BlockingQueueAdapter<E> {
      */
     private final int m;
 
-    private int[] padding = new int[11];
+    private long padding1, padding2, padding3, padding4, padding5;
+    private int padding6;
     /**
      * @sun.misc.Contended 这个注解修饰数组，数组里的元素可能还是会出现伪共享，所以还是自己填充解决好了
      */
