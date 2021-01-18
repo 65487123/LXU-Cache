@@ -15,6 +15,7 @@
 
 package com.lzp.common.service;
 
+import com.lzp.common.constant.Const;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.util.FileUtil;
 import com.lzp.singlemachine.service.ExpireService;
@@ -85,7 +86,7 @@ public class PersistenceService {
             if (objectOutputStream!=null) {
                 objectOutputStream.close();
             }
-            objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/corecache/snapshot.ser")));
+            objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File(Const.SNAPSHOT_PATH)));
             objectOutputStream.writeObject(object);
             objectOutputStream.flush();
         } catch (IOException e) {
@@ -98,7 +99,7 @@ public class PersistenceService {
             if (expireObjectOutputStream!=null) {
                 expireObjectOutputStream.close();
             }
-            expireObjectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("./persistence/expire/snapshot.ser")));
+            expireObjectOutputStream = new ObjectOutputStream(new FileOutputStream(new File(Const.EXPIRE_SNAPSHOT_PATH)));
             expireObjectOutputStream.writeObject(object);
             expireObjectOutputStream.flush();
         } catch (IOException e) {
@@ -116,7 +117,7 @@ public class PersistenceService {
             if (bufferedWriter!=null) {
                 bufferedWriter.close();
             }
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./persistence/corecache/journal.txt"),"UTF-8"));
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Const.JOURNAL_PATH),"UTF-8"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
@@ -127,7 +128,7 @@ public class PersistenceService {
             if (expireBufferedWriter != null) {
                 expireBufferedWriter.close();
             }
-            expireBufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./persistence/expire/journal.txt"),"UTF-8"));
+            expireBufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Const.EXPIRE_JOURNAL_PATH),"UTF-8"));
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }

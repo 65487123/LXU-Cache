@@ -15,6 +15,7 @@
 
 package com.lzp.cluster.service;
 
+import com.lzp.common.constant.Const;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -58,10 +59,10 @@ public class MasterExpireService {
 
     private static final Logger logger = LoggerFactory.getLogger(MasterExpireService.class);
 
-    private static Boolean isMaster = !"yes".equals(FileUtil.getProperty("cluster-enabled")) ? null : "yes".equals(FileUtil.getProperty("isMaster"));
+    private static Boolean isMaster = !Const.YES.equals(FileUtil.getProperty("cluster-enabled")) ? null : Const.YES.equals(FileUtil.getProperty("isMaster"));
 
     static {
-        File file = new File("./persistence/expire/snapshot.ser");
+        File file = new File(Const.EXPIRE_SNAPSHOT_PATH);
         if (!file.exists()) {
             keyTimeMap = new ConcurrentHashMap<>(16);
         } else {
@@ -77,7 +78,7 @@ public class MasterExpireService {
             }
             BufferedReader bufferedReader = null;
             try {
-                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/expire/journal.txt"), "UTF-8"));
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(Const.EXPIRE_JOURNAL_PATH), "UTF-8"));
                 String cmd;
                 bufferedReader.readLine();
                 while ((cmd = bufferedReader.readLine()) != null) {
@@ -119,7 +120,7 @@ public class MasterExpireService {
     }
 
     private static void restoreData(String[] strings) {
-        if (strings.length == 2) {
+        if (strings.length == Const.TWO) {
             keyTimeMap.put(strings[0], Long.parseLong(strings[1]));
         } else {
             keyTimeMap.remove(strings[0]);

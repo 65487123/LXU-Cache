@@ -16,6 +16,7 @@
 
 package com.lzp.singlemachine.service;
 
+import com.lzp.common.constant.Const;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -61,7 +62,7 @@ public class ExpireService {
 
 
     static {
-        File file = new File("./persistence/expire/snapshot.ser");
+        File file = new File(Const.EXPIRE_SNAPSHOT_PATH);
         if (!file.exists()) {
             keyTimeMap = new ConcurrentHashMap<>(16);
         } else {
@@ -77,7 +78,7 @@ public class ExpireService {
             }
             BufferedReader bufferedReader = null;
             try {
-                bufferedReader = new BufferedReader(new FileReader(new File("./persistence/expire/journal.txt")));
+                bufferedReader = new BufferedReader(new FileReader(new File(Const.EXPIRE_JOURNAL_PATH)));
                 String cmd;
                 bufferedReader.readLine();
                 while ((cmd = bufferedReader.readLine()) != null) {

@@ -15,6 +15,7 @@
 
 package com.lzp.cluster.service;
 
+import com.lzp.common.constant.Const;
 import com.lzp.common.protocol.CommandDTO;
 import com.lzp.common.service.PersistenceService;
 import com.lzp.common.service.ThreadFactoryImpl;
@@ -61,7 +62,7 @@ SlaveExpireService {
     private static Logger logger = LoggerFactory.getLogger(SlaveExpireService.class);
 
     static {
-        File file = new File("./persistence/expire/snapshot.ser");
+        File file = new File(Const.EXPIRE_SNAPSHOT_PATH);
         if (!file.exists()) {
             keyTimeMap = new ConcurrentHashMap<>(16);
         } else {
@@ -77,7 +78,7 @@ SlaveExpireService {
             }
             BufferedReader bufferedReader = null;
             try {
-                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/expire/journal.txt"), "UTF-8"));
+                bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(Const.EXPIRE_JOURNAL_PATH), "UTF-8"));
                 String cmd;
                 bufferedReader.readLine();
                 while ((cmd = bufferedReader.readLine()) != null) {

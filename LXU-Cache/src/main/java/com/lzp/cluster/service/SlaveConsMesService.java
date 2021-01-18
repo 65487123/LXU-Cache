@@ -18,6 +18,8 @@ package com.lzp.cluster.service;
 import com.lzp.cluster.client.ClientService;
 import com.lzp.common.cache.AutoDeleteMap;
 import com.lzp.common.cache.Cache;
+import com.lzp.common.constant.Const;
+import com.lzp.common.constant.ReqName;
 import com.lzp.common.datastructure.queue.OneToOneBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
@@ -107,11 +109,11 @@ public class SlaveConsMesService {
 
     private static void restoreData(String[] strings){
         switch (strings[0]){
-            case "put": {
+            case ReqName.PUT: {
                 cache.put(strings[1], strings[2]);
                 break;
             }
-            case "incr": {
+            case ReqName.INCR: {
                 String afterValue;
                 try {
                     afterValue = String.valueOf(Integer.parseInt((String) cache.get(strings[1])) + 1);
@@ -121,7 +123,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "decr": {
+            case ReqName.DECR: {
                 String afterValue ;
                 try {
                     afterValue = String.valueOf(Integer.parseInt((String) cache.get(strings[1])) - 1);
@@ -131,7 +133,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "hput": {
+            case ReqName.HPUT: {
                 Object value;
                 if ((value = cache.get(strings[1])) !=null && !(value instanceof Map)){
                     break;
@@ -140,7 +142,7 @@ public class SlaveConsMesService {
                 cache.put(strings[1],values);
                 break;
             }
-            case "hmerge": {
+            case ReqName.HMERGE: {
                 Object value;
                 if ((value = cache.get(strings[1])) == null) {
                     Map<String, String> values = SerialUtil.stringToMap(strings[2]);
@@ -156,7 +158,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "lpush": {
+            case ReqName.LPUSH: {
                 Object value;
                 if ((value = cache.get(strings[1])) == null) {
                     //不values.addAll(Arrays.asList(message.command.getValue().split(","))) 这样写的原因是他底层也是要addAll的，没区别
@@ -170,7 +172,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "sadd": {
+            case ReqName.SADD: {
                 Object value;
                 if ((value = cache.get(strings[1])) == null) {
                     cache.put(strings[1], SerialUtil.stringToSet(strings[2]));
@@ -182,7 +184,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "zadd": {
+            case ReqName.ZADD: {
                 try {
                     Zset zset = (Zset) cache.get(strings[1]);
                     String[] strings1 = (strings[2].split("È"));
@@ -195,7 +197,7 @@ public class SlaveConsMesService {
                 }
                 break;
             }
-            case "remove": {
+            case ReqName.REMOVE: {
                 cache.remove(strings[1]);
                 break;
             }
@@ -208,7 +210,7 @@ public class SlaveConsMesService {
             try {
                 SlaveConsMesService.Message message = queue.poll(1, TimeUnit.SECONDS);
                 switch (message.command.getType()) {
-                    case "put": {
+                    case ReqName.PUT: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -221,7 +223,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "incr": {
+                    case ReqName.INCR: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -236,7 +238,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "decr": {
+                    case ReqName.DECR: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -251,7 +253,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "hput": {
+                    case ReqName.HPUT: {
                         //写持久化日志
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
@@ -266,7 +268,7 @@ public class SlaveConsMesService {
                         cache.put(key, values);
                         break;
                     }
-                    case "hmerge": {
+                    case ReqName.HMERGE: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -287,7 +289,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "lpush": {
+                    case ReqName.LPUSH: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -304,7 +306,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "sadd": {
+                    case ReqName.SADD: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -321,7 +323,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "zadd": {
+                    case ReqName.ZADD: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -342,11 +344,10 @@ public class SlaveConsMesService {
                                 String[] scoreMem = e.split("©");
                                 ((Zset) value).zadd(Double.parseDouble(scoreMem[0]), scoreMem[1]);
                             }
-                        } else {
                         }
                         break;
                     }
-                    case "hset": {
+                    case ReqName.HSET: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -366,7 +367,7 @@ public class SlaveConsMesService {
                         break;
                     }
 
-                    case "expire": {
+                    case ReqName.EXPIRE: {
                         String key = message.command.getKey();
                         if (cache.get(key) != null) {
                             long expireTime = Instant.now().toEpochMilli() + (Long.parseLong(message.command.getValue()) * 1000);
@@ -376,7 +377,7 @@ public class SlaveConsMesService {
                         }
                         break;
                     }
-                    case "remove": {
+                    case ReqName.REMOVE: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(cache);
                         }
@@ -385,58 +386,58 @@ public class SlaveConsMesService {
                         break;
                     }
 
-                    case "zrem": {
+                    case ReqName.ZREM: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zincrby": {
+                    case ReqName.ZINCRBY: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrank": {
+                    case ReqName.ZRANK: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrevrank": {
+                    case ReqName.ZREVRANK: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrevrange": {
+                    case ReqName.ZREVRANGE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zcard": {
+                    case ReqName.ZCARD: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zscore": {
+                    case ReqName.ZSCORE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zcount": {
+                    case ReqName.ZCOUNT: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrangeByScore": {
+                    case ReqName.ZRANGEBYSCORE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
                     //启动后第一次来的请求一定是这个
-                    case "fullSync": {
+                    case ReqName.FULL_SYNC: {
                         recoverData(message);
                         break;
                     }
-                    case "notice": {
+                    case ReqName.NOTICE: {
                         laterSlaves.add(ClientService.getConnection(message.command.getKey(), Integer.parseInt(message.command.getValue())));
                         break;
                     }
-                    case "refreshMaster": {
+                    case ReqName.REFRESH_MASTER: {
                         InetSocketAddress inetSocketAddress = (InetSocketAddress) message.channelHandlerContext.channel().remoteAddress();
                         String newMaster = inetSocketAddress.getHostString() + ":" + message.command.getKey();
                         FileUtil.setProperty("masterIpAndPort", newMaster);
                         break;
                     }
-                    case "getMaster": {
+                    case ReqName.GET_MASTER: {
                         message.channelHandlerContext.writeAndFlush(FileUtil.getProperty("masterIpAndPort").getBytes(StandardCharsets.UTF_8));
                         break;
                     }
@@ -466,7 +467,7 @@ public class SlaveConsMesService {
         String expireJour = jours.length == 2 ? jours[1] : "";
         FileUtil.generateFileIfNotExist(new File("./persistence/corecache"));
         FileUtil.generateFileIfNotExist(new File("./persistence/expire"));
-        File journalFile = new File("./persistence/corecache/journal.txt");
+        File journalFile = new File(Const.JOURNAL_PATH);
         byte[] journalBytes = SerialUtil.toByteArray(journal);
         FileOutputStream jourfileOutputStream = null;
         FileOutputStream expJourFileOutputStream = null;
@@ -475,10 +476,10 @@ public class SlaveConsMesService {
             jourfileOutputStream = new FileOutputStream(journalFile);
             jourfileOutputStream.write(journalBytes);
             jourfileOutputStream.flush();
-            expJourFileOutputStream = new FileOutputStream("./persistence/expire/journal.txt");
+            expJourFileOutputStream = new FileOutputStream(Const.EXPIRE_JOURNAL_PATH);
             expJourFileOutputStream.write(SerialUtil.toByteArray(expireJour));
             expJourFileOutputStream.flush();
-            expSnapFileOutputStream = new FileOutputStream("./persistence/expire/snapshot.ser");
+            expSnapFileOutputStream = new FileOutputStream(Const.EXPIRE_SNAPSHOT_PATH);
             expSnapFileOutputStream.write(SerialUtil.toByteArray(expireSnap));
             expSnapFileOutputStream.flush();
         } catch (IOException e) {

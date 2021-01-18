@@ -19,6 +19,8 @@ import com.lzp.cluster.client.ClientService;
 import com.lzp.common.cache.AutoDeleteMap;
 import com.lzp.common.cache.Cache;
 import com.lzp.common.cache.LfuCache;
+import com.lzp.common.constant.ReqName;
+import com.lzp.common.constant.Const;
 import com.lzp.common.datastructure.queue.NoLockBlockingQueue;
 import com.lzp.common.datastructure.set.Zset;
 import com.lzp.common.protocol.CommandDTO;
@@ -73,8 +75,8 @@ public class MasterConsMesService {
         SNAPSHOT_BATCH_COUNT_D1 = Integer.parseInt(FileUtil.getProperty("snapshot-batch-count")) - 1;
         ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1), new ThreadFactoryImpl("operCache"));
         //如果有持久化文件就恢复数据，没有就初始化缓存
-        if ("LRU".equals(FileUtil.getProperty("strategy"))) {
-            File file = new File("./persistence/corecache/snapshot.ser");
+        if (Const.LRU.equals(FileUtil.getProperty("strategy"))) {
+            File file = new File(Const.SNAPSHOT_PATH);
             if (!file.exists()) {
                 CACHE = new AutoDeleteMap<>(maxSize);
             } else {
@@ -99,7 +101,7 @@ public class MasterConsMesService {
                 }
                 BufferedReader bufferedReader = null;
                 try {
-                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("./persistence/corecache/journal.txt"),"UTF-8"));
+                    bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(Const.JOURNAL_PATH),"UTF-8"));
                     String cmd;
                     bufferedReader.readLine();
                     while ((cmd = bufferedReader.readLine()) != null) {
@@ -155,11 +157,11 @@ public class MasterConsMesService {
 
     private static void restoreData(String[] strings){
         switch (strings[0]){
-            case "put": {
+            case ReqName.PUT: {
                 CACHE.put(strings[1], strings[2]);
                 break;
             }
-            case "incr": {
+            case ReqName.INCR: {
                 String afterValue;
                 try {
                     afterValue = String.valueOf(Integer.parseInt((String) CACHE.get(strings[1])) + 1);
@@ -169,7 +171,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "decr": {
+            case ReqName.DECR: {
                 String afterValue ;
                 try {
                     afterValue = String.valueOf(Integer.parseInt((String) CACHE.get(strings[1])) - 1);
@@ -179,7 +181,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "hput": {
+            case ReqName.HPUT: {
                 Object value;
                 if ((value = CACHE.get(strings[1])) !=null && !(value instanceof Map)){
                     break;
@@ -188,7 +190,7 @@ public class MasterConsMesService {
                 CACHE.put(strings[1],values);
                 break;
             }
-            case "hmerge": {
+            case ReqName.HMERGE: {
                 Object value;
                 if ((value = CACHE.get(strings[1])) == null) {
                     Map<String, String> values = SerialUtil.stringToMap(strings[2]);
@@ -204,7 +206,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "lpush": {
+            case ReqName.LPUSH: {
                 Object value;
                 if ((value = CACHE.get(strings[1])) == null) {
                     //不values.addAll(Arrays.asList(message.command.getValue().split(","))) 这样写的原因是他底层也是要addAll的，没区别
@@ -218,7 +220,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "sadd": {
+            case ReqName.SADD: {
                 Object value;
                 if ((value = CACHE.get(strings[1])) == null) {
                     CACHE.put(strings[1], SerialUtil.stringToSet(strings[2]));
@@ -230,7 +232,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "zadd": {
+            case ReqName.ZADD: {
                 try {
                     Zset zset = (Zset) CACHE.get(strings[1]);
                     String[] strings1 = (strings[2].split("È"));
@@ -243,7 +245,7 @@ public class MasterConsMesService {
                 }
                 break;
             }
-            case "remove": {
+            case ReqName.REMOVE: {
                 CACHE.remove(strings[1]);
                 break;
             }
@@ -256,13 +258,13 @@ public class MasterConsMesService {
             while (true) {
                 MasterConsMesService.Message message = QUEUE.take();
                 switch (message.command.getType()) {
-                    case "get": {
+                    case ReqName.GET: {
                         Object retern = CACHE.get(message.command.getKey());
                         String result = retern == null ? "null" : retern.toString();
                         message.channelHandlerContext.writeAndFlush(result.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
-                    case "put": {
+                    case ReqName.PUT: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -280,7 +282,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "incr": {
+                    case ReqName.INCR: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -300,7 +302,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(afterValue.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
-                    case "decr": {
+                    case ReqName.DECR: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -320,7 +322,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(afterValue.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
-                    case "hput": {
+                    case ReqName.HPUT: {
                         //写持久化日志
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
@@ -340,7 +342,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "hmerge": {
+                    case ReqName.HMERGE: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -366,7 +368,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "lpush": {
+                    case ReqName.LPUSH: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -388,7 +390,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "sadd": {
+                    case ReqName.SADD: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -410,7 +412,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "zadd": {
+                    case ReqName.ZADD: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -440,7 +442,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "hset": {
+                    case ReqName.HSET: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -464,7 +466,7 @@ public class MasterConsMesService {
                         message.channelHandlerContext.writeAndFlush(new byte[0]);
                         break;
                     }
-                    case "hget": {
+                    case ReqName.HGET: {
                         try {
                             Map<String, String> values = (Map<String, String>) CACHE.get(message.command.getKey());
                             if (values == null) {
@@ -478,7 +480,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "getList": {
+                    case ReqName.GET_LIST: {
                         try {
                             List<String> values = (List<String>) CACHE.get(message.command.getKey());
                             message.channelHandlerContext.writeAndFlush(values == null ? "null".getBytes(StandardCharsets.UTF_8) : SerialUtil.collectionToString(values).getBytes(StandardCharsets.UTF_8));
@@ -487,7 +489,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "getSet": {
+                    case ReqName.GET_SET: {
                         try {
                             Set<String> values = (Set<String>) CACHE.get(message.command.getKey());
                             message.channelHandlerContext.writeAndFlush(values == null ? "null".getBytes(StandardCharsets.UTF_8) : SerialUtil.collectionToString(values).getBytes(StandardCharsets.UTF_8));
@@ -496,7 +498,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "scontain": {
+                    case ReqName.SCONTAIN: {
                         try {
                             Set<String> values = (Set<String>) CACHE.get(message.command.getKey());
                             message.channelHandlerContext.writeAndFlush(String.valueOf(values.contains(message.command.getValue())).getBytes(StandardCharsets.UTF_8));
@@ -505,7 +507,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "expire": {
+                    case ReqName.EXPIRE: {
                         String key = message.command.getKey();
                         if (CACHE.get(key) == null) {
                             message.channelHandlerContext.writeAndFlush("0".getBytes(StandardCharsets.UTF_8));
@@ -521,7 +523,7 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "remove": {
+                    case ReqName.REMOVE: {
                         if (((++journalNum) & SNAPSHOT_BATCH_COUNT_D1) == 0) {
                             PersistenceService.generateSnapshot(CACHE);
                         }
@@ -536,7 +538,7 @@ public class MasterConsMesService {
 
                         break;
                     }
-                    case "zrange": {
+                    case ReqName.ZRANGE: {
                         try {
                             Zset zset = (Zset) CACHE.get(message.command.getKey());
                             String[] startAndEnd = message.command.getValue().split("©");
@@ -546,48 +548,48 @@ public class MasterConsMesService {
                         }
                         break;
                     }
-                    case "zrem": {
+                    case ReqName.ZREM: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zincrby": {
+                    case ReqName.ZINCRBY: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrank": {
+                    case ReqName.ZRANK: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrevrank": {
+                    case ReqName.ZREVRANK: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrevrange": {
+                    case ReqName.ZREVRANGE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zcard": {
+                    case ReqName.ZCARD: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zscore": {
+                    case ReqName.ZSCORE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zcount": {
+                    case ReqName.ZCOUNT: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "zrangeByScore": {
+                    case ReqName.ZRANGEBYSCORE: {
                         //todo 本地调用Zset其实都实现了，rpc暂时没时间写，有空补上
                         break;
                     }
-                    case "fullSync": {
+                    case ReqName.FULL_SYNC: {
                         connectSlaveAndSendSyncData(message);
                         break;
                     }
-                    case "getMaster": {
-                        message.channelHandlerContext.writeAndFlush("yes".getBytes(StandardCharsets.UTF_8));
+                    case ReqName.GET_MASTER: {
+                        message.channelHandlerContext.writeAndFlush(Const.YES.getBytes(StandardCharsets.UTF_8));
                         break;
                     }
                     default:
@@ -617,19 +619,19 @@ public class MasterConsMesService {
                 FileInputStream expireSnapshotFileInputStream = null;
                 FileInputStream expireJournalFileInputStream = null;
                 try {
-                    snapshotFileInputStream = new FileInputStream("./persistence/corecache/snapshot.ser");
+                    snapshotFileInputStream = new FileInputStream(Const.SNAPSHOT_PATH);
                     byte[] snapshotsBytes = new byte[snapshotFileInputStream.available()];
                     snapshotFileInputStream.read(snapshotsBytes);
-                    journalFileInputStream = new FileInputStream("./persistence/corecache/journal.txt");
+                    journalFileInputStream = new FileInputStream(Const.JOURNAL_PATH);
                     byte[] journalBytes = new byte[journalFileInputStream.available()];
                     journalFileInputStream.read(journalBytes);
-                    expireSnapshotFileInputStream = new FileInputStream("./persistence/expire/snapshot.ser");
+                    expireSnapshotFileInputStream = new FileInputStream(Const.EXPIRE_SNAPSHOT_PATH);
                     byte[] expireSnapshotsBytes = new byte[expireSnapshotFileInputStream.available()];
                     expireSnapshotFileInputStream.read(expireSnapshotsBytes);
-                    expireJournalFileInputStream = new FileInputStream("./persistence/expire/journal.txt");
+                    expireJournalFileInputStream = new FileInputStream(Const.EXPIRE_JOURNAL_PATH);
                     byte[] expireJournalBytes = new byte[expireJournalFileInputStream.available()];
                     expireJournalFileInputStream.read(expireJournalBytes);
-                    channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(SerialUtil.toHexString(snapshotsBytes) + "■■■■■" + SerialUtil.toHexString(expireSnapshotsBytes))
+                    channel.writeAndFlush(CommandDTO.Command.newBuilder().setType(ReqName.FULL_SYNC).setKey(SerialUtil.toHexString(snapshotsBytes) + "■■■■■" + SerialUtil.toHexString(expireSnapshotsBytes))
                             .setValue(SerialUtil.toHexString(journalBytes) + "■■■■■" + SerialUtil.toHexString(expireJournalBytes)).build());
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
