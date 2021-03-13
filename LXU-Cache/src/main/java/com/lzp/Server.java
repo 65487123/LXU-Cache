@@ -22,6 +22,7 @@ import com.lzp.cluster.handler.SlaveChannelInitializer;
 import com.lzp.cluster.service.MasterConsMesService;
 import com.lzp.cluster.service.SlaveConsMesService;
 import com.lzp.cluster.service.SlaveExpireService;
+import com.lzp.common.constant.Const;
 import com.lzp.singlemachine.handler.SocketChannelInitializer;
 import com.lzp.singlemachine.service.ConsMesService;
 import com.lzp.common.util.FileUtil;
@@ -63,7 +64,7 @@ public class Server {
     static {
         PORT = Integer.parseInt(FileUtil.getProperty("port"));
         //单机模式下
-        if (!"yes".equals(FileUtil.getProperty("cluster-enabled"))) {
+        if (!Const.YES.equals(FileUtil.getProperty("cluster-enabled"))) {
             try {
                 Class.forName("com.lzp.singlemachine.service.ConsMesService");
                 Class.forName("com.lzp.singlemachine.service.ExpireService");
@@ -73,7 +74,7 @@ public class Server {
             } catch (ClassNotFoundException e) {
                 logger.error(e.getMessage(), e);
             }
-        } else if ("yes".equals(FileUtil.getProperty("isMaster"))) {
+        } else if (Const.YES.equals(FileUtil.getProperty("isMaster"))) {
             //集群模式主节点
             try {
                 Class.forName("com.lzp.cluster.service.MasterConsMesService");
@@ -95,7 +96,7 @@ public class Server {
     public static void main(String[] args) {
         try {
             serverChannel = serverBootstrap.bind(PORT).sync().channel();
-            if ("yes".equals(FileUtil.getProperty("cluster-enabled")) && (!"yes".equals(FileUtil.getProperty("isMaster")))) {
+            if (Const.YES.equals(FileUtil.getProperty("cluster-enabled")) && (!"yes".equals(FileUtil.getProperty("isMaster")))) {
                 String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
                 ClientService.sentFullSyncReq(masterIpAndPort[0], Integer.parseInt(masterIpAndPort[1]));
             }
