@@ -27,8 +27,8 @@ import io.netty.handler.timeout.IdleStateHandler;
 public class MasterChannelInitializer extends ChannelInitializer {
     @Override
     protected void initChannel(Channel channel) {
-        channel.pipeline().addLast(new IdleStateHandler(15,Integer.MAX_VALUE,Integer.MAX_VALUE)).addLast(new LzpMessageDecoder())
+        channel.pipeline().addLast(new IdleStateHandler(15, Integer.MAX_VALUE, Integer.MAX_VALUE)).addLast(new LzpMessageDecoder(true))
                 .addLast(new LzpProtobufDecoder(CommandDTO.Command.getDefaultInstance()))
-                .addLast(new LzpMessageEncoder()).addLast("handler1",new MasterHandler());
+                .addLast(new LzpMessageEncoder()).addLast("handler1", new MasterHandler());
     }
 }

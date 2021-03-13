@@ -28,7 +28,7 @@ import io.netty.channel.ChannelInitializer;
 public class ClientInitializer extends ChannelInitializer {
     @Override
     protected void initChannel(Channel channel) {
-        channel.pipeline().addLast(new LzpMessageDecoder())
+        channel.pipeline().addLast(new LzpMessageDecoder(true))
                 .addLast(new LzpMessageEncoder()).addLast(new LzpProtobufEncoder()).addLast(new ClientHandler());
     }
 }
