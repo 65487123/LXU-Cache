@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class LzpMessageDecoder extends ReplayingDecoder<Void> {
-    private boolean isServer;
+    private final boolean isServer;
 
     public LzpMessageDecoder(boolean isServer) {
         this.isServer = isServer;
