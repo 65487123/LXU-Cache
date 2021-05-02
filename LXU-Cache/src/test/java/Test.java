@@ -1,4 +1,4 @@
-import com.lzp.common.cache.AutoDeleteMap;
+import com.lzp.lxucache.common.cache.AutoDeleteMap;
 
 import java.io.*;
 import java.time.Instant;
