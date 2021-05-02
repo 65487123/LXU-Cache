@@ -276,7 +276,7 @@ public class MasterConsMesService {
                         Object preValue;
                         if ((preValue = CACHE.get(key)) instanceof String || preValue == null) {
                             CACHE.put(key, message.command.getValue());
-                            message.channelHandlerContext.writeAndFlush(" ".getBytes(StandardCharsets.UTF_8));
+                            message.channelHandlerContext.writeAndFlush(new byte[1]);
                         } else {
                             message.channelHandlerContext.writeAndFlush("e".getBytes(StandardCharsets.UTF_8));
                         }
