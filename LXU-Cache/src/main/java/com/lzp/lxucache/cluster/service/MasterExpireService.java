@@ -94,29 +94,28 @@ public class MasterExpireService {
         //清空持久化文件，生成一次快照
         PersistenceService.generateExpireSnapshot(keyTimeMap);
         pollingInterval = Long.parseLong(FileUtil.getProperty("pollingInterval"));
-        threadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    //这里假设遍历map的时间是很快的，所以不用在判断每个key的时候重新计算当前时间，如果有漏网之鱼，只能在下一次轮询的时候揪出来删除了
-                    Long now = Instant.now().toEpochMilli();
-                    Iterator<Map.Entry<String, Long>> iterator = keyTimeMap.entrySet().iterator();
-                    while (iterator.hasNext()) {
-                        Map.Entry<String, Long> entry = iterator.next();
-                        if (now > entry.getValue()) {
-                            MasterConsMesService.addMessage(new MasterConsMesService.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(), null), 0);
-                            PersistenceService.writeExpireJournal(entry.getKey());
-                            iterator.remove();
-                        }
-                    }
-                    try {
-                        Thread.sleep(pollingInterval);
-                    } catch (InterruptedException e) {
-                        logger.error(e.getMessage(), e);
-                    }
+        threadPool.execute(MasterExpireService::detecExpiredAndRem);
+    }
+
+    private static void detecExpiredAndRem(){
+        while (true) {
+            //这里假设遍历map的时间是很快的，所以不用在判断每个key的时候重新计算当前时间，如果有漏网之鱼，只能在下一次轮询的时候揪出来删除了
+            Long now = Instant.now().toEpochMilli();
+            Iterator<Map.Entry<String, Long>> iterator = keyTimeMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, Long> entry = iterator.next();
+                if (now > entry.getValue()) {
+                    MasterConsMesService.addMessage(new MasterConsMesService.Message(CommandDTO.Command.newBuilder().setKey(entry.getKey()).setType("remove").build(), null), 0);
+                    PersistenceService.writeExpireJournal(entry.getKey());
+                    iterator.remove();
                 }
             }
-        });
+            try {
+                Thread.sleep(pollingInterval);
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 
     private static void restoreData(String[] strings) {

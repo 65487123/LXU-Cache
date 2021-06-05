@@ -100,6 +100,7 @@ public class Server {
                 String[] masterIpAndPort = FileUtil.getProperty("masterIpAndPort").split(":");
                 ClientService.sentFullSyncReq(masterIpAndPort[0], Integer.parseInt(masterIpAndPort[1]));
             }
+            logger.info("start server successfully");
             serverChannel.closeFuture().sync();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(), e);

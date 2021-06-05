@@ -26,25 +26,25 @@ import java.util.*;
  * @date: 2019/7/20 12:19
  */
 public class Zset implements Serializable {
-    private Set<Node> treeSet = new TreeSet();
-    private Map<String, Double> map = new HashMap();
+    private final Set<Node> TREESET = new TreeSet();
+    private final Map<String, Double> MAP = new HashMap();
     private static final long serialVersionUID = 3L;
 
     private static class Node implements Comparable<Node>, Serializable {
-        private double score;
+        private final double SCORE;
         private String e;
 
         public Node(double score, String e) {
-            this.score = score;
+            this.SCORE = score;
             this.e = e;
         }
 
         @Override
         public int compareTo(Node node) {
-            if (this.score == node.score) {
+            if (this.SCORE == node.SCORE) {
                 return this.e.equals(node.e) ? 0 : -1;
             } else {
-                return this.score - node.score > 0 ? 1 : -1;
+                return this.SCORE - node.SCORE > 0 ? 1 : -1;
             }
         }
 
@@ -64,21 +64,21 @@ public class Zset implements Serializable {
 
         @Override
         public String toString() {
-            return "{member=" + e + ",score=" + score + "}";
+            return "{member=" + e + ",score=" + SCORE + "}";
         }
     }
 
     public void zadd(double score,String e) {
         Double preScore;
-        if ((preScore = map.put(e, score)) != null) {
-            treeSet.remove(new Node(preScore, e));
+        if ((preScore = MAP.put(e, score)) != null) {
+            TREESET.remove(new Node(preScore, e));
         }
-        treeSet.add(new Node(score, e));
+        TREESET.add(new Node(score, e));
     }
 
 
     public String zrange(long start, long end) {
-        Iterator<Node> iterator = treeSet.iterator();
+        Iterator<Node> iterator = TREESET.iterator();
         StringBuilder setString = new StringBuilder();
         for (long i = 0; i < start; i++) {
             if (!iterator.hasNext()) {
@@ -98,22 +98,22 @@ public class Zset implements Serializable {
 
     public void zrem(String... member) {
         for (String men : member) {
-            treeSet.remove(new Node(map.remove(men), men));
+            TREESET.remove(new Node(MAP.remove(men), men));
         }
     }
 
     Double zincrby(double score, String member) throws NullPointerException {
-        double preScore = map.get(member);
-        treeSet.remove(new Node(preScore, member));
+        double preScore = MAP.get(member);
+        TREESET.remove(new Node(preScore, member));
         double afterSocre = preScore + score;
-        map.put(member, afterSocre);
-        treeSet.add(new Node(afterSocre, member));
+        MAP.put(member, afterSocre);
+        TREESET.add(new Node(afterSocre, member));
         return afterSocre;
     }
 
     Long zrank(String member) {
         long i = -1;
-        Iterator<Node> iterator = treeSet.iterator();
+        Iterator<Node> iterator = TREESET.iterator();
         while (iterator.hasNext()) {
             i++;
             Node node = iterator.next();
@@ -125,7 +125,7 @@ public class Zset implements Serializable {
     }
 
     Long zrevrank(String key, String member) {
-        ListIterator<Node> listIterator = new ArrayList(treeSet).listIterator(treeSet.size());
+        ListIterator<Node> listIterator = new ArrayList(TREESET).listIterator(TREESET.size());
         long rank = -1;
         while (listIterator.hasPrevious()) {
             rank++;
@@ -137,7 +137,7 @@ public class Zset implements Serializable {
     }
 
     String zrevrange(String key, long start, long end) {
-        ListIterator<Node> listIterator = new ArrayList(treeSet).listIterator(treeSet.size());
+        ListIterator<Node> listIterator = new ArrayList(TREESET).listIterator(TREESET.size());
         StringBuilder setString = new StringBuilder();
         for (long i = 0; i < start; i++) {
             if (!listIterator.hasPrevious()) {
@@ -156,18 +156,18 @@ public class Zset implements Serializable {
     }
 
     public long size() {
-        return treeSet.size();
+        return TREESET.size();
     }
 
     Double zscore(String member) {
-        return map.get(member);
+        return MAP.get(member);
     }
 
     Long zcount(double min, double max) {
         long count = 0;
-        for (Node node : treeSet) {
-            if (node.score > min) {
-                if (node.score > max) {
+        for (Node node : TREESET) {
+            if (node.SCORE > min) {
+                if (node.SCORE > max) {
                     return count;
                 }
                 count++;
@@ -178,9 +178,9 @@ public class Zset implements Serializable {
 
     String zrangeByScore(double min, double max) {
         StringBuilder setString = new StringBuilder();
-        for (Node node : treeSet) {
-            if (node.score > min) {
-                if (node.score > max) {
+        for (Node node : TREESET) {
+            if (node.SCORE > min) {
+                if (node.SCORE > max) {
                     break;
                 }
                 setString.append(node.e).append("È");
@@ -193,6 +193,6 @@ public class Zset implements Serializable {
 
     @Override
     public String toString() {
-        return treeSet.toString();
+        return TREESET.toString();
     }
 }

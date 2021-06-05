@@ -36,11 +36,11 @@ import org.slf4j.LoggerFactory;
  */
 public class ClientService {
     private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
-    private static EventLoopGroup eventExecutors = new NioEventLoopGroup(1);
-    private static Bootstrap serverBootstrap = new Bootstrap();
+    private static final EventLoopGroup EVENT_EXECUTORS = new NioEventLoopGroup(1);
+    private static final Bootstrap SERVER_BOOTSTRAP = new Bootstrap();
 
     static {
-        serverBootstrap.group(eventExecutors).channel(NioSocketChannel.class).handler(new ClientInitializer());
+        SERVER_BOOTSTRAP.group(EVENT_EXECUTORS).channel(NioSocketChannel.class).handler(new ClientInitializer());
     }
 
     /**
@@ -48,7 +48,7 @@ public class ClientService {
      **/
     public static void sentFullSyncReq(String masterIp, int masterPort) {
         try {
-            Channel channel = serverBootstrap.connect(masterIp, masterPort).sync().channel();
+            Channel channel = SERVER_BOOTSTRAP.connect(masterIp, masterPort).sync().channel();
             channel.writeAndFlush(CommandDTO.Command.newBuilder().setType("fullSync").setKey(FileUtil.getProperty("port")).build());
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
@@ -61,7 +61,7 @@ public class ClientService {
      **/
     public static Channel getConnection(String ip,int port){
         try {
-            return serverBootstrap.connect(ip,port).sync().channel();
+            return SERVER_BOOTSTRAP.connect(ip,port).sync().channel();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(),e);
         }

@@ -48,42 +48,42 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
      * 由于每部份数组块只被同一个线程操作，所以写数据的时候也不需要进行cas（不可能会出现两个写线程
      * 同时在等一个位置被释放）
      */
-    private E[] array;
+    private final E[] ARRAY;
     /**
      * 4字节，加上对象头12字节，一共20字节，还差44字节
      */
     private final int m;
 
-    private int[] head = new int[27];
+    private final int[] HEAD = new int[27];
 
-    private int[] tail = new int[16];
+    private final int[] TAIL = new int[16];
 
 
     public OneToOneBlockingQueue(int preferCapacity) {
         int capacity = HashUtil.tableSizeFor(preferCapacity);
-        array = (E[]) new Object[capacity];
+        ARRAY = (E[]) new Object[capacity];
         m = capacity - 1;
     }
 
     @Override
     public void put(E obj) throws InterruptedException {
 
-        int p = head[11]++ & m;
-        while (array[p] != null) {
+        int p = HEAD[11]++ & m;
+        while (ARRAY[p] != null) {
             Thread.yield();
         }
-        array[p] = obj;
+        ARRAY[p] = obj;
     }
 
 
     @Override
     public E take() throws InterruptedException {
         E e;
-        int p = tail[0]++ & m;
-        while ((e = array[p]) == null) {
+        int p = TAIL[0]++ & m;
+        while ((e = ARRAY[p]) == null) {
             Thread.yield();
         }
-        array[p] = null;
+        ARRAY[p] = null;
         return  e;
     }
 
@@ -92,18 +92,18 @@ public class OneToOneBlockingQueue<E> extends BlockingQueueAdapter<E> {
         long now = 0;
         long time = unit.toMillis(timeout);
         E e;
-        int p = tail[0]++ & m;
-        while ((e = array[p]) == null) {
+        int p = TAIL[0]++ & m;
+        while ((e = ARRAY[p]) == null) {
             if (now == 0) {
                 now = System.currentTimeMillis();
             } else if (System.currentTimeMillis() - now > time) {
-                tail[0]--;
+                TAIL[0]--;
                 throw new InterruptedException();
             } else {
                 Thread.yield();
             }
         }
-        array[p] = null;
+        ARRAY[p] = null;
         return e;
     }
 }

@@ -485,36 +485,10 @@ public class SlaveConsMesService {
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         } finally {
-            FileUtil.closeResource(jourfileOutputStream,expJourFileOutputStream,expSnapFileOutputStream);
+            FileUtil.closeResource(jourfileOutputStream, expJourFileOutputStream, expSnapFileOutputStream);
         }
         if ("LRU".equals(FileUtil.getProperty("strategy"))) {
-            ObjectInputStream objectInputStream = null;
-            try {
-                objectInputStream = new ObjectInputStream(new ByteArrayInputStream(SerialUtil.toByteArray(snapshots)));
-                cache = (AutoDeleteMap<String, Object>) objectInputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                logger.error(e.getMessage(), e);
-                throw new RuntimeException();
-            } catch (ClassCastException e) {
-                logger.error("持久化文件的缓存淘汰策略和配置文件不一致");
-                throw e;
-            } finally {
-                FileUtil.closeResource(objectInputStream);
-            }
-            BufferedReader bufferedReader = null;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(journalFile));
-                String cmd;
-                bufferedReader.readLine();
-                while ((cmd = bufferedReader.readLine()) != null) {
-                    restoreData(cmd.split("ÈÈ"));
-                }
-            } catch (IOException e) {
-                logger.error(e.getMessage(), e);
-                throw new RuntimeException();
-            } finally {
-                FileUtil.closeResource(bufferedReader);
-            }
+            recoverCacheOfLRU(snapshots, journalFile);
         } else {
             //todo 和lrucache一样的逻辑
         }
@@ -524,6 +498,36 @@ public class SlaveConsMesService {
             Class.forName("com.lzp.lxucache.cluster.service.SlaveExpireService");
         } catch (ClassNotFoundException e) {
             logger.error(e.getMessage(),e);
+        }
+    }
+
+    private static void recoverCacheOfLRU(String snapshots, File journalFile) {
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream = new ObjectInputStream(new ByteArrayInputStream(SerialUtil.toByteArray(snapshots)));
+            cache = (AutoDeleteMap<String, Object>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException();
+        } catch (ClassCastException e) {
+            logger.error("持久化文件的缓存淘汰策略和配置文件不一致");
+            throw e;
+        } finally {
+            FileUtil.closeResource(objectInputStream);
+        }
+        BufferedReader bufferedReader = null;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(journalFile));
+            String cmd;
+            bufferedReader.readLine();
+            while ((cmd = bufferedReader.readLine()) != null) {
+                restoreData(cmd.split("ÈÈ"));
+            }
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException();
+        } finally {
+            FileUtil.closeResource(bufferedReader);
         }
     }
 
