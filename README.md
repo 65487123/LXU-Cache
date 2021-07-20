@@ -3,7 +3,7 @@
    中文|[English](https://github.com/65487123/LXU-Cache/blob/master/README-EN.md)                         
 # 功能介绍
     和Redis类似，一个分布式缓存中间件。redis的主要功能基本都实现了，
-    包括其主要五种数据结构（string、list、hash、set、zset)、缓存淘汰、
+    包括其主要五种数据类型（string、list、hash、set、zset)、缓存淘汰、
     key设置过期时间、持久化、集群等等。
     并且提供了各种批量操作api来减少网络IO次数，达到提升写缓存效率目的。
 # 写这个项目的目的
